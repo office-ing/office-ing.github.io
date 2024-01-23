@@ -1,0 +1,3032 @@
+@charset "utf-8";
+
+/* ==========================================
+ Helper
+============================================*/
+
+/* font */
+.font-default {
+  font-family: var(--font-default);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-gothic {
+  font-family: var(--font-gothic);
+}
+
+/* color */
+:root {
+  --color-primary: #3362cd;
+  --color-secondary: #ffe33f;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-dark: #051f4f;
+  --color-navy: #21417b;
+  --color-line: #67c858;
+  --color-gold: #a28242;
+  --color-light-gold: #efd93f;
+  --color-blue: #0718f6;
+  --color-beige: #f6f4f2;
+  --color-red: #cd0d0d;
+  --color-wine: #c62837;
+  --color-pink: #f15b77;
+  --color-yellow: #ffff64;
+  --color-orange: #fc871e;
+  --color-placeholder: #bab9b9;
+}
+
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.text-white {
+  color: var(--color-white) !important;
+}
+
+.text-black {
+  color: var(--color-black) !important;
+}
+
+.text-dark {
+  color: var(--color-dark) !important;
+}
+
+.text-navy {
+  color: var(--color-navy) !important;
+}
+
+.text-line {
+  color: var(--color-line) !important;
+}
+
+.text-gold {
+  color: var(--color-gold) !important;
+}
+
+.text-light-gold {
+  color: var(--color-light-gold) !important;
+}
+
+.text-blue {
+  color: var(--color-blue) !important;
+}
+
+.text-beige {
+  color: var(--color-beige) !important;
+}
+
+.text-red {
+  color: var(--color-red) !important;
+}
+
+.text-wine {
+  color: var(--color-wine) !important;
+}
+
+.text-pink {
+  color: var(--color-pink) !important;
+}
+
+.text-yellow {
+  color: var(--color-yellow) !important;
+}
+
+.text-orange {
+  color: var(--color-orange) !important;
+}
+
+.bg-white {
+  background-color: var(--color-white) !important;
+}
+
+.bg-black {
+  background-color: var(--color-black) !important;
+}
+
+.bg-dark {
+  background-color: var(--color-dark) !important;
+}
+
+.bg-navy {
+  background-color: var(--color-navy) !important;
+}
+
+.bg-line {
+  background-color: var(--color-line) !important;
+}
+
+.bg-gold {
+  background-color: var(--color-gold) !important;
+}
+
+.bg-light-gold {
+  background-color: var(--color-light-gold) !important;
+}
+
+.bg-blue {
+  background-color: var(--color-blue) !important;
+}
+
+.bg-beige {
+  background-color: var(--color-beige) !important;
+}
+
+.bg-red {
+  background-color: var(--color-red) !important;
+}
+
+.bg-wine {
+  background-color: var(--color-wine) !important;
+}
+
+.bg-pink {
+  background-color: var(--color-pink) !important;
+}
+
+.bg-yellow {
+  background-color: var(--color-yellow) !important;
+}
+
+.bg-orange {
+  background-color: var(--color-orange) !important;
+}
+
+/* size */
+:root {
+  --sz-1: clamp(calc(1px * var(--min_w1) / var(--max_w1)), calc(1vw * 100 / var(--max_w1)), 1px);
+  --sz-2: clamp(calc(2px * var(--min_w1) / var(--max_w1)), calc(2vw * 100 / var(--max_w1)), 2px);
+  --sz-3: clamp(calc(3px * var(--min_w1) / var(--max_w1)), calc(3vw * 100 / var(--max_w1)), 3px);
+  --sz-4: clamp(calc(4px * var(--min_w1) / var(--max_w1)), calc(4vw * 100 / var(--max_w1)), 4px);
+  --sz-5: clamp(calc(5px * var(--min_w1) / var(--max_w1)), calc(5vw * 100 / var(--max_w1)), 5px);
+  --sz-6: clamp(calc(6px * var(--min_w1) / var(--max_w1)), calc(6vw * 100 / var(--max_w1)), 6px);
+  --sz-7: clamp(calc(7px * var(--min_w1) / var(--max_w1)), calc(7vw * 100 / var(--max_w1)), 7px);
+  --sz-8: clamp(calc(8px * var(--min_w1) / var(--max_w1)), calc(8vw * 100 / var(--max_w1)), 8px);
+  --sz-9: clamp(calc(9px * var(--min_w1) / var(--max_w1)), calc(9vw * 100 / var(--max_w1)), 9px);
+  --sz-10: clamp(calc(10px * var(--min_w1) / var(--max_w1)), calc(10vw * 100 / var(--max_w1)), 10px);
+  --sz-11: clamp(calc(11px * var(--min_w1) / var(--max_w1)), calc(11vw * 100 / var(--max_w1)), 11px);
+  --sz-12: clamp(calc(12px * var(--min_w1) / var(--max_w1)), calc(12vw * 100 / var(--max_w1)), 12px);
+  --sz-13: clamp(calc(13px * var(--min_w1) / var(--max_w1)), calc(13vw * 100 / var(--max_w1)), 13px);
+  --sz-14: clamp(calc(14px * var(--min_w1) / var(--max_w1)), calc(14vw * 100 / var(--max_w1)), 14px);
+  --sz-15: clamp(calc(15px * var(--min_w1) / var(--max_w1)), calc(15vw * 100 / var(--max_w1)), 15px);
+  --sz-16: clamp(calc(16px * var(--min_w1) / var(--max_w1)), calc(16vw * 100 / var(--max_w1)), 16px);
+  --sz-17: clamp(calc(17px * var(--min_w1) / var(--max_w1)), calc(17vw * 100 / var(--max_w1)), 17px);
+  --sz-18: clamp(calc(18px * var(--min_w1) / var(--max_w1)), calc(18vw * 100 / var(--max_w1)), 18px);
+  --sz-19: clamp(calc(19px * var(--min_w1) / var(--max_w1)), calc(19vw * 100 / var(--max_w1)), 19px);
+  --sz-20: clamp(calc(20px * var(--min_w1) / var(--max_w1)), calc(20vw * 100 / var(--max_w1)), 20px);
+  --sz-21: clamp(calc(21px * var(--min_w1) / var(--max_w1)), calc(21vw * 100 / var(--max_w1)), 21px);
+  --sz-22: clamp(calc(22px * var(--min_w1) / var(--max_w1)), calc(22vw * 100 / var(--max_w1)), 22px);
+  --sz-23: clamp(calc(23px * var(--min_w1) / var(--max_w1)), calc(23vw * 100 / var(--max_w1)), 23px);
+  --sz-24: clamp(calc(24px * var(--min_w1) / var(--max_w1)), calc(24vw * 100 / var(--max_w1)), 24px);
+  --sz-25: clamp(calc(25px * var(--min_w1) / var(--max_w1)), calc(25vw * 100 / var(--max_w1)), 25px);
+  --sz-26: clamp(calc(26px * var(--min_w1) / var(--max_w1)), calc(26vw * 100 / var(--max_w1)), 26px);
+  --sz-27: clamp(calc(27px * var(--min_w1) / var(--max_w1)), calc(27vw * 100 / var(--max_w1)), 27px);
+  --sz-28: clamp(calc(28px * var(--min_w1) / var(--max_w1)), calc(28vw * 100 / var(--max_w1)), 28px);
+  --sz-29: clamp(calc(29px * var(--min_w1) / var(--max_w1)), calc(29vw * 100 / var(--max_w1)), 29px);
+  --sz-30: clamp(calc(30px * var(--min_w1) / var(--max_w1)), calc(30vw * 100 / var(--max_w1)), 30px);
+  --sz-31: clamp(calc(31px * var(--min_w1) / var(--max_w1)), calc(31vw * 100 / var(--max_w1)), 31px);
+  --sz-32: clamp(calc(32px * var(--min_w1) / var(--max_w1)), calc(32vw * 100 / var(--max_w1)), 32px);
+  --sz-33: clamp(calc(33px * var(--min_w1) / var(--max_w1)), calc(33vw * 100 / var(--max_w1)), 33px);
+  --sz-34: clamp(calc(34px * var(--min_w1) / var(--max_w1)), calc(34vw * 100 / var(--max_w1)), 34px);
+  --sz-35: clamp(calc(35px * var(--min_w1) / var(--max_w1)), calc(35vw * 100 / var(--max_w1)), 35px);
+  --sz-36: clamp(calc(36px * var(--min_w1) / var(--max_w1)), calc(36vw * 100 / var(--max_w1)), 36px);
+  --sz-37: clamp(calc(37px * var(--min_w1) / var(--max_w1)), calc(37vw * 100 / var(--max_w1)), 37px);
+  --sz-38: clamp(calc(38px * var(--min_w1) / var(--max_w1)), calc(38vw * 100 / var(--max_w1)), 38px);
+  --sz-39: clamp(calc(39px * var(--min_w1) / var(--max_w1)), calc(39vw * 100 / var(--max_w1)), 39px);
+  --sz-40: clamp(calc(40px * var(--min_w1) / var(--max_w1)), calc(40vw * 100 / var(--max_w1)), 40px);
+  --sz-41: clamp(calc(41px * var(--min_w1) / var(--max_w1)), calc(41vw * 100 / var(--max_w1)), 41px);
+  --sz-42: clamp(calc(42px * var(--min_w1) / var(--max_w1)), calc(42vw * 100 / var(--max_w1)), 42px);
+  --sz-43: clamp(calc(43px * var(--min_w1) / var(--max_w1)), calc(43vw * 100 / var(--max_w1)), 43px);
+  --sz-44: clamp(calc(44px * var(--min_w1) / var(--max_w1)), calc(44vw * 100 / var(--max_w1)), 44px);
+  --sz-45: clamp(calc(45px * var(--min_w1) / var(--max_w1)), calc(45vw * 100 / var(--max_w1)), 45px);
+  --sz-46: clamp(calc(46px * var(--min_w1) / var(--max_w1)), calc(46vw * 100 / var(--max_w1)), 46px);
+  --sz-47: clamp(calc(47px * var(--min_w1) / var(--max_w1)), calc(47vw * 100 / var(--max_w1)), 47px);
+  --sz-48: clamp(calc(48px * var(--min_w1) / var(--max_w1)), calc(48vw * 100 / var(--max_w1)), 48px);
+  --sz-49: clamp(calc(49px * var(--min_w1) / var(--max_w1)), calc(49vw * 100 / var(--max_w1)), 49px);
+  --sz-50: clamp(calc(50px * var(--min_w1) / var(--max_w1)), calc(50vw * 100 / var(--max_w1)), 50px);
+  --sz-51: clamp(calc(51px * var(--min_w1) / var(--max_w1)), calc(51vw * 100 / var(--max_w1)), 51px);
+  --sz-52: clamp(calc(52px * var(--min_w1) / var(--max_w1)), calc(52vw * 100 / var(--max_w1)), 52px);
+  --sz-53: clamp(calc(53px * var(--min_w1) / var(--max_w1)), calc(53vw * 100 / var(--max_w1)), 53px);
+  --sz-54: clamp(calc(54px * var(--min_w1) / var(--max_w1)), calc(54vw * 100 / var(--max_w1)), 54px);
+  --sz-55: clamp(calc(55px * var(--min_w1) / var(--max_w1)), calc(55vw * 100 / var(--max_w1)), 55px);
+  --sz-56: clamp(calc(56px * var(--min_w1) / var(--max_w1)), calc(56vw * 100 / var(--max_w1)), 56px);
+  --sz-57: clamp(calc(57px * var(--min_w1) / var(--max_w1)), calc(57vw * 100 / var(--max_w1)), 57px);
+  --sz-58: clamp(calc(58px * var(--min_w1) / var(--max_w1)), calc(58vw * 100 / var(--max_w1)), 58px);
+  --sz-59: clamp(calc(59px * var(--min_w1) / var(--max_w1)), calc(59vw * 100 / var(--max_w1)), 59px);
+  --sz-60: clamp(calc(60px * var(--min_w1) / var(--max_w1)), calc(60vw * 100 / var(--max_w1)), 60px);
+  --sz-61: clamp(calc(61px * var(--min_w1) / var(--max_w1)), calc(61vw * 100 / var(--max_w1)), 61px);
+  --sz-62: clamp(calc(62px * var(--min_w1) / var(--max_w1)), calc(62vw * 100 / var(--max_w1)), 62px);
+  --sz-63: clamp(calc(63px * var(--min_w1) / var(--max_w1)), calc(63vw * 100 / var(--max_w1)), 63px);
+  --sz-64: clamp(calc(64px * var(--min_w1) / var(--max_w1)), calc(64vw * 100 / var(--max_w1)), 64px);
+  --sz-65: clamp(calc(65px * var(--min_w1) / var(--max_w1)), calc(65vw * 100 / var(--max_w1)), 65px);
+  --sz-66: clamp(calc(66px * var(--min_w1) / var(--max_w1)), calc(66vw * 100 / var(--max_w1)), 66px);
+  --sz-67: clamp(calc(67px * var(--min_w1) / var(--max_w1)), calc(67vw * 100 / var(--max_w1)), 67px);
+  --sz-68: clamp(calc(68px * var(--min_w1) / var(--max_w1)), calc(68vw * 100 / var(--max_w1)), 68px);
+  --sz-69: clamp(calc(69px * var(--min_w1) / var(--max_w1)), calc(69vw * 100 / var(--max_w1)), 69px);
+  --sz-70: clamp(calc(70px * var(--min_w1) / var(--max_w1)), calc(70vw * 100 / var(--max_w1)), 70px);
+  --sz-71: clamp(calc(71px * var(--min_w1) / var(--max_w1)), calc(71vw * 100 / var(--max_w1)), 71px);
+  --sz-72: clamp(calc(72px * var(--min_w1) / var(--max_w1)), calc(72vw * 100 / var(--max_w1)), 72px);
+  --sz-73: clamp(calc(73px * var(--min_w1) / var(--max_w1)), calc(73vw * 100 / var(--max_w1)), 73px);
+  --sz-74: clamp(calc(74px * var(--min_w1) / var(--max_w1)), calc(74vw * 100 / var(--max_w1)), 74px);
+  --sz-75: clamp(calc(75px * var(--min_w1) / var(--max_w1)), calc(75vw * 100 / var(--max_w1)), 75px);
+  --sz-76: clamp(calc(76px * var(--min_w1) / var(--max_w1)), calc(76vw * 100 / var(--max_w1)), 76px);
+  --sz-77: clamp(calc(77px * var(--min_w1) / var(--max_w1)), calc(77vw * 100 / var(--max_w1)), 77px);
+  --sz-78: clamp(calc(78px * var(--min_w1) / var(--max_w1)), calc(78vw * 100 / var(--max_w1)), 78px);
+  --sz-79: clamp(calc(79px * var(--min_w1) / var(--max_w1)), calc(79vw * 100 / var(--max_w1)), 79px);
+  --sz-80: clamp(calc(80px * var(--min_w1) / var(--max_w1)), calc(80vw * 100 / var(--max_w1)), 80px);
+  --sz-81: clamp(calc(81px * var(--min_w1) / var(--max_w1)), calc(81vw * 100 / var(--max_w1)), 81px);
+  --sz-82: clamp(calc(82px * var(--min_w1) / var(--max_w1)), calc(82vw * 100 / var(--max_w1)), 82px);
+  --sz-83: clamp(calc(83px * var(--min_w1) / var(--max_w1)), calc(83vw * 100 / var(--max_w1)), 83px);
+  --sz-84: clamp(calc(84px * var(--min_w1) / var(--max_w1)), calc(84vw * 100 / var(--max_w1)), 84px);
+  --sz-85: clamp(calc(85px * var(--min_w1) / var(--max_w1)), calc(85vw * 100 / var(--max_w1)), 85px);
+  --sz-86: clamp(calc(86px * var(--min_w1) / var(--max_w1)), calc(86vw * 100 / var(--max_w1)), 86px);
+  --sz-87: clamp(calc(87px * var(--min_w1) / var(--max_w1)), calc(87vw * 100 / var(--max_w1)), 87px);
+  --sz-88: clamp(calc(88px * var(--min_w1) / var(--max_w1)), calc(88vw * 100 / var(--max_w1)), 88px);
+  --sz-89: clamp(calc(89px * var(--min_w1) / var(--max_w1)), calc(89vw * 100 / var(--max_w1)), 89px);
+  --sz-90: clamp(calc(90px * var(--min_w1) / var(--max_w1)), calc(90vw * 100 / var(--max_w1)), 90px);
+  --sz-91: clamp(calc(91px * var(--min_w1) / var(--max_w1)), calc(91vw * 100 / var(--max_w1)), 91px);
+  --sz-92: clamp(calc(92px * var(--min_w1) / var(--max_w1)), calc(92vw * 100 / var(--max_w1)), 92px);
+  --sz-93: clamp(calc(93px * var(--min_w1) / var(--max_w1)), calc(93vw * 100 / var(--max_w1)), 93px);
+  --sz-94: clamp(calc(94px * var(--min_w1) / var(--max_w1)), calc(94vw * 100 / var(--max_w1)), 94px);
+  --sz-95: clamp(calc(95px * var(--min_w1) / var(--max_w1)), calc(95vw * 100 / var(--max_w1)), 95px);
+  --sz-96: clamp(calc(96px * var(--min_w1) / var(--max_w1)), calc(96vw * 100 / var(--max_w1)), 96px);
+  --sz-97: clamp(calc(97px * var(--min_w1) / var(--max_w1)), calc(97vw * 100 / var(--max_w1)), 97px);
+  --sz-98: clamp(calc(98px * var(--min_w1) / var(--max_w1)), calc(98vw * 100 / var(--max_w1)), 98px);
+  --sz-99: clamp(calc(99px * var(--min_w1) / var(--max_w1)), calc(99vw * 100 / var(--max_w1)), 99px);
+  --sz-100: clamp(calc(100px * var(--min_w1) / var(--max_w1)), calc(100vw * 100 / var(--max_w1)), 100px);
+  --sz-101: clamp(calc(101px * var(--min_w1) / var(--max_w1)), calc(101vw * 100 / var(--max_w1)), 101px);
+  --sz-102: clamp(calc(102px * var(--min_w1) / var(--max_w1)), calc(102vw * 100 / var(--max_w1)), 102px);
+  --sz-103: clamp(calc(103px * var(--min_w1) / var(--max_w1)), calc(103vw * 100 / var(--max_w1)), 103px);
+  --sz-104: clamp(calc(104px * var(--min_w1) / var(--max_w1)), calc(104vw * 100 / var(--max_w1)), 104px);
+  --sz-105: clamp(calc(105px * var(--min_w1) / var(--max_w1)), calc(105vw * 100 / var(--max_w1)), 105px);
+  --sz-106: clamp(calc(106px * var(--min_w1) / var(--max_w1)), calc(106vw * 100 / var(--max_w1)), 106px);
+  --sz-107: clamp(calc(107px * var(--min_w1) / var(--max_w1)), calc(107vw * 100 / var(--max_w1)), 107px);
+  --sz-108: clamp(calc(108px * var(--min_w1) / var(--max_w1)), calc(108vw * 100 / var(--max_w1)), 108px);
+  --sz-109: clamp(calc(109px * var(--min_w1) / var(--max_w1)), calc(109vw * 100 / var(--max_w1)), 109px);
+  --sz-110: clamp(calc(110px * var(--min_w1) / var(--max_w1)), calc(110vw * 100 / var(--max_w1)), 110px);
+  --sz-111: clamp(calc(111px * var(--min_w1) / var(--max_w1)), calc(111vw * 100 / var(--max_w1)), 111px);
+  --sz-112: clamp(calc(112px * var(--min_w1) / var(--max_w1)), calc(112vw * 100 / var(--max_w1)), 112px);
+  --sz-113: clamp(calc(113px * var(--min_w1) / var(--max_w1)), calc(113vw * 100 / var(--max_w1)), 113px);
+  --sz-114: clamp(calc(114px * var(--min_w1) / var(--max_w1)), calc(114vw * 100 / var(--max_w1)), 114px);
+  --sz-115: clamp(calc(115px * var(--min_w1) / var(--max_w1)), calc(115vw * 100 / var(--max_w1)), 115px);
+  --sz-116: clamp(calc(116px * var(--min_w1) / var(--max_w1)), calc(116vw * 100 / var(--max_w1)), 116px);
+  --sz-117: clamp(calc(117px * var(--min_w1) / var(--max_w1)), calc(117vw * 100 / var(--max_w1)), 117px);
+  --sz-118: clamp(calc(118px * var(--min_w1) / var(--max_w1)), calc(118vw * 100 / var(--max_w1)), 118px);
+  --sz-119: clamp(calc(119px * var(--min_w1) / var(--max_w1)), calc(119vw * 100 / var(--max_w1)), 119px);
+  --sz-120: clamp(calc(120px * var(--min_w1) / var(--max_w1)), calc(120vw * 100 / var(--max_w1)), 120px);
+  --sz-121: clamp(calc(121px * var(--min_w1) / var(--max_w1)), calc(121vw * 100 / var(--max_w1)), 121px);
+  --sz-122: clamp(calc(122px * var(--min_w1) / var(--max_w1)), calc(122vw * 100 / var(--max_w1)), 122px);
+  --sz-123: clamp(calc(123px * var(--min_w1) / var(--max_w1)), calc(123vw * 100 / var(--max_w1)), 123px);
+  --sz-124: clamp(calc(124px * var(--min_w1) / var(--max_w1)), calc(124vw * 100 / var(--max_w1)), 124px);
+  --sz-125: clamp(calc(125px * var(--min_w1) / var(--max_w1)), calc(125vw * 100 / var(--max_w1)), 125px);
+  --sz-126: clamp(calc(126px * var(--min_w1) / var(--max_w1)), calc(126vw * 100 / var(--max_w1)), 126px);
+  --sz-127: clamp(calc(127px * var(--min_w1) / var(--max_w1)), calc(127vw * 100 / var(--max_w1)), 127px);
+  --sz-128: clamp(calc(128px * var(--min_w1) / var(--max_w1)), calc(128vw * 100 / var(--max_w1)), 128px);
+  --sz-129: clamp(calc(129px * var(--min_w1) / var(--max_w1)), calc(129vw * 100 / var(--max_w1)), 129px);
+  --sz-130: clamp(calc(130px * var(--min_w1) / var(--max_w1)), calc(130vw * 100 / var(--max_w1)), 130px);
+  --sz-131: clamp(calc(131px * var(--min_w1) / var(--max_w1)), calc(131vw * 100 / var(--max_w1)), 131px);
+  --sz-132: clamp(calc(132px * var(--min_w1) / var(--max_w1)), calc(132vw * 100 / var(--max_w1)), 132px);
+  --sz-133: clamp(calc(133px * var(--min_w1) / var(--max_w1)), calc(133vw * 100 / var(--max_w1)), 133px);
+  --sz-134: clamp(calc(134px * var(--min_w1) / var(--max_w1)), calc(134vw * 100 / var(--max_w1)), 134px);
+  --sz-135: clamp(calc(135px * var(--min_w1) / var(--max_w1)), calc(135vw * 100 / var(--max_w1)), 135px);
+  --sz-136: clamp(calc(136px * var(--min_w1) / var(--max_w1)), calc(136vw * 100 / var(--max_w1)), 136px);
+  --sz-137: clamp(calc(137px * var(--min_w1) / var(--max_w1)), calc(137vw * 100 / var(--max_w1)), 137px);
+  --sz-138: clamp(calc(138px * var(--min_w1) / var(--max_w1)), calc(138vw * 100 / var(--max_w1)), 138px);
+  --sz-139: clamp(calc(139px * var(--min_w1) / var(--max_w1)), calc(139vw * 100 / var(--max_w1)), 139px);
+  --sz-140: clamp(calc(140px * var(--min_w1) / var(--max_w1)), calc(140vw * 100 / var(--max_w1)), 140px);
+  --sz-141: clamp(calc(141px * var(--min_w1) / var(--max_w1)), calc(141vw * 100 / var(--max_w1)), 141px);
+  --sz-142: clamp(calc(142px * var(--min_w1) / var(--max_w1)), calc(142vw * 100 / var(--max_w1)), 142px);
+  --sz-143: clamp(calc(143px * var(--min_w1) / var(--max_w1)), calc(143vw * 100 / var(--max_w1)), 143px);
+  --sz-144: clamp(calc(144px * var(--min_w1) / var(--max_w1)), calc(144vw * 100 / var(--max_w1)), 144px);
+  --sz-145: clamp(calc(145px * var(--min_w1) / var(--max_w1)), calc(145vw * 100 / var(--max_w1)), 145px);
+  --sz-146: clamp(calc(146px * var(--min_w1) / var(--max_w1)), calc(146vw * 100 / var(--max_w1)), 146px);
+  --sz-147: clamp(calc(147px * var(--min_w1) / var(--max_w1)), calc(147vw * 100 / var(--max_w1)), 147px);
+  --sz-148: clamp(calc(148px * var(--min_w1) / var(--max_w1)), calc(148vw * 100 / var(--max_w1)), 148px);
+  --sz-149: clamp(calc(149px * var(--min_w1) / var(--max_w1)), calc(149vw * 100 / var(--max_w1)), 149px);
+  --sz-150: clamp(calc(150px * var(--min_w1) / var(--max_w1)), calc(150vw * 100 / var(--max_w1)), 150px);
+  --sz-151: clamp(calc(151px * var(--min_w1) / var(--max_w1)), calc(151vw * 100 / var(--max_w1)), 151px);
+  --sz-152: clamp(calc(152px * var(--min_w1) / var(--max_w1)), calc(152vw * 100 / var(--max_w1)), 152px);
+  --sz-153: clamp(calc(153px * var(--min_w1) / var(--max_w1)), calc(153vw * 100 / var(--max_w1)), 153px);
+  --sz-154: clamp(calc(154px * var(--min_w1) / var(--max_w1)), calc(154vw * 100 / var(--max_w1)), 154px);
+  --sz-155: clamp(calc(155px * var(--min_w1) / var(--max_w1)), calc(155vw * 100 / var(--max_w1)), 155px);
+  --sz-156: clamp(calc(156px * var(--min_w1) / var(--max_w1)), calc(156vw * 100 / var(--max_w1)), 156px);
+  --sz-157: clamp(calc(157px * var(--min_w1) / var(--max_w1)), calc(157vw * 100 / var(--max_w1)), 157px);
+  --sz-158: clamp(calc(158px * var(--min_w1) / var(--max_w1)), calc(158vw * 100 / var(--max_w1)), 158px);
+  --sz-159: clamp(calc(159px * var(--min_w1) / var(--max_w1)), calc(159vw * 100 / var(--max_w1)), 159px);
+  --sz-160: clamp(calc(160px * var(--min_w1) / var(--max_w1)), calc(160vw * 100 / var(--max_w1)), 160px);
+  --sz-161: clamp(calc(161px * var(--min_w1) / var(--max_w1)), calc(161vw * 100 / var(--max_w1)), 161px);
+  --sz-162: clamp(calc(162px * var(--min_w1) / var(--max_w1)), calc(162vw * 100 / var(--max_w1)), 162px);
+  --sz-163: clamp(calc(163px * var(--min_w1) / var(--max_w1)), calc(163vw * 100 / var(--max_w1)), 163px);
+  --sz-164: clamp(calc(164px * var(--min_w1) / var(--max_w1)), calc(164vw * 100 / var(--max_w1)), 164px);
+  --sz-165: clamp(calc(165px * var(--min_w1) / var(--max_w1)), calc(165vw * 100 / var(--max_w1)), 165px);
+  --sz-166: clamp(calc(166px * var(--min_w1) / var(--max_w1)), calc(166vw * 100 / var(--max_w1)), 166px);
+  --sz-167: clamp(calc(167px * var(--min_w1) / var(--max_w1)), calc(167vw * 100 / var(--max_w1)), 167px);
+  --sz-168: clamp(calc(168px * var(--min_w1) / var(--max_w1)), calc(168vw * 100 / var(--max_w1)), 168px);
+  --sz-169: clamp(calc(169px * var(--min_w1) / var(--max_w1)), calc(169vw * 100 / var(--max_w1)), 169px);
+  --sz-170: clamp(calc(170px * var(--min_w1) / var(--max_w1)), calc(170vw * 100 / var(--max_w1)), 170px);
+  --sz-171: clamp(calc(171px * var(--min_w1) / var(--max_w1)), calc(171vw * 100 / var(--max_w1)), 171px);
+  --sz-172: clamp(calc(172px * var(--min_w1) / var(--max_w1)), calc(172vw * 100 / var(--max_w1)), 172px);
+  --sz-173: clamp(calc(173px * var(--min_w1) / var(--max_w1)), calc(173vw * 100 / var(--max_w1)), 173px);
+  --sz-174: clamp(calc(174px * var(--min_w1) / var(--max_w1)), calc(174vw * 100 / var(--max_w1)), 174px);
+  --sz-175: clamp(calc(175px * var(--min_w1) / var(--max_w1)), calc(175vw * 100 / var(--max_w1)), 175px);
+  --sz-176: clamp(calc(176px * var(--min_w1) / var(--max_w1)), calc(176vw * 100 / var(--max_w1)), 176px);
+  --sz-177: clamp(calc(177px * var(--min_w1) / var(--max_w1)), calc(177vw * 100 / var(--max_w1)), 177px);
+  --sz-178: clamp(calc(178px * var(--min_w1) / var(--max_w1)), calc(178vw * 100 / var(--max_w1)), 178px);
+  --sz-179: clamp(calc(179px * var(--min_w1) / var(--max_w1)), calc(179vw * 100 / var(--max_w1)), 179px);
+  --sz-180: clamp(calc(180px * var(--min_w1) / var(--max_w1)), calc(180vw * 100 / var(--max_w1)), 180px);
+  --sz-181: clamp(calc(181px * var(--min_w1) / var(--max_w1)), calc(181vw * 100 / var(--max_w1)), 181px);
+  --sz-182: clamp(calc(182px * var(--min_w1) / var(--max_w1)), calc(182vw * 100 / var(--max_w1)), 182px);
+  --sz-183: clamp(calc(183px * var(--min_w1) / var(--max_w1)), calc(183vw * 100 / var(--max_w1)), 183px);
+  --sz-184: clamp(calc(184px * var(--min_w1) / var(--max_w1)), calc(184vw * 100 / var(--max_w1)), 184px);
+  --sz-185: clamp(calc(185px * var(--min_w1) / var(--max_w1)), calc(185vw * 100 / var(--max_w1)), 185px);
+  --sz-186: clamp(calc(186px * var(--min_w1) / var(--max_w1)), calc(186vw * 100 / var(--max_w1)), 186px);
+  --sz-187: clamp(calc(187px * var(--min_w1) / var(--max_w1)), calc(187vw * 100 / var(--max_w1)), 187px);
+  --sz-188: clamp(calc(188px * var(--min_w1) / var(--max_w1)), calc(188vw * 100 / var(--max_w1)), 188px);
+  --sz-189: clamp(calc(189px * var(--min_w1) / var(--max_w1)), calc(189vw * 100 / var(--max_w1)), 189px);
+  --sz-190: clamp(calc(190px * var(--min_w1) / var(--max_w1)), calc(190vw * 100 / var(--max_w1)), 190px);
+  --sz-191: clamp(calc(191px * var(--min_w1) / var(--max_w1)), calc(191vw * 100 / var(--max_w1)), 191px);
+  --sz-192: clamp(calc(192px * var(--min_w1) / var(--max_w1)), calc(192vw * 100 / var(--max_w1)), 192px);
+  --sz-193: clamp(calc(193px * var(--min_w1) / var(--max_w1)), calc(193vw * 100 / var(--max_w1)), 193px);
+  --sz-194: clamp(calc(194px * var(--min_w1) / var(--max_w1)), calc(194vw * 100 / var(--max_w1)), 194px);
+  --sz-195: clamp(calc(195px * var(--min_w1) / var(--max_w1)), calc(195vw * 100 / var(--max_w1)), 195px);
+  --sz-196: clamp(calc(196px * var(--min_w1) / var(--max_w1)), calc(196vw * 100 / var(--max_w1)), 196px);
+  --sz-197: clamp(calc(197px * var(--min_w1) / var(--max_w1)), calc(197vw * 100 / var(--max_w1)), 197px);
+  --sz-198: clamp(calc(198px * var(--min_w1) / var(--max_w1)), calc(198vw * 100 / var(--max_w1)), 198px);
+  --sz-199: clamp(calc(199px * var(--min_w1) / var(--max_w1)), calc(199vw * 100 / var(--max_w1)), 199px);
+  --sz-200: clamp(calc(200px * var(--min_w1) / var(--max_w1)), calc(200vw * 100 / var(--max_w1)), 200px);
+  --sz-201: clamp(calc(201px * var(--min_w1) / var(--max_w1)), calc(201vw * 100 / var(--max_w1)), 201px);
+  --sz-202: clamp(calc(202px * var(--min_w1) / var(--max_w1)), calc(202vw * 100 / var(--max_w1)), 202px);
+  --sz-203: clamp(calc(203px * var(--min_w1) / var(--max_w1)), calc(203vw * 100 / var(--max_w1)), 203px);
+  --sz-204: clamp(calc(204px * var(--min_w1) / var(--max_w1)), calc(204vw * 100 / var(--max_w1)), 204px);
+  --sz-205: clamp(calc(205px * var(--min_w1) / var(--max_w1)), calc(205vw * 100 / var(--max_w1)), 205px);
+  --sz-206: clamp(calc(206px * var(--min_w1) / var(--max_w1)), calc(206vw * 100 / var(--max_w1)), 206px);
+  --sz-207: clamp(calc(207px * var(--min_w1) / var(--max_w1)), calc(207vw * 100 / var(--max_w1)), 207px);
+  --sz-208: clamp(calc(208px * var(--min_w1) / var(--max_w1)), calc(208vw * 100 / var(--max_w1)), 208px);
+  --sz-209: clamp(calc(209px * var(--min_w1) / var(--max_w1)), calc(209vw * 100 / var(--max_w1)), 209px);
+  --sz-210: clamp(calc(210px * var(--min_w1) / var(--max_w1)), calc(210vw * 100 / var(--max_w1)), 210px);
+  --sz-211: clamp(calc(211px * var(--min_w1) / var(--max_w1)), calc(211vw * 100 / var(--max_w1)), 211px);
+  --sz-212: clamp(calc(212px * var(--min_w1) / var(--max_w1)), calc(212vw * 100 / var(--max_w1)), 212px);
+  --sz-213: clamp(calc(213px * var(--min_w1) / var(--max_w1)), calc(213vw * 100 / var(--max_w1)), 213px);
+  --sz-214: clamp(calc(214px * var(--min_w1) / var(--max_w1)), calc(214vw * 100 / var(--max_w1)), 214px);
+  --sz-215: clamp(calc(215px * var(--min_w1) / var(--max_w1)), calc(215vw * 100 / var(--max_w1)), 215px);
+  --sz-216: clamp(calc(216px * var(--min_w1) / var(--max_w1)), calc(216vw * 100 / var(--max_w1)), 216px);
+  --sz-217: clamp(calc(217px * var(--min_w1) / var(--max_w1)), calc(217vw * 100 / var(--max_w1)), 217px);
+  --sz-218: clamp(calc(218px * var(--min_w1) / var(--max_w1)), calc(218vw * 100 / var(--max_w1)), 218px);
+  --sz-219: clamp(calc(219px * var(--min_w1) / var(--max_w1)), calc(219vw * 100 / var(--max_w1)), 219px);
+  --sz-220: clamp(calc(220px * var(--min_w1) / var(--max_w1)), calc(220vw * 100 / var(--max_w1)), 220px);
+  --sz-221: clamp(calc(221px * var(--min_w1) / var(--max_w1)), calc(221vw * 100 / var(--max_w1)), 221px);
+  --sz-222: clamp(calc(222px * var(--min_w1) / var(--max_w1)), calc(222vw * 100 / var(--max_w1)), 222px);
+  --sz-223: clamp(calc(223px * var(--min_w1) / var(--max_w1)), calc(223vw * 100 / var(--max_w1)), 223px);
+  --sz-224: clamp(calc(224px * var(--min_w1) / var(--max_w1)), calc(224vw * 100 / var(--max_w1)), 224px);
+  --sz-225: clamp(calc(225px * var(--min_w1) / var(--max_w1)), calc(225vw * 100 / var(--max_w1)), 225px);
+  --sz-226: clamp(calc(226px * var(--min_w1) / var(--max_w1)), calc(226vw * 100 / var(--max_w1)), 226px);
+  --sz-227: clamp(calc(227px * var(--min_w1) / var(--max_w1)), calc(227vw * 100 / var(--max_w1)), 227px);
+  --sz-228: clamp(calc(228px * var(--min_w1) / var(--max_w1)), calc(228vw * 100 / var(--max_w1)), 228px);
+  --sz-229: clamp(calc(229px * var(--min_w1) / var(--max_w1)), calc(229vw * 100 / var(--max_w1)), 229px);
+  --sz-230: clamp(calc(230px * var(--min_w1) / var(--max_w1)), calc(230vw * 100 / var(--max_w1)), 230px);
+  --sz-231: clamp(calc(231px * var(--min_w1) / var(--max_w1)), calc(231vw * 100 / var(--max_w1)), 231px);
+  --sz-232: clamp(calc(232px * var(--min_w1) / var(--max_w1)), calc(232vw * 100 / var(--max_w1)), 232px);
+  --sz-233: clamp(calc(233px * var(--min_w1) / var(--max_w1)), calc(233vw * 100 / var(--max_w1)), 233px);
+  --sz-234: clamp(calc(234px * var(--min_w1) / var(--max_w1)), calc(234vw * 100 / var(--max_w1)), 234px);
+  --sz-235: clamp(calc(235px * var(--min_w1) / var(--max_w1)), calc(235vw * 100 / var(--max_w1)), 235px);
+  --sz-236: clamp(calc(236px * var(--min_w1) / var(--max_w1)), calc(236vw * 100 / var(--max_w1)), 236px);
+  --sz-237: clamp(calc(237px * var(--min_w1) / var(--max_w1)), calc(237vw * 100 / var(--max_w1)), 237px);
+  --sz-238: clamp(calc(238px * var(--min_w1) / var(--max_w1)), calc(238vw * 100 / var(--max_w1)), 238px);
+  --sz-239: clamp(calc(239px * var(--min_w1) / var(--max_w1)), calc(239vw * 100 / var(--max_w1)), 239px);
+  --sz-240: clamp(calc(240px * var(--min_w1) / var(--max_w1)), calc(240vw * 100 / var(--max_w1)), 240px);
+  --sz-241: clamp(calc(241px * var(--min_w1) / var(--max_w1)), calc(241vw * 100 / var(--max_w1)), 241px);
+  --sz-242: clamp(calc(242px * var(--min_w1) / var(--max_w1)), calc(242vw * 100 / var(--max_w1)), 242px);
+  --sz-243: clamp(calc(243px * var(--min_w1) / var(--max_w1)), calc(243vw * 100 / var(--max_w1)), 243px);
+  --sz-244: clamp(calc(244px * var(--min_w1) / var(--max_w1)), calc(244vw * 100 / var(--max_w1)), 244px);
+  --sz-245: clamp(calc(245px * var(--min_w1) / var(--max_w1)), calc(245vw * 100 / var(--max_w1)), 245px);
+  --sz-246: clamp(calc(246px * var(--min_w1) / var(--max_w1)), calc(246vw * 100 / var(--max_w1)), 246px);
+  --sz-247: clamp(calc(247px * var(--min_w1) / var(--max_w1)), calc(247vw * 100 / var(--max_w1)), 247px);
+  --sz-248: clamp(calc(248px * var(--min_w1) / var(--max_w1)), calc(248vw * 100 / var(--max_w1)), 248px);
+  --sz-249: clamp(calc(249px * var(--min_w1) / var(--max_w1)), calc(249vw * 100 / var(--max_w1)), 249px);
+  --sz-250: clamp(calc(250px * var(--min_w1) / var(--max_w1)), calc(250vw * 100 / var(--max_w1)), 250px);
+  --sz-251: clamp(calc(251px * var(--min_w1) / var(--max_w1)), calc(251vw * 100 / var(--max_w1)), 251px);
+  --sz-252: clamp(calc(252px * var(--min_w1) / var(--max_w1)), calc(252vw * 100 / var(--max_w1)), 252px);
+  --sz-253: clamp(calc(253px * var(--min_w1) / var(--max_w1)), calc(253vw * 100 / var(--max_w1)), 253px);
+  --sz-254: clamp(calc(254px * var(--min_w1) / var(--max_w1)), calc(254vw * 100 / var(--max_w1)), 254px);
+  --sz-255: clamp(calc(255px * var(--min_w1) / var(--max_w1)), calc(255vw * 100 / var(--max_w1)), 255px);
+  --sz-256: clamp(calc(256px * var(--min_w1) / var(--max_w1)), calc(256vw * 100 / var(--max_w1)), 256px);
+  --sz-257: clamp(calc(257px * var(--min_w1) / var(--max_w1)), calc(257vw * 100 / var(--max_w1)), 257px);
+  --sz-258: clamp(calc(258px * var(--min_w1) / var(--max_w1)), calc(258vw * 100 / var(--max_w1)), 258px);
+  --sz-259: clamp(calc(259px * var(--min_w1) / var(--max_w1)), calc(259vw * 100 / var(--max_w1)), 259px);
+  --sz-260: clamp(calc(260px * var(--min_w1) / var(--max_w1)), calc(260vw * 100 / var(--max_w1)), 260px);
+  --sz-261: clamp(calc(261px * var(--min_w1) / var(--max_w1)), calc(261vw * 100 / var(--max_w1)), 261px);
+  --sz-262: clamp(calc(262px * var(--min_w1) / var(--max_w1)), calc(262vw * 100 / var(--max_w1)), 262px);
+  --sz-263: clamp(calc(263px * var(--min_w1) / var(--max_w1)), calc(263vw * 100 / var(--max_w1)), 263px);
+  --sz-264: clamp(calc(264px * var(--min_w1) / var(--max_w1)), calc(264vw * 100 / var(--max_w1)), 264px);
+  --sz-265: clamp(calc(265px * var(--min_w1) / var(--max_w1)), calc(265vw * 100 / var(--max_w1)), 265px);
+  --sz-266: clamp(calc(266px * var(--min_w1) / var(--max_w1)), calc(266vw * 100 / var(--max_w1)), 266px);
+  --sz-267: clamp(calc(267px * var(--min_w1) / var(--max_w1)), calc(267vw * 100 / var(--max_w1)), 267px);
+  --sz-268: clamp(calc(268px * var(--min_w1) / var(--max_w1)), calc(268vw * 100 / var(--max_w1)), 268px);
+  --sz-269: clamp(calc(269px * var(--min_w1) / var(--max_w1)), calc(269vw * 100 / var(--max_w1)), 269px);
+  --sz-270: clamp(calc(270px * var(--min_w1) / var(--max_w1)), calc(270vw * 100 / var(--max_w1)), 270px);
+  --sz-271: clamp(calc(271px * var(--min_w1) / var(--max_w1)), calc(271vw * 100 / var(--max_w1)), 271px);
+  --sz-272: clamp(calc(272px * var(--min_w1) / var(--max_w1)), calc(272vw * 100 / var(--max_w1)), 272px);
+  --sz-273: clamp(calc(273px * var(--min_w1) / var(--max_w1)), calc(273vw * 100 / var(--max_w1)), 273px);
+  --sz-274: clamp(calc(274px * var(--min_w1) / var(--max_w1)), calc(274vw * 100 / var(--max_w1)), 274px);
+  --sz-275: clamp(calc(275px * var(--min_w1) / var(--max_w1)), calc(275vw * 100 / var(--max_w1)), 275px);
+  --sz-276: clamp(calc(276px * var(--min_w1) / var(--max_w1)), calc(276vw * 100 / var(--max_w1)), 276px);
+  --sz-277: clamp(calc(277px * var(--min_w1) / var(--max_w1)), calc(277vw * 100 / var(--max_w1)), 277px);
+  --sz-278: clamp(calc(278px * var(--min_w1) / var(--max_w1)), calc(278vw * 100 / var(--max_w1)), 278px);
+  --sz-279: clamp(calc(279px * var(--min_w1) / var(--max_w1)), calc(279vw * 100 / var(--max_w1)), 279px);
+  --sz-280: clamp(calc(280px * var(--min_w1) / var(--max_w1)), calc(280vw * 100 / var(--max_w1)), 280px);
+  --sz-281: clamp(calc(281px * var(--min_w1) / var(--max_w1)), calc(281vw * 100 / var(--max_w1)), 281px);
+  --sz-282: clamp(calc(282px * var(--min_w1) / var(--max_w1)), calc(282vw * 100 / var(--max_w1)), 282px);
+  --sz-283: clamp(calc(283px * var(--min_w1) / var(--max_w1)), calc(283vw * 100 / var(--max_w1)), 283px);
+  --sz-284: clamp(calc(284px * var(--min_w1) / var(--max_w1)), calc(284vw * 100 / var(--max_w1)), 284px);
+  --sz-285: clamp(calc(285px * var(--min_w1) / var(--max_w1)), calc(285vw * 100 / var(--max_w1)), 285px);
+  --sz-286: clamp(calc(286px * var(--min_w1) / var(--max_w1)), calc(286vw * 100 / var(--max_w1)), 286px);
+  --sz-287: clamp(calc(287px * var(--min_w1) / var(--max_w1)), calc(287vw * 100 / var(--max_w1)), 287px);
+  --sz-288: clamp(calc(288px * var(--min_w1) / var(--max_w1)), calc(288vw * 100 / var(--max_w1)), 288px);
+  --sz-289: clamp(calc(289px * var(--min_w1) / var(--max_w1)), calc(289vw * 100 / var(--max_w1)), 289px);
+  --sz-290: clamp(calc(290px * var(--min_w1) / var(--max_w1)), calc(290vw * 100 / var(--max_w1)), 290px);
+  --sz-291: clamp(calc(291px * var(--min_w1) / var(--max_w1)), calc(291vw * 100 / var(--max_w1)), 291px);
+  --sz-292: clamp(calc(292px * var(--min_w1) / var(--max_w1)), calc(292vw * 100 / var(--max_w1)), 292px);
+  --sz-293: clamp(calc(293px * var(--min_w1) / var(--max_w1)), calc(293vw * 100 / var(--max_w1)), 293px);
+  --sz-294: clamp(calc(294px * var(--min_w1) / var(--max_w1)), calc(294vw * 100 / var(--max_w1)), 294px);
+  --sz-295: clamp(calc(295px * var(--min_w1) / var(--max_w1)), calc(295vw * 100 / var(--max_w1)), 295px);
+  --sz-296: clamp(calc(296px * var(--min_w1) / var(--max_w1)), calc(296vw * 100 / var(--max_w1)), 296px);
+  --sz-297: clamp(calc(297px * var(--min_w1) / var(--max_w1)), calc(297vw * 100 / var(--max_w1)), 297px);
+  --sz-298: clamp(calc(298px * var(--min_w1) / var(--max_w1)), calc(298vw * 100 / var(--max_w1)), 298px);
+  --sz-299: clamp(calc(299px * var(--min_w1) / var(--max_w1)), calc(299vw * 100 / var(--max_w1)), 299px);
+  --sz-300: clamp(calc(300px * var(--min_w1) / var(--max_w1)), calc(300vw * 100 / var(--max_w1)), 300px);
+  --sz-301: clamp(calc(301px * var(--min_w1) / var(--max_w1)), calc(301vw * 100 / var(--max_w1)), 301px);
+  --sz-302: clamp(calc(302px * var(--min_w1) / var(--max_w1)), calc(302vw * 100 / var(--max_w1)), 302px);
+  --sz-303: clamp(calc(303px * var(--min_w1) / var(--max_w1)), calc(303vw * 100 / var(--max_w1)), 303px);
+  --sz-304: clamp(calc(304px * var(--min_w1) / var(--max_w1)), calc(304vw * 100 / var(--max_w1)), 304px);
+  --sz-305: clamp(calc(305px * var(--min_w1) / var(--max_w1)), calc(305vw * 100 / var(--max_w1)), 305px);
+  --sz-306: clamp(calc(306px * var(--min_w1) / var(--max_w1)), calc(306vw * 100 / var(--max_w1)), 306px);
+  --sz-307: clamp(calc(307px * var(--min_w1) / var(--max_w1)), calc(307vw * 100 / var(--max_w1)), 307px);
+  --sz-308: clamp(calc(308px * var(--min_w1) / var(--max_w1)), calc(308vw * 100 / var(--max_w1)), 308px);
+  --sz-309: clamp(calc(309px * var(--min_w1) / var(--max_w1)), calc(309vw * 100 / var(--max_w1)), 309px);
+  --sz-310: clamp(calc(310px * var(--min_w1) / var(--max_w1)), calc(310vw * 100 / var(--max_w1)), 310px);
+  --sz-311: clamp(calc(311px * var(--min_w1) / var(--max_w1)), calc(311vw * 100 / var(--max_w1)), 311px);
+  --sz-312: clamp(calc(312px * var(--min_w1) / var(--max_w1)), calc(312vw * 100 / var(--max_w1)), 312px);
+  --sz-313: clamp(calc(313px * var(--min_w1) / var(--max_w1)), calc(313vw * 100 / var(--max_w1)), 313px);
+  --sz-314: clamp(calc(314px * var(--min_w1) / var(--max_w1)), calc(314vw * 100 / var(--max_w1)), 314px);
+  --sz-315: clamp(calc(315px * var(--min_w1) / var(--max_w1)), calc(315vw * 100 / var(--max_w1)), 315px);
+  --sz-316: clamp(calc(316px * var(--min_w1) / var(--max_w1)), calc(316vw * 100 / var(--max_w1)), 316px);
+  --sz-317: clamp(calc(317px * var(--min_w1) / var(--max_w1)), calc(317vw * 100 / var(--max_w1)), 317px);
+  --sz-318: clamp(calc(318px * var(--min_w1) / var(--max_w1)), calc(318vw * 100 / var(--max_w1)), 318px);
+  --sz-319: clamp(calc(319px * var(--min_w1) / var(--max_w1)), calc(319vw * 100 / var(--max_w1)), 319px);
+  --sz-320: clamp(calc(320px * var(--min_w1) / var(--max_w1)), calc(320vw * 100 / var(--max_w1)), 320px);
+  --sz-321: clamp(calc(321px * var(--min_w1) / var(--max_w1)), calc(321vw * 100 / var(--max_w1)), 321px);
+  --sz-322: clamp(calc(322px * var(--min_w1) / var(--max_w1)), calc(322vw * 100 / var(--max_w1)), 322px);
+  --sz-323: clamp(calc(323px * var(--min_w1) / var(--max_w1)), calc(323vw * 100 / var(--max_w1)), 323px);
+  --sz-324: clamp(calc(324px * var(--min_w1) / var(--max_w1)), calc(324vw * 100 / var(--max_w1)), 324px);
+  --sz-325: clamp(calc(325px * var(--min_w1) / var(--max_w1)), calc(325vw * 100 / var(--max_w1)), 325px);
+  --sz-326: clamp(calc(326px * var(--min_w1) / var(--max_w1)), calc(326vw * 100 / var(--max_w1)), 326px);
+  --sz-327: clamp(calc(327px * var(--min_w1) / var(--max_w1)), calc(327vw * 100 / var(--max_w1)), 327px);
+  --sz-328: clamp(calc(328px * var(--min_w1) / var(--max_w1)), calc(328vw * 100 / var(--max_w1)), 328px);
+  --sz-329: clamp(calc(329px * var(--min_w1) / var(--max_w1)), calc(329vw * 100 / var(--max_w1)), 329px);
+  --sz-330: clamp(calc(330px * var(--min_w1) / var(--max_w1)), calc(330vw * 100 / var(--max_w1)), 330px);
+  --sz-331: clamp(calc(331px * var(--min_w1) / var(--max_w1)), calc(331vw * 100 / var(--max_w1)), 331px);
+  --sz-332: clamp(calc(332px * var(--min_w1) / var(--max_w1)), calc(332vw * 100 / var(--max_w1)), 332px);
+  --sz-333: clamp(calc(333px * var(--min_w1) / var(--max_w1)), calc(333vw * 100 / var(--max_w1)), 333px);
+  --sz-334: clamp(calc(334px * var(--min_w1) / var(--max_w1)), calc(334vw * 100 / var(--max_w1)), 334px);
+  --sz-335: clamp(calc(335px * var(--min_w1) / var(--max_w1)), calc(335vw * 100 / var(--max_w1)), 335px);
+  --sz-336: clamp(calc(336px * var(--min_w1) / var(--max_w1)), calc(336vw * 100 / var(--max_w1)), 336px);
+  --sz-337: clamp(calc(337px * var(--min_w1) / var(--max_w1)), calc(337vw * 100 / var(--max_w1)), 337px);
+  --sz-338: clamp(calc(338px * var(--min_w1) / var(--max_w1)), calc(338vw * 100 / var(--max_w1)), 338px);
+  --sz-339: clamp(calc(339px * var(--min_w1) / var(--max_w1)), calc(339vw * 100 / var(--max_w1)), 339px);
+  --sz-340: clamp(calc(340px * var(--min_w1) / var(--max_w1)), calc(340vw * 100 / var(--max_w1)), 340px);
+  --sz-341: clamp(calc(341px * var(--min_w1) / var(--max_w1)), calc(341vw * 100 / var(--max_w1)), 341px);
+  --sz-342: clamp(calc(342px * var(--min_w1) / var(--max_w1)), calc(342vw * 100 / var(--max_w1)), 342px);
+  --sz-343: clamp(calc(343px * var(--min_w1) / var(--max_w1)), calc(343vw * 100 / var(--max_w1)), 343px);
+  --sz-344: clamp(calc(344px * var(--min_w1) / var(--max_w1)), calc(344vw * 100 / var(--max_w1)), 344px);
+  --sz-345: clamp(calc(345px * var(--min_w1) / var(--max_w1)), calc(345vw * 100 / var(--max_w1)), 345px);
+  --sz-346: clamp(calc(346px * var(--min_w1) / var(--max_w1)), calc(346vw * 100 / var(--max_w1)), 346px);
+  --sz-347: clamp(calc(347px * var(--min_w1) / var(--max_w1)), calc(347vw * 100 / var(--max_w1)), 347px);
+  --sz-348: clamp(calc(348px * var(--min_w1) / var(--max_w1)), calc(348vw * 100 / var(--max_w1)), 348px);
+  --sz-349: clamp(calc(349px * var(--min_w1) / var(--max_w1)), calc(349vw * 100 / var(--max_w1)), 349px);
+  --sz-350: clamp(calc(350px * var(--min_w1) / var(--max_w1)), calc(350vw * 100 / var(--max_w1)), 350px);
+  --sz-351: clamp(calc(351px * var(--min_w1) / var(--max_w1)), calc(351vw * 100 / var(--max_w1)), 351px);
+  --sz-352: clamp(calc(352px * var(--min_w1) / var(--max_w1)), calc(352vw * 100 / var(--max_w1)), 352px);
+  --sz-353: clamp(calc(353px * var(--min_w1) / var(--max_w1)), calc(353vw * 100 / var(--max_w1)), 353px);
+  --sz-354: clamp(calc(354px * var(--min_w1) / var(--max_w1)), calc(354vw * 100 / var(--max_w1)), 354px);
+  --sz-355: clamp(calc(355px * var(--min_w1) / var(--max_w1)), calc(355vw * 100 / var(--max_w1)), 355px);
+  --sz-356: clamp(calc(356px * var(--min_w1) / var(--max_w1)), calc(356vw * 100 / var(--max_w1)), 356px);
+  --sz-357: clamp(calc(357px * var(--min_w1) / var(--max_w1)), calc(357vw * 100 / var(--max_w1)), 357px);
+  --sz-358: clamp(calc(358px * var(--min_w1) / var(--max_w1)), calc(358vw * 100 / var(--max_w1)), 358px);
+  --sz-359: clamp(calc(359px * var(--min_w1) / var(--max_w1)), calc(359vw * 100 / var(--max_w1)), 359px);
+  --sz-360: clamp(calc(360px * var(--min_w1) / var(--max_w1)), calc(360vw * 100 / var(--max_w1)), 360px);
+  --sz-361: clamp(calc(361px * var(--min_w1) / var(--max_w1)), calc(361vw * 100 / var(--max_w1)), 361px);
+  --sz-362: clamp(calc(362px * var(--min_w1) / var(--max_w1)), calc(362vw * 100 / var(--max_w1)), 362px);
+  --sz-363: clamp(calc(363px * var(--min_w1) / var(--max_w1)), calc(363vw * 100 / var(--max_w1)), 363px);
+  --sz-364: clamp(calc(364px * var(--min_w1) / var(--max_w1)), calc(364vw * 100 / var(--max_w1)), 364px);
+  --sz-365: clamp(calc(365px * var(--min_w1) / var(--max_w1)), calc(365vw * 100 / var(--max_w1)), 365px);
+  --sz-366: clamp(calc(366px * var(--min_w1) / var(--max_w1)), calc(366vw * 100 / var(--max_w1)), 366px);
+  --sz-367: clamp(calc(367px * var(--min_w1) / var(--max_w1)), calc(367vw * 100 / var(--max_w1)), 367px);
+  --sz-368: clamp(calc(368px * var(--min_w1) / var(--max_w1)), calc(368vw * 100 / var(--max_w1)), 368px);
+  --sz-369: clamp(calc(369px * var(--min_w1) / var(--max_w1)), calc(369vw * 100 / var(--max_w1)), 369px);
+  --sz-370: clamp(calc(370px * var(--min_w1) / var(--max_w1)), calc(370vw * 100 / var(--max_w1)), 370px);
+  --sz-371: clamp(calc(371px * var(--min_w1) / var(--max_w1)), calc(371vw * 100 / var(--max_w1)), 371px);
+  --sz-372: clamp(calc(372px * var(--min_w1) / var(--max_w1)), calc(372vw * 100 / var(--max_w1)), 372px);
+  --sz-373: clamp(calc(373px * var(--min_w1) / var(--max_w1)), calc(373vw * 100 / var(--max_w1)), 373px);
+  --sz-374: clamp(calc(374px * var(--min_w1) / var(--max_w1)), calc(374vw * 100 / var(--max_w1)), 374px);
+  --sz-375: clamp(calc(375px * var(--min_w1) / var(--max_w1)), calc(375vw * 100 / var(--max_w1)), 375px);
+  --sz-376: clamp(calc(376px * var(--min_w1) / var(--max_w1)), calc(376vw * 100 / var(--max_w1)), 376px);
+  --sz-377: clamp(calc(377px * var(--min_w1) / var(--max_w1)), calc(377vw * 100 / var(--max_w1)), 377px);
+  --sz-378: clamp(calc(378px * var(--min_w1) / var(--max_w1)), calc(378vw * 100 / var(--max_w1)), 378px);
+  --sz-379: clamp(calc(379px * var(--min_w1) / var(--max_w1)), calc(379vw * 100 / var(--max_w1)), 379px);
+  --sz-380: clamp(calc(380px * var(--min_w1) / var(--max_w1)), calc(380vw * 100 / var(--max_w1)), 380px);
+  --sz-381: clamp(calc(381px * var(--min_w1) / var(--max_w1)), calc(381vw * 100 / var(--max_w1)), 381px);
+  --sz-382: clamp(calc(382px * var(--min_w1) / var(--max_w1)), calc(382vw * 100 / var(--max_w1)), 382px);
+  --sz-383: clamp(calc(383px * var(--min_w1) / var(--max_w1)), calc(383vw * 100 / var(--max_w1)), 383px);
+  --sz-384: clamp(calc(384px * var(--min_w1) / var(--max_w1)), calc(384vw * 100 / var(--max_w1)), 384px);
+  --sz-385: clamp(calc(385px * var(--min_w1) / var(--max_w1)), calc(385vw * 100 / var(--max_w1)), 385px);
+  --sz-386: clamp(calc(386px * var(--min_w1) / var(--max_w1)), calc(386vw * 100 / var(--max_w1)), 386px);
+  --sz-387: clamp(calc(387px * var(--min_w1) / var(--max_w1)), calc(387vw * 100 / var(--max_w1)), 387px);
+  --sz-388: clamp(calc(388px * var(--min_w1) / var(--max_w1)), calc(388vw * 100 / var(--max_w1)), 388px);
+  --sz-389: clamp(calc(389px * var(--min_w1) / var(--max_w1)), calc(389vw * 100 / var(--max_w1)), 389px);
+  --sz-390: clamp(calc(390px * var(--min_w1) / var(--max_w1)), calc(390vw * 100 / var(--max_w1)), 390px);
+  --sz-391: clamp(calc(391px * var(--min_w1) / var(--max_w1)), calc(391vw * 100 / var(--max_w1)), 391px);
+  --sz-392: clamp(calc(392px * var(--min_w1) / var(--max_w1)), calc(392vw * 100 / var(--max_w1)), 392px);
+  --sz-393: clamp(calc(393px * var(--min_w1) / var(--max_w1)), calc(393vw * 100 / var(--max_w1)), 393px);
+  --sz-394: clamp(calc(394px * var(--min_w1) / var(--max_w1)), calc(394vw * 100 / var(--max_w1)), 394px);
+  --sz-395: clamp(calc(395px * var(--min_w1) / var(--max_w1)), calc(395vw * 100 / var(--max_w1)), 395px);
+  --sz-396: clamp(calc(396px * var(--min_w1) / var(--max_w1)), calc(396vw * 100 / var(--max_w1)), 396px);
+  --sz-397: clamp(calc(397px * var(--min_w1) / var(--max_w1)), calc(397vw * 100 / var(--max_w1)), 397px);
+  --sz-398: clamp(calc(398px * var(--min_w1) / var(--max_w1)), calc(398vw * 100 / var(--max_w1)), 398px);
+  --sz-399: clamp(calc(399px * var(--min_w1) / var(--max_w1)), calc(399vw * 100 / var(--max_w1)), 399px);
+  --sz-400: clamp(calc(400px * var(--min_w1) / var(--max_w1)), calc(400vw * 100 / var(--max_w1)), 400px);
+  --sz-401: clamp(calc(401px * var(--min_w1) / var(--max_w1)), calc(401vw * 100 / var(--max_w1)), 401px);
+  --sz-402: clamp(calc(402px * var(--min_w1) / var(--max_w1)), calc(402vw * 100 / var(--max_w1)), 402px);
+  --sz-403: clamp(calc(403px * var(--min_w1) / var(--max_w1)), calc(403vw * 100 / var(--max_w1)), 403px);
+  --sz-404: clamp(calc(404px * var(--min_w1) / var(--max_w1)), calc(404vw * 100 / var(--max_w1)), 404px);
+  --sz-405: clamp(calc(405px * var(--min_w1) / var(--max_w1)), calc(405vw * 100 / var(--max_w1)), 405px);
+  --sz-406: clamp(calc(406px * var(--min_w1) / var(--max_w1)), calc(406vw * 100 / var(--max_w1)), 406px);
+  --sz-407: clamp(calc(407px * var(--min_w1) / var(--max_w1)), calc(407vw * 100 / var(--max_w1)), 407px);
+  --sz-408: clamp(calc(408px * var(--min_w1) / var(--max_w1)), calc(408vw * 100 / var(--max_w1)), 408px);
+  --sz-409: clamp(calc(409px * var(--min_w1) / var(--max_w1)), calc(409vw * 100 / var(--max_w1)), 409px);
+  --sz-410: clamp(calc(410px * var(--min_w1) / var(--max_w1)), calc(410vw * 100 / var(--max_w1)), 410px);
+  --sz-411: clamp(calc(411px * var(--min_w1) / var(--max_w1)), calc(411vw * 100 / var(--max_w1)), 411px);
+  --sz-412: clamp(calc(412px * var(--min_w1) / var(--max_w1)), calc(412vw * 100 / var(--max_w1)), 412px);
+  --sz-413: clamp(calc(413px * var(--min_w1) / var(--max_w1)), calc(413vw * 100 / var(--max_w1)), 413px);
+  --sz-414: clamp(calc(414px * var(--min_w1) / var(--max_w1)), calc(414vw * 100 / var(--max_w1)), 414px);
+  --sz-415: clamp(calc(415px * var(--min_w1) / var(--max_w1)), calc(415vw * 100 / var(--max_w1)), 415px);
+  --sz-416: clamp(calc(416px * var(--min_w1) / var(--max_w1)), calc(416vw * 100 / var(--max_w1)), 416px);
+  --sz-417: clamp(calc(417px * var(--min_w1) / var(--max_w1)), calc(417vw * 100 / var(--max_w1)), 417px);
+  --sz-418: clamp(calc(418px * var(--min_w1) / var(--max_w1)), calc(418vw * 100 / var(--max_w1)), 418px);
+  --sz-419: clamp(calc(419px * var(--min_w1) / var(--max_w1)), calc(419vw * 100 / var(--max_w1)), 419px);
+  --sz-420: clamp(calc(420px * var(--min_w1) / var(--max_w1)), calc(420vw * 100 / var(--max_w1)), 420px);
+  --sz-421: clamp(calc(421px * var(--min_w1) / var(--max_w1)), calc(421vw * 100 / var(--max_w1)), 421px);
+  --sz-422: clamp(calc(422px * var(--min_w1) / var(--max_w1)), calc(422vw * 100 / var(--max_w1)), 422px);
+  --sz-423: clamp(calc(423px * var(--min_w1) / var(--max_w1)), calc(423vw * 100 / var(--max_w1)), 423px);
+  --sz-424: clamp(calc(424px * var(--min_w1) / var(--max_w1)), calc(424vw * 100 / var(--max_w1)), 424px);
+  --sz-425: clamp(calc(425px * var(--min_w1) / var(--max_w1)), calc(425vw * 100 / var(--max_w1)), 425px);
+  --sz-426: clamp(calc(426px * var(--min_w1) / var(--max_w1)), calc(426vw * 100 / var(--max_w1)), 426px);
+  --sz-427: clamp(calc(427px * var(--min_w1) / var(--max_w1)), calc(427vw * 100 / var(--max_w1)), 427px);
+  --sz-428: clamp(calc(428px * var(--min_w1) / var(--max_w1)), calc(428vw * 100 / var(--max_w1)), 428px);
+  --sz-429: clamp(calc(429px * var(--min_w1) / var(--max_w1)), calc(429vw * 100 / var(--max_w1)), 429px);
+  --sz-430: clamp(calc(430px * var(--min_w1) / var(--max_w1)), calc(430vw * 100 / var(--max_w1)), 430px);
+  --sz-431: clamp(calc(431px * var(--min_w1) / var(--max_w1)), calc(431vw * 100 / var(--max_w1)), 431px);
+  --sz-432: clamp(calc(432px * var(--min_w1) / var(--max_w1)), calc(432vw * 100 / var(--max_w1)), 432px);
+  --sz-433: clamp(calc(433px * var(--min_w1) / var(--max_w1)), calc(433vw * 100 / var(--max_w1)), 433px);
+  --sz-434: clamp(calc(434px * var(--min_w1) / var(--max_w1)), calc(434vw * 100 / var(--max_w1)), 434px);
+  --sz-435: clamp(calc(435px * var(--min_w1) / var(--max_w1)), calc(435vw * 100 / var(--max_w1)), 435px);
+  --sz-436: clamp(calc(436px * var(--min_w1) / var(--max_w1)), calc(436vw * 100 / var(--max_w1)), 436px);
+  --sz-437: clamp(calc(437px * var(--min_w1) / var(--max_w1)), calc(437vw * 100 / var(--max_w1)), 437px);
+  --sz-438: clamp(calc(438px * var(--min_w1) / var(--max_w1)), calc(438vw * 100 / var(--max_w1)), 438px);
+  --sz-439: clamp(calc(439px * var(--min_w1) / var(--max_w1)), calc(439vw * 100 / var(--max_w1)), 439px);
+  --sz-440: clamp(calc(440px * var(--min_w1) / var(--max_w1)), calc(440vw * 100 / var(--max_w1)), 440px);
+  --sz-441: clamp(calc(441px * var(--min_w1) / var(--max_w1)), calc(441vw * 100 / var(--max_w1)), 441px);
+  --sz-442: clamp(calc(442px * var(--min_w1) / var(--max_w1)), calc(442vw * 100 / var(--max_w1)), 442px);
+  --sz-443: clamp(calc(443px * var(--min_w1) / var(--max_w1)), calc(443vw * 100 / var(--max_w1)), 443px);
+  --sz-444: clamp(calc(444px * var(--min_w1) / var(--max_w1)), calc(444vw * 100 / var(--max_w1)), 444px);
+  --sz-445: clamp(calc(445px * var(--min_w1) / var(--max_w1)), calc(445vw * 100 / var(--max_w1)), 445px);
+  --sz-446: clamp(calc(446px * var(--min_w1) / var(--max_w1)), calc(446vw * 100 / var(--max_w1)), 446px);
+  --sz-447: clamp(calc(447px * var(--min_w1) / var(--max_w1)), calc(447vw * 100 / var(--max_w1)), 447px);
+  --sz-448: clamp(calc(448px * var(--min_w1) / var(--max_w1)), calc(448vw * 100 / var(--max_w1)), 448px);
+  --sz-449: clamp(calc(449px * var(--min_w1) / var(--max_w1)), calc(449vw * 100 / var(--max_w1)), 449px);
+  --sz-450: clamp(calc(450px * var(--min_w1) / var(--max_w1)), calc(450vw * 100 / var(--max_w1)), 450px);
+  --sz-451: clamp(calc(451px * var(--min_w1) / var(--max_w1)), calc(451vw * 100 / var(--max_w1)), 451px);
+  --sz-452: clamp(calc(452px * var(--min_w1) / var(--max_w1)), calc(452vw * 100 / var(--max_w1)), 452px);
+  --sz-453: clamp(calc(453px * var(--min_w1) / var(--max_w1)), calc(453vw * 100 / var(--max_w1)), 453px);
+  --sz-454: clamp(calc(454px * var(--min_w1) / var(--max_w1)), calc(454vw * 100 / var(--max_w1)), 454px);
+  --sz-455: clamp(calc(455px * var(--min_w1) / var(--max_w1)), calc(455vw * 100 / var(--max_w1)), 455px);
+  --sz-456: clamp(calc(456px * var(--min_w1) / var(--max_w1)), calc(456vw * 100 / var(--max_w1)), 456px);
+  --sz-457: clamp(calc(457px * var(--min_w1) / var(--max_w1)), calc(457vw * 100 / var(--max_w1)), 457px);
+  --sz-458: clamp(calc(458px * var(--min_w1) / var(--max_w1)), calc(458vw * 100 / var(--max_w1)), 458px);
+  --sz-459: clamp(calc(459px * var(--min_w1) / var(--max_w1)), calc(459vw * 100 / var(--max_w1)), 459px);
+  --sz-460: clamp(calc(460px * var(--min_w1) / var(--max_w1)), calc(460vw * 100 / var(--max_w1)), 460px);
+  --sz-461: clamp(calc(461px * var(--min_w1) / var(--max_w1)), calc(461vw * 100 / var(--max_w1)), 461px);
+  --sz-462: clamp(calc(462px * var(--min_w1) / var(--max_w1)), calc(462vw * 100 / var(--max_w1)), 462px);
+  --sz-463: clamp(calc(463px * var(--min_w1) / var(--max_w1)), calc(463vw * 100 / var(--max_w1)), 463px);
+  --sz-464: clamp(calc(464px * var(--min_w1) / var(--max_w1)), calc(464vw * 100 / var(--max_w1)), 464px);
+  --sz-465: clamp(calc(465px * var(--min_w1) / var(--max_w1)), calc(465vw * 100 / var(--max_w1)), 465px);
+  --sz-466: clamp(calc(466px * var(--min_w1) / var(--max_w1)), calc(466vw * 100 / var(--max_w1)), 466px);
+  --sz-467: clamp(calc(467px * var(--min_w1) / var(--max_w1)), calc(467vw * 100 / var(--max_w1)), 467px);
+  --sz-468: clamp(calc(468px * var(--min_w1) / var(--max_w1)), calc(468vw * 100 / var(--max_w1)), 468px);
+  --sz-469: clamp(calc(469px * var(--min_w1) / var(--max_w1)), calc(469vw * 100 / var(--max_w1)), 469px);
+  --sz-470: clamp(calc(470px * var(--min_w1) / var(--max_w1)), calc(470vw * 100 / var(--max_w1)), 470px);
+  --sz-471: clamp(calc(471px * var(--min_w1) / var(--max_w1)), calc(471vw * 100 / var(--max_w1)), 471px);
+  --sz-472: clamp(calc(472px * var(--min_w1) / var(--max_w1)), calc(472vw * 100 / var(--max_w1)), 472px);
+  --sz-473: clamp(calc(473px * var(--min_w1) / var(--max_w1)), calc(473vw * 100 / var(--max_w1)), 473px);
+  --sz-474: clamp(calc(474px * var(--min_w1) / var(--max_w1)), calc(474vw * 100 / var(--max_w1)), 474px);
+  --sz-475: clamp(calc(475px * var(--min_w1) / var(--max_w1)), calc(475vw * 100 / var(--max_w1)), 475px);
+  --sz-476: clamp(calc(476px * var(--min_w1) / var(--max_w1)), calc(476vw * 100 / var(--max_w1)), 476px);
+  --sz-477: clamp(calc(477px * var(--min_w1) / var(--max_w1)), calc(477vw * 100 / var(--max_w1)), 477px);
+  --sz-478: clamp(calc(478px * var(--min_w1) / var(--max_w1)), calc(478vw * 100 / var(--max_w1)), 478px);
+  --sz-479: clamp(calc(479px * var(--min_w1) / var(--max_w1)), calc(479vw * 100 / var(--max_w1)), 479px);
+  --sz-480: clamp(calc(480px * var(--min_w1) / var(--max_w1)), calc(480vw * 100 / var(--max_w1)), 480px);
+  --sz-481: clamp(calc(481px * var(--min_w1) / var(--max_w1)), calc(481vw * 100 / var(--max_w1)), 481px);
+  --sz-482: clamp(calc(482px * var(--min_w1) / var(--max_w1)), calc(482vw * 100 / var(--max_w1)), 482px);
+  --sz-483: clamp(calc(483px * var(--min_w1) / var(--max_w1)), calc(483vw * 100 / var(--max_w1)), 483px);
+  --sz-484: clamp(calc(484px * var(--min_w1) / var(--max_w1)), calc(484vw * 100 / var(--max_w1)), 484px);
+  --sz-485: clamp(calc(485px * var(--min_w1) / var(--max_w1)), calc(485vw * 100 / var(--max_w1)), 485px);
+  --sz-486: clamp(calc(486px * var(--min_w1) / var(--max_w1)), calc(486vw * 100 / var(--max_w1)), 486px);
+  --sz-487: clamp(calc(487px * var(--min_w1) / var(--max_w1)), calc(487vw * 100 / var(--max_w1)), 487px);
+  --sz-488: clamp(calc(488px * var(--min_w1) / var(--max_w1)), calc(488vw * 100 / var(--max_w1)), 488px);
+  --sz-489: clamp(calc(489px * var(--min_w1) / var(--max_w1)), calc(489vw * 100 / var(--max_w1)), 489px);
+  --sz-490: clamp(calc(490px * var(--min_w1) / var(--max_w1)), calc(490vw * 100 / var(--max_w1)), 490px);
+  --sz-491: clamp(calc(491px * var(--min_w1) / var(--max_w1)), calc(491vw * 100 / var(--max_w1)), 491px);
+  --sz-492: clamp(calc(492px * var(--min_w1) / var(--max_w1)), calc(492vw * 100 / var(--max_w1)), 492px);
+  --sz-493: clamp(calc(493px * var(--min_w1) / var(--max_w1)), calc(493vw * 100 / var(--max_w1)), 493px);
+  --sz-494: clamp(calc(494px * var(--min_w1) / var(--max_w1)), calc(494vw * 100 / var(--max_w1)), 494px);
+  --sz-495: clamp(calc(495px * var(--min_w1) / var(--max_w1)), calc(495vw * 100 / var(--max_w1)), 495px);
+  --sz-496: clamp(calc(496px * var(--min_w1) / var(--max_w1)), calc(496vw * 100 / var(--max_w1)), 496px);
+  --sz-497: clamp(calc(497px * var(--min_w1) / var(--max_w1)), calc(497vw * 100 / var(--max_w1)), 497px);
+  --sz-498: clamp(calc(498px * var(--min_w1) / var(--max_w1)), calc(498vw * 100 / var(--max_w1)), 498px);
+  --sz-499: clamp(calc(499px * var(--min_w1) / var(--max_w1)), calc(499vw * 100 / var(--max_w1)), 499px);
+  --sz-500: clamp(calc(500px * var(--min_w1) / var(--max_w1)), calc(500vw * 100 / var(--max_w1)), 500px);
+}
+
+@media (min-width: 992px) {
+  :root {
+    --sz-1: clamp(calc(1px * var(--min_w2) / var(--max_w2)), calc(1vw * 100 / var(--max_w2)), 1px);
+    --sz-2: clamp(calc(2px * var(--min_w2) / var(--max_w2)), calc(2vw * 100 / var(--max_w2)), 2px);
+    --sz-3: clamp(calc(3px * var(--min_w2) / var(--max_w2)), calc(3vw * 100 / var(--max_w2)), 3px);
+    --sz-4: clamp(calc(4px * var(--min_w2) / var(--max_w2)), calc(4vw * 100 / var(--max_w2)), 4px);
+    --sz-5: clamp(calc(5px * var(--min_w2) / var(--max_w2)), calc(5vw * 100 / var(--max_w2)), 5px);
+    --sz-6: clamp(calc(6px * var(--min_w2) / var(--max_w2)), calc(6vw * 100 / var(--max_w2)), 6px);
+    --sz-7: clamp(calc(7px * var(--min_w2) / var(--max_w2)), calc(7vw * 100 / var(--max_w2)), 7px);
+    --sz-8: clamp(calc(8px * var(--min_w2) / var(--max_w2)), calc(8vw * 100 / var(--max_w2)), 8px);
+    --sz-9: clamp(calc(9px * var(--min_w2) / var(--max_w2)), calc(9vw * 100 / var(--max_w2)), 9px);
+    --sz-10: clamp(calc(10px * var(--min_w2) / var(--max_w2)), calc(10vw * 100 / var(--max_w2)), 10px);
+    --sz-11: clamp(calc(11px * var(--min_w2) / var(--max_w2)), calc(11vw * 100 / var(--max_w2)), 11px);
+    --sz-12: clamp(calc(12px * var(--min_w2) / var(--max_w2)), calc(12vw * 100 / var(--max_w2)), 12px);
+    --sz-13: clamp(calc(13px * var(--min_w2) / var(--max_w2)), calc(13vw * 100 / var(--max_w2)), 13px);
+    --sz-14: clamp(calc(14px * var(--min_w2) / var(--max_w2)), calc(14vw * 100 / var(--max_w2)), 14px);
+    --sz-15: clamp(calc(15px * var(--min_w2) / var(--max_w2)), calc(15vw * 100 / var(--max_w2)), 15px);
+    --sz-16: clamp(calc(16px * var(--min_w2) / var(--max_w2)), calc(16vw * 100 / var(--max_w2)), 16px);
+    --sz-17: clamp(calc(17px * var(--min_w2) / var(--max_w2)), calc(17vw * 100 / var(--max_w2)), 17px);
+    --sz-18: clamp(calc(18px * var(--min_w2) / var(--max_w2)), calc(18vw * 100 / var(--max_w2)), 18px);
+    --sz-19: clamp(calc(19px * var(--min_w2) / var(--max_w2)), calc(19vw * 100 / var(--max_w2)), 19px);
+    --sz-20: clamp(calc(20px * var(--min_w2) / var(--max_w2)), calc(20vw * 100 / var(--max_w2)), 20px);
+    --sz-21: clamp(calc(21px * var(--min_w2) / var(--max_w2)), calc(21vw * 100 / var(--max_w2)), 21px);
+    --sz-22: clamp(calc(22px * var(--min_w2) / var(--max_w2)), calc(22vw * 100 / var(--max_w2)), 22px);
+    --sz-23: clamp(calc(23px * var(--min_w2) / var(--max_w2)), calc(23vw * 100 / var(--max_w2)), 23px);
+    --sz-24: clamp(calc(24px * var(--min_w2) / var(--max_w2)), calc(24vw * 100 / var(--max_w2)), 24px);
+    --sz-25: clamp(calc(25px * var(--min_w2) / var(--max_w2)), calc(25vw * 100 / var(--max_w2)), 25px);
+    --sz-26: clamp(calc(26px * var(--min_w2) / var(--max_w2)), calc(26vw * 100 / var(--max_w2)), 26px);
+    --sz-27: clamp(calc(27px * var(--min_w2) / var(--max_w2)), calc(27vw * 100 / var(--max_w2)), 27px);
+    --sz-28: clamp(calc(28px * var(--min_w2) / var(--max_w2)), calc(28vw * 100 / var(--max_w2)), 28px);
+    --sz-29: clamp(calc(29px * var(--min_w2) / var(--max_w2)), calc(29vw * 100 / var(--max_w2)), 29px);
+    --sz-30: clamp(calc(30px * var(--min_w2) / var(--max_w2)), calc(30vw * 100 / var(--max_w2)), 30px);
+    --sz-31: clamp(calc(31px * var(--min_w2) / var(--max_w2)), calc(31vw * 100 / var(--max_w2)), 31px);
+    --sz-32: clamp(calc(32px * var(--min_w2) / var(--max_w2)), calc(32vw * 100 / var(--max_w2)), 32px);
+    --sz-33: clamp(calc(33px * var(--min_w2) / var(--max_w2)), calc(33vw * 100 / var(--max_w2)), 33px);
+    --sz-34: clamp(calc(34px * var(--min_w2) / var(--max_w2)), calc(34vw * 100 / var(--max_w2)), 34px);
+    --sz-35: clamp(calc(35px * var(--min_w2) / var(--max_w2)), calc(35vw * 100 / var(--max_w2)), 35px);
+    --sz-36: clamp(calc(36px * var(--min_w2) / var(--max_w2)), calc(36vw * 100 / var(--max_w2)), 36px);
+    --sz-37: clamp(calc(37px * var(--min_w2) / var(--max_w2)), calc(37vw * 100 / var(--max_w2)), 37px);
+    --sz-38: clamp(calc(38px * var(--min_w2) / var(--max_w2)), calc(38vw * 100 / var(--max_w2)), 38px);
+    --sz-39: clamp(calc(39px * var(--min_w2) / var(--max_w2)), calc(39vw * 100 / var(--max_w2)), 39px);
+    --sz-40: clamp(calc(40px * var(--min_w2) / var(--max_w2)), calc(40vw * 100 / var(--max_w2)), 40px);
+    --sz-41: clamp(calc(41px * var(--min_w2) / var(--max_w2)), calc(41vw * 100 / var(--max_w2)), 41px);
+    --sz-42: clamp(calc(42px * var(--min_w2) / var(--max_w2)), calc(42vw * 100 / var(--max_w2)), 42px);
+    --sz-43: clamp(calc(43px * var(--min_w2) / var(--max_w2)), calc(43vw * 100 / var(--max_w2)), 43px);
+    --sz-44: clamp(calc(44px * var(--min_w2) / var(--max_w2)), calc(44vw * 100 / var(--max_w2)), 44px);
+    --sz-45: clamp(calc(45px * var(--min_w2) / var(--max_w2)), calc(45vw * 100 / var(--max_w2)), 45px);
+    --sz-46: clamp(calc(46px * var(--min_w2) / var(--max_w2)), calc(46vw * 100 / var(--max_w2)), 46px);
+    --sz-47: clamp(calc(47px * var(--min_w2) / var(--max_w2)), calc(47vw * 100 / var(--max_w2)), 47px);
+    --sz-48: clamp(calc(48px * var(--min_w2) / var(--max_w2)), calc(48vw * 100 / var(--max_w2)), 48px);
+    --sz-49: clamp(calc(49px * var(--min_w2) / var(--max_w2)), calc(49vw * 100 / var(--max_w2)), 49px);
+    --sz-50: clamp(calc(50px * var(--min_w2) / var(--max_w2)), calc(50vw * 100 / var(--max_w2)), 50px);
+    --sz-51: clamp(calc(51px * var(--min_w2) / var(--max_w2)), calc(51vw * 100 / var(--max_w2)), 51px);
+    --sz-52: clamp(calc(52px * var(--min_w2) / var(--max_w2)), calc(52vw * 100 / var(--max_w2)), 52px);
+    --sz-53: clamp(calc(53px * var(--min_w2) / var(--max_w2)), calc(53vw * 100 / var(--max_w2)), 53px);
+    --sz-54: clamp(calc(54px * var(--min_w2) / var(--max_w2)), calc(54vw * 100 / var(--max_w2)), 54px);
+    --sz-55: clamp(calc(55px * var(--min_w2) / var(--max_w2)), calc(55vw * 100 / var(--max_w2)), 55px);
+    --sz-56: clamp(calc(56px * var(--min_w2) / var(--max_w2)), calc(56vw * 100 / var(--max_w2)), 56px);
+    --sz-57: clamp(calc(57px * var(--min_w2) / var(--max_w2)), calc(57vw * 100 / var(--max_w2)), 57px);
+    --sz-58: clamp(calc(58px * var(--min_w2) / var(--max_w2)), calc(58vw * 100 / var(--max_w2)), 58px);
+    --sz-59: clamp(calc(59px * var(--min_w2) / var(--max_w2)), calc(59vw * 100 / var(--max_w2)), 59px);
+    --sz-60: clamp(calc(60px * var(--min_w2) / var(--max_w2)), calc(60vw * 100 / var(--max_w2)), 60px);
+    --sz-61: clamp(calc(61px * var(--min_w2) / var(--max_w2)), calc(61vw * 100 / var(--max_w2)), 61px);
+    --sz-62: clamp(calc(62px * var(--min_w2) / var(--max_w2)), calc(62vw * 100 / var(--max_w2)), 62px);
+    --sz-63: clamp(calc(63px * var(--min_w2) / var(--max_w2)), calc(63vw * 100 / var(--max_w2)), 63px);
+    --sz-64: clamp(calc(64px * var(--min_w2) / var(--max_w2)), calc(64vw * 100 / var(--max_w2)), 64px);
+    --sz-65: clamp(calc(65px * var(--min_w2) / var(--max_w2)), calc(65vw * 100 / var(--max_w2)), 65px);
+    --sz-66: clamp(calc(66px * var(--min_w2) / var(--max_w2)), calc(66vw * 100 / var(--max_w2)), 66px);
+    --sz-67: clamp(calc(67px * var(--min_w2) / var(--max_w2)), calc(67vw * 100 / var(--max_w2)), 67px);
+    --sz-68: clamp(calc(68px * var(--min_w2) / var(--max_w2)), calc(68vw * 100 / var(--max_w2)), 68px);
+    --sz-69: clamp(calc(69px * var(--min_w2) / var(--max_w2)), calc(69vw * 100 / var(--max_w2)), 69px);
+    --sz-70: clamp(calc(70px * var(--min_w2) / var(--max_w2)), calc(70vw * 100 / var(--max_w2)), 70px);
+    --sz-71: clamp(calc(71px * var(--min_w2) / var(--max_w2)), calc(71vw * 100 / var(--max_w2)), 71px);
+    --sz-72: clamp(calc(72px * var(--min_w2) / var(--max_w2)), calc(72vw * 100 / var(--max_w2)), 72px);
+    --sz-73: clamp(calc(73px * var(--min_w2) / var(--max_w2)), calc(73vw * 100 / var(--max_w2)), 73px);
+    --sz-74: clamp(calc(74px * var(--min_w2) / var(--max_w2)), calc(74vw * 100 / var(--max_w2)), 74px);
+    --sz-75: clamp(calc(75px * var(--min_w2) / var(--max_w2)), calc(75vw * 100 / var(--max_w2)), 75px);
+    --sz-76: clamp(calc(76px * var(--min_w2) / var(--max_w2)), calc(76vw * 100 / var(--max_w2)), 76px);
+    --sz-77: clamp(calc(77px * var(--min_w2) / var(--max_w2)), calc(77vw * 100 / var(--max_w2)), 77px);
+    --sz-78: clamp(calc(78px * var(--min_w2) / var(--max_w2)), calc(78vw * 100 / var(--max_w2)), 78px);
+    --sz-79: clamp(calc(79px * var(--min_w2) / var(--max_w2)), calc(79vw * 100 / var(--max_w2)), 79px);
+    --sz-80: clamp(calc(80px * var(--min_w2) / var(--max_w2)), calc(80vw * 100 / var(--max_w2)), 80px);
+    --sz-81: clamp(calc(81px * var(--min_w2) / var(--max_w2)), calc(81vw * 100 / var(--max_w2)), 81px);
+    --sz-82: clamp(calc(82px * var(--min_w2) / var(--max_w2)), calc(82vw * 100 / var(--max_w2)), 82px);
+    --sz-83: clamp(calc(83px * var(--min_w2) / var(--max_w2)), calc(83vw * 100 / var(--max_w2)), 83px);
+    --sz-84: clamp(calc(84px * var(--min_w2) / var(--max_w2)), calc(84vw * 100 / var(--max_w2)), 84px);
+    --sz-85: clamp(calc(85px * var(--min_w2) / var(--max_w2)), calc(85vw * 100 / var(--max_w2)), 85px);
+    --sz-86: clamp(calc(86px * var(--min_w2) / var(--max_w2)), calc(86vw * 100 / var(--max_w2)), 86px);
+    --sz-87: clamp(calc(87px * var(--min_w2) / var(--max_w2)), calc(87vw * 100 / var(--max_w2)), 87px);
+    --sz-88: clamp(calc(88px * var(--min_w2) / var(--max_w2)), calc(88vw * 100 / var(--max_w2)), 88px);
+    --sz-89: clamp(calc(89px * var(--min_w2) / var(--max_w2)), calc(89vw * 100 / var(--max_w2)), 89px);
+    --sz-90: clamp(calc(90px * var(--min_w2) / var(--max_w2)), calc(90vw * 100 / var(--max_w2)), 90px);
+    --sz-91: clamp(calc(91px * var(--min_w2) / var(--max_w2)), calc(91vw * 100 / var(--max_w2)), 91px);
+    --sz-92: clamp(calc(92px * var(--min_w2) / var(--max_w2)), calc(92vw * 100 / var(--max_w2)), 92px);
+    --sz-93: clamp(calc(93px * var(--min_w2) / var(--max_w2)), calc(93vw * 100 / var(--max_w2)), 93px);
+    --sz-94: clamp(calc(94px * var(--min_w2) / var(--max_w2)), calc(94vw * 100 / var(--max_w2)), 94px);
+    --sz-95: clamp(calc(95px * var(--min_w2) / var(--max_w2)), calc(95vw * 100 / var(--max_w2)), 95px);
+    --sz-96: clamp(calc(96px * var(--min_w2) / var(--max_w2)), calc(96vw * 100 / var(--max_w2)), 96px);
+    --sz-97: clamp(calc(97px * var(--min_w2) / var(--max_w2)), calc(97vw * 100 / var(--max_w2)), 97px);
+    --sz-98: clamp(calc(98px * var(--min_w2) / var(--max_w2)), calc(98vw * 100 / var(--max_w2)), 98px);
+    --sz-99: clamp(calc(99px * var(--min_w2) / var(--max_w2)), calc(99vw * 100 / var(--max_w2)), 99px);
+    --sz-100: clamp(calc(100px * var(--min_w2) / var(--max_w2)), calc(100vw * 100 / var(--max_w2)), 100px);
+    --sz-101: clamp(calc(101px * var(--min_w2) / var(--max_w2)), calc(101vw * 100 / var(--max_w2)), 101px);
+    --sz-102: clamp(calc(102px * var(--min_w2) / var(--max_w2)), calc(102vw * 100 / var(--max_w2)), 102px);
+    --sz-103: clamp(calc(103px * var(--min_w2) / var(--max_w2)), calc(103vw * 100 / var(--max_w2)), 103px);
+    --sz-104: clamp(calc(104px * var(--min_w2) / var(--max_w2)), calc(104vw * 100 / var(--max_w2)), 104px);
+    --sz-105: clamp(calc(105px * var(--min_w2) / var(--max_w2)), calc(105vw * 100 / var(--max_w2)), 105px);
+    --sz-106: clamp(calc(106px * var(--min_w2) / var(--max_w2)), calc(106vw * 100 / var(--max_w2)), 106px);
+    --sz-107: clamp(calc(107px * var(--min_w2) / var(--max_w2)), calc(107vw * 100 / var(--max_w2)), 107px);
+    --sz-108: clamp(calc(108px * var(--min_w2) / var(--max_w2)), calc(108vw * 100 / var(--max_w2)), 108px);
+    --sz-109: clamp(calc(109px * var(--min_w2) / var(--max_w2)), calc(109vw * 100 / var(--max_w2)), 109px);
+    --sz-110: clamp(calc(110px * var(--min_w2) / var(--max_w2)), calc(110vw * 100 / var(--max_w2)), 110px);
+    --sz-111: clamp(calc(111px * var(--min_w2) / var(--max_w2)), calc(111vw * 100 / var(--max_w2)), 111px);
+    --sz-112: clamp(calc(112px * var(--min_w2) / var(--max_w2)), calc(112vw * 100 / var(--max_w2)), 112px);
+    --sz-113: clamp(calc(113px * var(--min_w2) / var(--max_w2)), calc(113vw * 100 / var(--max_w2)), 113px);
+    --sz-114: clamp(calc(114px * var(--min_w2) / var(--max_w2)), calc(114vw * 100 / var(--max_w2)), 114px);
+    --sz-115: clamp(calc(115px * var(--min_w2) / var(--max_w2)), calc(115vw * 100 / var(--max_w2)), 115px);
+    --sz-116: clamp(calc(116px * var(--min_w2) / var(--max_w2)), calc(116vw * 100 / var(--max_w2)), 116px);
+    --sz-117: clamp(calc(117px * var(--min_w2) / var(--max_w2)), calc(117vw * 100 / var(--max_w2)), 117px);
+    --sz-118: clamp(calc(118px * var(--min_w2) / var(--max_w2)), calc(118vw * 100 / var(--max_w2)), 118px);
+    --sz-119: clamp(calc(119px * var(--min_w2) / var(--max_w2)), calc(119vw * 100 / var(--max_w2)), 119px);
+    --sz-120: clamp(calc(120px * var(--min_w2) / var(--max_w2)), calc(120vw * 100 / var(--max_w2)), 120px);
+    --sz-121: clamp(calc(121px * var(--min_w2) / var(--max_w2)), calc(121vw * 100 / var(--max_w2)), 121px);
+    --sz-122: clamp(calc(122px * var(--min_w2) / var(--max_w2)), calc(122vw * 100 / var(--max_w2)), 122px);
+    --sz-123: clamp(calc(123px * var(--min_w2) / var(--max_w2)), calc(123vw * 100 / var(--max_w2)), 123px);
+    --sz-124: clamp(calc(124px * var(--min_w2) / var(--max_w2)), calc(124vw * 100 / var(--max_w2)), 124px);
+    --sz-125: clamp(calc(125px * var(--min_w2) / var(--max_w2)), calc(125vw * 100 / var(--max_w2)), 125px);
+    --sz-126: clamp(calc(126px * var(--min_w2) / var(--max_w2)), calc(126vw * 100 / var(--max_w2)), 126px);
+    --sz-127: clamp(calc(127px * var(--min_w2) / var(--max_w2)), calc(127vw * 100 / var(--max_w2)), 127px);
+    --sz-128: clamp(calc(128px * var(--min_w2) / var(--max_w2)), calc(128vw * 100 / var(--max_w2)), 128px);
+    --sz-129: clamp(calc(129px * var(--min_w2) / var(--max_w2)), calc(129vw * 100 / var(--max_w2)), 129px);
+    --sz-130: clamp(calc(130px * var(--min_w2) / var(--max_w2)), calc(130vw * 100 / var(--max_w2)), 130px);
+    --sz-131: clamp(calc(131px * var(--min_w2) / var(--max_w2)), calc(131vw * 100 / var(--max_w2)), 131px);
+    --sz-132: clamp(calc(132px * var(--min_w2) / var(--max_w2)), calc(132vw * 100 / var(--max_w2)), 132px);
+    --sz-133: clamp(calc(133px * var(--min_w2) / var(--max_w2)), calc(133vw * 100 / var(--max_w2)), 133px);
+    --sz-134: clamp(calc(134px * var(--min_w2) / var(--max_w2)), calc(134vw * 100 / var(--max_w2)), 134px);
+    --sz-135: clamp(calc(135px * var(--min_w2) / var(--max_w2)), calc(135vw * 100 / var(--max_w2)), 135px);
+    --sz-136: clamp(calc(136px * var(--min_w2) / var(--max_w2)), calc(136vw * 100 / var(--max_w2)), 136px);
+    --sz-137: clamp(calc(137px * var(--min_w2) / var(--max_w2)), calc(137vw * 100 / var(--max_w2)), 137px);
+    --sz-138: clamp(calc(138px * var(--min_w2) / var(--max_w2)), calc(138vw * 100 / var(--max_w2)), 138px);
+    --sz-139: clamp(calc(139px * var(--min_w2) / var(--max_w2)), calc(139vw * 100 / var(--max_w2)), 139px);
+    --sz-140: clamp(calc(140px * var(--min_w2) / var(--max_w2)), calc(140vw * 100 / var(--max_w2)), 140px);
+    --sz-141: clamp(calc(141px * var(--min_w2) / var(--max_w2)), calc(141vw * 100 / var(--max_w2)), 141px);
+    --sz-142: clamp(calc(142px * var(--min_w2) / var(--max_w2)), calc(142vw * 100 / var(--max_w2)), 142px);
+    --sz-143: clamp(calc(143px * var(--min_w2) / var(--max_w2)), calc(143vw * 100 / var(--max_w2)), 143px);
+    --sz-144: clamp(calc(144px * var(--min_w2) / var(--max_w2)), calc(144vw * 100 / var(--max_w2)), 144px);
+    --sz-145: clamp(calc(145px * var(--min_w2) / var(--max_w2)), calc(145vw * 100 / var(--max_w2)), 145px);
+    --sz-146: clamp(calc(146px * var(--min_w2) / var(--max_w2)), calc(146vw * 100 / var(--max_w2)), 146px);
+    --sz-147: clamp(calc(147px * var(--min_w2) / var(--max_w2)), calc(147vw * 100 / var(--max_w2)), 147px);
+    --sz-148: clamp(calc(148px * var(--min_w2) / var(--max_w2)), calc(148vw * 100 / var(--max_w2)), 148px);
+    --sz-149: clamp(calc(149px * var(--min_w2) / var(--max_w2)), calc(149vw * 100 / var(--max_w2)), 149px);
+    --sz-150: clamp(calc(150px * var(--min_w2) / var(--max_w2)), calc(150vw * 100 / var(--max_w2)), 150px);
+    --sz-151: clamp(calc(151px * var(--min_w2) / var(--max_w2)), calc(151vw * 100 / var(--max_w2)), 151px);
+    --sz-152: clamp(calc(152px * var(--min_w2) / var(--max_w2)), calc(152vw * 100 / var(--max_w2)), 152px);
+    --sz-153: clamp(calc(153px * var(--min_w2) / var(--max_w2)), calc(153vw * 100 / var(--max_w2)), 153px);
+    --sz-154: clamp(calc(154px * var(--min_w2) / var(--max_w2)), calc(154vw * 100 / var(--max_w2)), 154px);
+    --sz-155: clamp(calc(155px * var(--min_w2) / var(--max_w2)), calc(155vw * 100 / var(--max_w2)), 155px);
+    --sz-156: clamp(calc(156px * var(--min_w2) / var(--max_w2)), calc(156vw * 100 / var(--max_w2)), 156px);
+    --sz-157: clamp(calc(157px * var(--min_w2) / var(--max_w2)), calc(157vw * 100 / var(--max_w2)), 157px);
+    --sz-158: clamp(calc(158px * var(--min_w2) / var(--max_w2)), calc(158vw * 100 / var(--max_w2)), 158px);
+    --sz-159: clamp(calc(159px * var(--min_w2) / var(--max_w2)), calc(159vw * 100 / var(--max_w2)), 159px);
+    --sz-160: clamp(calc(160px * var(--min_w2) / var(--max_w2)), calc(160vw * 100 / var(--max_w2)), 160px);
+    --sz-161: clamp(calc(161px * var(--min_w2) / var(--max_w2)), calc(161vw * 100 / var(--max_w2)), 161px);
+    --sz-162: clamp(calc(162px * var(--min_w2) / var(--max_w2)), calc(162vw * 100 / var(--max_w2)), 162px);
+    --sz-163: clamp(calc(163px * var(--min_w2) / var(--max_w2)), calc(163vw * 100 / var(--max_w2)), 163px);
+    --sz-164: clamp(calc(164px * var(--min_w2) / var(--max_w2)), calc(164vw * 100 / var(--max_w2)), 164px);
+    --sz-165: clamp(calc(165px * var(--min_w2) / var(--max_w2)), calc(165vw * 100 / var(--max_w2)), 165px);
+    --sz-166: clamp(calc(166px * var(--min_w2) / var(--max_w2)), calc(166vw * 100 / var(--max_w2)), 166px);
+    --sz-167: clamp(calc(167px * var(--min_w2) / var(--max_w2)), calc(167vw * 100 / var(--max_w2)), 167px);
+    --sz-168: clamp(calc(168px * var(--min_w2) / var(--max_w2)), calc(168vw * 100 / var(--max_w2)), 168px);
+    --sz-169: clamp(calc(169px * var(--min_w2) / var(--max_w2)), calc(169vw * 100 / var(--max_w2)), 169px);
+    --sz-170: clamp(calc(170px * var(--min_w2) / var(--max_w2)), calc(170vw * 100 / var(--max_w2)), 170px);
+    --sz-171: clamp(calc(171px * var(--min_w2) / var(--max_w2)), calc(171vw * 100 / var(--max_w2)), 171px);
+    --sz-172: clamp(calc(172px * var(--min_w2) / var(--max_w2)), calc(172vw * 100 / var(--max_w2)), 172px);
+    --sz-173: clamp(calc(173px * var(--min_w2) / var(--max_w2)), calc(173vw * 100 / var(--max_w2)), 173px);
+    --sz-174: clamp(calc(174px * var(--min_w2) / var(--max_w2)), calc(174vw * 100 / var(--max_w2)), 174px);
+    --sz-175: clamp(calc(175px * var(--min_w2) / var(--max_w2)), calc(175vw * 100 / var(--max_w2)), 175px);
+    --sz-176: clamp(calc(176px * var(--min_w2) / var(--max_w2)), calc(176vw * 100 / var(--max_w2)), 176px);
+    --sz-177: clamp(calc(177px * var(--min_w2) / var(--max_w2)), calc(177vw * 100 / var(--max_w2)), 177px);
+    --sz-178: clamp(calc(178px * var(--min_w2) / var(--max_w2)), calc(178vw * 100 / var(--max_w2)), 178px);
+    --sz-179: clamp(calc(179px * var(--min_w2) / var(--max_w2)), calc(179vw * 100 / var(--max_w2)), 179px);
+    --sz-180: clamp(calc(180px * var(--min_w2) / var(--max_w2)), calc(180vw * 100 / var(--max_w2)), 180px);
+    --sz-181: clamp(calc(181px * var(--min_w2) / var(--max_w2)), calc(181vw * 100 / var(--max_w2)), 181px);
+    --sz-182: clamp(calc(182px * var(--min_w2) / var(--max_w2)), calc(182vw * 100 / var(--max_w2)), 182px);
+    --sz-183: clamp(calc(183px * var(--min_w2) / var(--max_w2)), calc(183vw * 100 / var(--max_w2)), 183px);
+    --sz-184: clamp(calc(184px * var(--min_w2) / var(--max_w2)), calc(184vw * 100 / var(--max_w2)), 184px);
+    --sz-185: clamp(calc(185px * var(--min_w2) / var(--max_w2)), calc(185vw * 100 / var(--max_w2)), 185px);
+    --sz-186: clamp(calc(186px * var(--min_w2) / var(--max_w2)), calc(186vw * 100 / var(--max_w2)), 186px);
+    --sz-187: clamp(calc(187px * var(--min_w2) / var(--max_w2)), calc(187vw * 100 / var(--max_w2)), 187px);
+    --sz-188: clamp(calc(188px * var(--min_w2) / var(--max_w2)), calc(188vw * 100 / var(--max_w2)), 188px);
+    --sz-189: clamp(calc(189px * var(--min_w2) / var(--max_w2)), calc(189vw * 100 / var(--max_w2)), 189px);
+    --sz-190: clamp(calc(190px * var(--min_w2) / var(--max_w2)), calc(190vw * 100 / var(--max_w2)), 190px);
+    --sz-191: clamp(calc(191px * var(--min_w2) / var(--max_w2)), calc(191vw * 100 / var(--max_w2)), 191px);
+    --sz-192: clamp(calc(192px * var(--min_w2) / var(--max_w2)), calc(192vw * 100 / var(--max_w2)), 192px);
+    --sz-193: clamp(calc(193px * var(--min_w2) / var(--max_w2)), calc(193vw * 100 / var(--max_w2)), 193px);
+    --sz-194: clamp(calc(194px * var(--min_w2) / var(--max_w2)), calc(194vw * 100 / var(--max_w2)), 194px);
+    --sz-195: clamp(calc(195px * var(--min_w2) / var(--max_w2)), calc(195vw * 100 / var(--max_w2)), 195px);
+    --sz-196: clamp(calc(196px * var(--min_w2) / var(--max_w2)), calc(196vw * 100 / var(--max_w2)), 196px);
+    --sz-197: clamp(calc(197px * var(--min_w2) / var(--max_w2)), calc(197vw * 100 / var(--max_w2)), 197px);
+    --sz-198: clamp(calc(198px * var(--min_w2) / var(--max_w2)), calc(198vw * 100 / var(--max_w2)), 198px);
+    --sz-199: clamp(calc(199px * var(--min_w2) / var(--max_w2)), calc(199vw * 100 / var(--max_w2)), 199px);
+    --sz-200: clamp(calc(200px * var(--min_w2) / var(--max_w2)), calc(200vw * 100 / var(--max_w2)), 200px);
+    --sz-201: clamp(calc(201px * var(--min_w2) / var(--max_w2)), calc(201vw * 100 / var(--max_w2)), 201px);
+    --sz-202: clamp(calc(202px * var(--min_w2) / var(--max_w2)), calc(202vw * 100 / var(--max_w2)), 202px);
+    --sz-203: clamp(calc(203px * var(--min_w2) / var(--max_w2)), calc(203vw * 100 / var(--max_w2)), 203px);
+    --sz-204: clamp(calc(204px * var(--min_w2) / var(--max_w2)), calc(204vw * 100 / var(--max_w2)), 204px);
+    --sz-205: clamp(calc(205px * var(--min_w2) / var(--max_w2)), calc(205vw * 100 / var(--max_w2)), 205px);
+    --sz-206: clamp(calc(206px * var(--min_w2) / var(--max_w2)), calc(206vw * 100 / var(--max_w2)), 206px);
+    --sz-207: clamp(calc(207px * var(--min_w2) / var(--max_w2)), calc(207vw * 100 / var(--max_w2)), 207px);
+    --sz-208: clamp(calc(208px * var(--min_w2) / var(--max_w2)), calc(208vw * 100 / var(--max_w2)), 208px);
+    --sz-209: clamp(calc(209px * var(--min_w2) / var(--max_w2)), calc(209vw * 100 / var(--max_w2)), 209px);
+    --sz-210: clamp(calc(210px * var(--min_w2) / var(--max_w2)), calc(210vw * 100 / var(--max_w2)), 210px);
+    --sz-211: clamp(calc(211px * var(--min_w2) / var(--max_w2)), calc(211vw * 100 / var(--max_w2)), 211px);
+    --sz-212: clamp(calc(212px * var(--min_w2) / var(--max_w2)), calc(212vw * 100 / var(--max_w2)), 212px);
+    --sz-213: clamp(calc(213px * var(--min_w2) / var(--max_w2)), calc(213vw * 100 / var(--max_w2)), 213px);
+    --sz-214: clamp(calc(214px * var(--min_w2) / var(--max_w2)), calc(214vw * 100 / var(--max_w2)), 214px);
+    --sz-215: clamp(calc(215px * var(--min_w2) / var(--max_w2)), calc(215vw * 100 / var(--max_w2)), 215px);
+    --sz-216: clamp(calc(216px * var(--min_w2) / var(--max_w2)), calc(216vw * 100 / var(--max_w2)), 216px);
+    --sz-217: clamp(calc(217px * var(--min_w2) / var(--max_w2)), calc(217vw * 100 / var(--max_w2)), 217px);
+    --sz-218: clamp(calc(218px * var(--min_w2) / var(--max_w2)), calc(218vw * 100 / var(--max_w2)), 218px);
+    --sz-219: clamp(calc(219px * var(--min_w2) / var(--max_w2)), calc(219vw * 100 / var(--max_w2)), 219px);
+    --sz-220: clamp(calc(220px * var(--min_w2) / var(--max_w2)), calc(220vw * 100 / var(--max_w2)), 220px);
+    --sz-221: clamp(calc(221px * var(--min_w2) / var(--max_w2)), calc(221vw * 100 / var(--max_w2)), 221px);
+    --sz-222: clamp(calc(222px * var(--min_w2) / var(--max_w2)), calc(222vw * 100 / var(--max_w2)), 222px);
+    --sz-223: clamp(calc(223px * var(--min_w2) / var(--max_w2)), calc(223vw * 100 / var(--max_w2)), 223px);
+    --sz-224: clamp(calc(224px * var(--min_w2) / var(--max_w2)), calc(224vw * 100 / var(--max_w2)), 224px);
+    --sz-225: clamp(calc(225px * var(--min_w2) / var(--max_w2)), calc(225vw * 100 / var(--max_w2)), 225px);
+    --sz-226: clamp(calc(226px * var(--min_w2) / var(--max_w2)), calc(226vw * 100 / var(--max_w2)), 226px);
+    --sz-227: clamp(calc(227px * var(--min_w2) / var(--max_w2)), calc(227vw * 100 / var(--max_w2)), 227px);
+    --sz-228: clamp(calc(228px * var(--min_w2) / var(--max_w2)), calc(228vw * 100 / var(--max_w2)), 228px);
+    --sz-229: clamp(calc(229px * var(--min_w2) / var(--max_w2)), calc(229vw * 100 / var(--max_w2)), 229px);
+    --sz-230: clamp(calc(230px * var(--min_w2) / var(--max_w2)), calc(230vw * 100 / var(--max_w2)), 230px);
+    --sz-231: clamp(calc(231px * var(--min_w2) / var(--max_w2)), calc(231vw * 100 / var(--max_w2)), 231px);
+    --sz-232: clamp(calc(232px * var(--min_w2) / var(--max_w2)), calc(232vw * 100 / var(--max_w2)), 232px);
+    --sz-233: clamp(calc(233px * var(--min_w2) / var(--max_w2)), calc(233vw * 100 / var(--max_w2)), 233px);
+    --sz-234: clamp(calc(234px * var(--min_w2) / var(--max_w2)), calc(234vw * 100 / var(--max_w2)), 234px);
+    --sz-235: clamp(calc(235px * var(--min_w2) / var(--max_w2)), calc(235vw * 100 / var(--max_w2)), 235px);
+    --sz-236: clamp(calc(236px * var(--min_w2) / var(--max_w2)), calc(236vw * 100 / var(--max_w2)), 236px);
+    --sz-237: clamp(calc(237px * var(--min_w2) / var(--max_w2)), calc(237vw * 100 / var(--max_w2)), 237px);
+    --sz-238: clamp(calc(238px * var(--min_w2) / var(--max_w2)), calc(238vw * 100 / var(--max_w2)), 238px);
+    --sz-239: clamp(calc(239px * var(--min_w2) / var(--max_w2)), calc(239vw * 100 / var(--max_w2)), 239px);
+    --sz-240: clamp(calc(240px * var(--min_w2) / var(--max_w2)), calc(240vw * 100 / var(--max_w2)), 240px);
+    --sz-241: clamp(calc(241px * var(--min_w2) / var(--max_w2)), calc(241vw * 100 / var(--max_w2)), 241px);
+    --sz-242: clamp(calc(242px * var(--min_w2) / var(--max_w2)), calc(242vw * 100 / var(--max_w2)), 242px);
+    --sz-243: clamp(calc(243px * var(--min_w2) / var(--max_w2)), calc(243vw * 100 / var(--max_w2)), 243px);
+    --sz-244: clamp(calc(244px * var(--min_w2) / var(--max_w2)), calc(244vw * 100 / var(--max_w2)), 244px);
+    --sz-245: clamp(calc(245px * var(--min_w2) / var(--max_w2)), calc(245vw * 100 / var(--max_w2)), 245px);
+    --sz-246: clamp(calc(246px * var(--min_w2) / var(--max_w2)), calc(246vw * 100 / var(--max_w2)), 246px);
+    --sz-247: clamp(calc(247px * var(--min_w2) / var(--max_w2)), calc(247vw * 100 / var(--max_w2)), 247px);
+    --sz-248: clamp(calc(248px * var(--min_w2) / var(--max_w2)), calc(248vw * 100 / var(--max_w2)), 248px);
+    --sz-249: clamp(calc(249px * var(--min_w2) / var(--max_w2)), calc(249vw * 100 / var(--max_w2)), 249px);
+    --sz-250: clamp(calc(250px * var(--min_w2) / var(--max_w2)), calc(250vw * 100 / var(--max_w2)), 250px);
+    --sz-251: clamp(calc(251px * var(--min_w2) / var(--max_w2)), calc(251vw * 100 / var(--max_w2)), 251px);
+    --sz-252: clamp(calc(252px * var(--min_w2) / var(--max_w2)), calc(252vw * 100 / var(--max_w2)), 252px);
+    --sz-253: clamp(calc(253px * var(--min_w2) / var(--max_w2)), calc(253vw * 100 / var(--max_w2)), 253px);
+    --sz-254: clamp(calc(254px * var(--min_w2) / var(--max_w2)), calc(254vw * 100 / var(--max_w2)), 254px);
+    --sz-255: clamp(calc(255px * var(--min_w2) / var(--max_w2)), calc(255vw * 100 / var(--max_w2)), 255px);
+    --sz-256: clamp(calc(256px * var(--min_w2) / var(--max_w2)), calc(256vw * 100 / var(--max_w2)), 256px);
+    --sz-257: clamp(calc(257px * var(--min_w2) / var(--max_w2)), calc(257vw * 100 / var(--max_w2)), 257px);
+    --sz-258: clamp(calc(258px * var(--min_w2) / var(--max_w2)), calc(258vw * 100 / var(--max_w2)), 258px);
+    --sz-259: clamp(calc(259px * var(--min_w2) / var(--max_w2)), calc(259vw * 100 / var(--max_w2)), 259px);
+    --sz-260: clamp(calc(260px * var(--min_w2) / var(--max_w2)), calc(260vw * 100 / var(--max_w2)), 260px);
+    --sz-261: clamp(calc(261px * var(--min_w2) / var(--max_w2)), calc(261vw * 100 / var(--max_w2)), 261px);
+    --sz-262: clamp(calc(262px * var(--min_w2) / var(--max_w2)), calc(262vw * 100 / var(--max_w2)), 262px);
+    --sz-263: clamp(calc(263px * var(--min_w2) / var(--max_w2)), calc(263vw * 100 / var(--max_w2)), 263px);
+    --sz-264: clamp(calc(264px * var(--min_w2) / var(--max_w2)), calc(264vw * 100 / var(--max_w2)), 264px);
+    --sz-265: clamp(calc(265px * var(--min_w2) / var(--max_w2)), calc(265vw * 100 / var(--max_w2)), 265px);
+    --sz-266: clamp(calc(266px * var(--min_w2) / var(--max_w2)), calc(266vw * 100 / var(--max_w2)), 266px);
+    --sz-267: clamp(calc(267px * var(--min_w2) / var(--max_w2)), calc(267vw * 100 / var(--max_w2)), 267px);
+    --sz-268: clamp(calc(268px * var(--min_w2) / var(--max_w2)), calc(268vw * 100 / var(--max_w2)), 268px);
+    --sz-269: clamp(calc(269px * var(--min_w2) / var(--max_w2)), calc(269vw * 100 / var(--max_w2)), 269px);
+    --sz-270: clamp(calc(270px * var(--min_w2) / var(--max_w2)), calc(270vw * 100 / var(--max_w2)), 270px);
+    --sz-271: clamp(calc(271px * var(--min_w2) / var(--max_w2)), calc(271vw * 100 / var(--max_w2)), 271px);
+    --sz-272: clamp(calc(272px * var(--min_w2) / var(--max_w2)), calc(272vw * 100 / var(--max_w2)), 272px);
+    --sz-273: clamp(calc(273px * var(--min_w2) / var(--max_w2)), calc(273vw * 100 / var(--max_w2)), 273px);
+    --sz-274: clamp(calc(274px * var(--min_w2) / var(--max_w2)), calc(274vw * 100 / var(--max_w2)), 274px);
+    --sz-275: clamp(calc(275px * var(--min_w2) / var(--max_w2)), calc(275vw * 100 / var(--max_w2)), 275px);
+    --sz-276: clamp(calc(276px * var(--min_w2) / var(--max_w2)), calc(276vw * 100 / var(--max_w2)), 276px);
+    --sz-277: clamp(calc(277px * var(--min_w2) / var(--max_w2)), calc(277vw * 100 / var(--max_w2)), 277px);
+    --sz-278: clamp(calc(278px * var(--min_w2) / var(--max_w2)), calc(278vw * 100 / var(--max_w2)), 278px);
+    --sz-279: clamp(calc(279px * var(--min_w2) / var(--max_w2)), calc(279vw * 100 / var(--max_w2)), 279px);
+    --sz-280: clamp(calc(280px * var(--min_w2) / var(--max_w2)), calc(280vw * 100 / var(--max_w2)), 280px);
+    --sz-281: clamp(calc(281px * var(--min_w2) / var(--max_w2)), calc(281vw * 100 / var(--max_w2)), 281px);
+    --sz-282: clamp(calc(282px * var(--min_w2) / var(--max_w2)), calc(282vw * 100 / var(--max_w2)), 282px);
+    --sz-283: clamp(calc(283px * var(--min_w2) / var(--max_w2)), calc(283vw * 100 / var(--max_w2)), 283px);
+    --sz-284: clamp(calc(284px * var(--min_w2) / var(--max_w2)), calc(284vw * 100 / var(--max_w2)), 284px);
+    --sz-285: clamp(calc(285px * var(--min_w2) / var(--max_w2)), calc(285vw * 100 / var(--max_w2)), 285px);
+    --sz-286: clamp(calc(286px * var(--min_w2) / var(--max_w2)), calc(286vw * 100 / var(--max_w2)), 286px);
+    --sz-287: clamp(calc(287px * var(--min_w2) / var(--max_w2)), calc(287vw * 100 / var(--max_w2)), 287px);
+    --sz-288: clamp(calc(288px * var(--min_w2) / var(--max_w2)), calc(288vw * 100 / var(--max_w2)), 288px);
+    --sz-289: clamp(calc(289px * var(--min_w2) / var(--max_w2)), calc(289vw * 100 / var(--max_w2)), 289px);
+    --sz-290: clamp(calc(290px * var(--min_w2) / var(--max_w2)), calc(290vw * 100 / var(--max_w2)), 290px);
+    --sz-291: clamp(calc(291px * var(--min_w2) / var(--max_w2)), calc(291vw * 100 / var(--max_w2)), 291px);
+    --sz-292: clamp(calc(292px * var(--min_w2) / var(--max_w2)), calc(292vw * 100 / var(--max_w2)), 292px);
+    --sz-293: clamp(calc(293px * var(--min_w2) / var(--max_w2)), calc(293vw * 100 / var(--max_w2)), 293px);
+    --sz-294: clamp(calc(294px * var(--min_w2) / var(--max_w2)), calc(294vw * 100 / var(--max_w2)), 294px);
+    --sz-295: clamp(calc(295px * var(--min_w2) / var(--max_w2)), calc(295vw * 100 / var(--max_w2)), 295px);
+    --sz-296: clamp(calc(296px * var(--min_w2) / var(--max_w2)), calc(296vw * 100 / var(--max_w2)), 296px);
+    --sz-297: clamp(calc(297px * var(--min_w2) / var(--max_w2)), calc(297vw * 100 / var(--max_w2)), 297px);
+    --sz-298: clamp(calc(298px * var(--min_w2) / var(--max_w2)), calc(298vw * 100 / var(--max_w2)), 298px);
+    --sz-299: clamp(calc(299px * var(--min_w2) / var(--max_w2)), calc(299vw * 100 / var(--max_w2)), 299px);
+    --sz-300: clamp(calc(300px * var(--min_w2) / var(--max_w2)), calc(300vw * 100 / var(--max_w2)), 300px);
+    --sz-301: clamp(calc(301px * var(--min_w2) / var(--max_w2)), calc(301vw * 100 / var(--max_w2)), 301px);
+    --sz-302: clamp(calc(302px * var(--min_w2) / var(--max_w2)), calc(302vw * 100 / var(--max_w2)), 302px);
+    --sz-303: clamp(calc(303px * var(--min_w2) / var(--max_w2)), calc(303vw * 100 / var(--max_w2)), 303px);
+    --sz-304: clamp(calc(304px * var(--min_w2) / var(--max_w2)), calc(304vw * 100 / var(--max_w2)), 304px);
+    --sz-305: clamp(calc(305px * var(--min_w2) / var(--max_w2)), calc(305vw * 100 / var(--max_w2)), 305px);
+    --sz-306: clamp(calc(306px * var(--min_w2) / var(--max_w2)), calc(306vw * 100 / var(--max_w2)), 306px);
+    --sz-307: clamp(calc(307px * var(--min_w2) / var(--max_w2)), calc(307vw * 100 / var(--max_w2)), 307px);
+    --sz-308: clamp(calc(308px * var(--min_w2) / var(--max_w2)), calc(308vw * 100 / var(--max_w2)), 308px);
+    --sz-309: clamp(calc(309px * var(--min_w2) / var(--max_w2)), calc(309vw * 100 / var(--max_w2)), 309px);
+    --sz-310: clamp(calc(310px * var(--min_w2) / var(--max_w2)), calc(310vw * 100 / var(--max_w2)), 310px);
+    --sz-311: clamp(calc(311px * var(--min_w2) / var(--max_w2)), calc(311vw * 100 / var(--max_w2)), 311px);
+    --sz-312: clamp(calc(312px * var(--min_w2) / var(--max_w2)), calc(312vw * 100 / var(--max_w2)), 312px);
+    --sz-313: clamp(calc(313px * var(--min_w2) / var(--max_w2)), calc(313vw * 100 / var(--max_w2)), 313px);
+    --sz-314: clamp(calc(314px * var(--min_w2) / var(--max_w2)), calc(314vw * 100 / var(--max_w2)), 314px);
+    --sz-315: clamp(calc(315px * var(--min_w2) / var(--max_w2)), calc(315vw * 100 / var(--max_w2)), 315px);
+    --sz-316: clamp(calc(316px * var(--min_w2) / var(--max_w2)), calc(316vw * 100 / var(--max_w2)), 316px);
+    --sz-317: clamp(calc(317px * var(--min_w2) / var(--max_w2)), calc(317vw * 100 / var(--max_w2)), 317px);
+    --sz-318: clamp(calc(318px * var(--min_w2) / var(--max_w2)), calc(318vw * 100 / var(--max_w2)), 318px);
+    --sz-319: clamp(calc(319px * var(--min_w2) / var(--max_w2)), calc(319vw * 100 / var(--max_w2)), 319px);
+    --sz-320: clamp(calc(320px * var(--min_w2) / var(--max_w2)), calc(320vw * 100 / var(--max_w2)), 320px);
+    --sz-321: clamp(calc(321px * var(--min_w2) / var(--max_w2)), calc(321vw * 100 / var(--max_w2)), 321px);
+    --sz-322: clamp(calc(322px * var(--min_w2) / var(--max_w2)), calc(322vw * 100 / var(--max_w2)), 322px);
+    --sz-323: clamp(calc(323px * var(--min_w2) / var(--max_w2)), calc(323vw * 100 / var(--max_w2)), 323px);
+    --sz-324: clamp(calc(324px * var(--min_w2) / var(--max_w2)), calc(324vw * 100 / var(--max_w2)), 324px);
+    --sz-325: clamp(calc(325px * var(--min_w2) / var(--max_w2)), calc(325vw * 100 / var(--max_w2)), 325px);
+    --sz-326: clamp(calc(326px * var(--min_w2) / var(--max_w2)), calc(326vw * 100 / var(--max_w2)), 326px);
+    --sz-327: clamp(calc(327px * var(--min_w2) / var(--max_w2)), calc(327vw * 100 / var(--max_w2)), 327px);
+    --sz-328: clamp(calc(328px * var(--min_w2) / var(--max_w2)), calc(328vw * 100 / var(--max_w2)), 328px);
+    --sz-329: clamp(calc(329px * var(--min_w2) / var(--max_w2)), calc(329vw * 100 / var(--max_w2)), 329px);
+    --sz-330: clamp(calc(330px * var(--min_w2) / var(--max_w2)), calc(330vw * 100 / var(--max_w2)), 330px);
+    --sz-331: clamp(calc(331px * var(--min_w2) / var(--max_w2)), calc(331vw * 100 / var(--max_w2)), 331px);
+    --sz-332: clamp(calc(332px * var(--min_w2) / var(--max_w2)), calc(332vw * 100 / var(--max_w2)), 332px);
+    --sz-333: clamp(calc(333px * var(--min_w2) / var(--max_w2)), calc(333vw * 100 / var(--max_w2)), 333px);
+    --sz-334: clamp(calc(334px * var(--min_w2) / var(--max_w2)), calc(334vw * 100 / var(--max_w2)), 334px);
+    --sz-335: clamp(calc(335px * var(--min_w2) / var(--max_w2)), calc(335vw * 100 / var(--max_w2)), 335px);
+    --sz-336: clamp(calc(336px * var(--min_w2) / var(--max_w2)), calc(336vw * 100 / var(--max_w2)), 336px);
+    --sz-337: clamp(calc(337px * var(--min_w2) / var(--max_w2)), calc(337vw * 100 / var(--max_w2)), 337px);
+    --sz-338: clamp(calc(338px * var(--min_w2) / var(--max_w2)), calc(338vw * 100 / var(--max_w2)), 338px);
+    --sz-339: clamp(calc(339px * var(--min_w2) / var(--max_w2)), calc(339vw * 100 / var(--max_w2)), 339px);
+    --sz-340: clamp(calc(340px * var(--min_w2) / var(--max_w2)), calc(340vw * 100 / var(--max_w2)), 340px);
+    --sz-341: clamp(calc(341px * var(--min_w2) / var(--max_w2)), calc(341vw * 100 / var(--max_w2)), 341px);
+    --sz-342: clamp(calc(342px * var(--min_w2) / var(--max_w2)), calc(342vw * 100 / var(--max_w2)), 342px);
+    --sz-343: clamp(calc(343px * var(--min_w2) / var(--max_w2)), calc(343vw * 100 / var(--max_w2)), 343px);
+    --sz-344: clamp(calc(344px * var(--min_w2) / var(--max_w2)), calc(344vw * 100 / var(--max_w2)), 344px);
+    --sz-345: clamp(calc(345px * var(--min_w2) / var(--max_w2)), calc(345vw * 100 / var(--max_w2)), 345px);
+    --sz-346: clamp(calc(346px * var(--min_w2) / var(--max_w2)), calc(346vw * 100 / var(--max_w2)), 346px);
+    --sz-347: clamp(calc(347px * var(--min_w2) / var(--max_w2)), calc(347vw * 100 / var(--max_w2)), 347px);
+    --sz-348: clamp(calc(348px * var(--min_w2) / var(--max_w2)), calc(348vw * 100 / var(--max_w2)), 348px);
+    --sz-349: clamp(calc(349px * var(--min_w2) / var(--max_w2)), calc(349vw * 100 / var(--max_w2)), 349px);
+    --sz-350: clamp(calc(350px * var(--min_w2) / var(--max_w2)), calc(350vw * 100 / var(--max_w2)), 350px);
+    --sz-351: clamp(calc(351px * var(--min_w2) / var(--max_w2)), calc(351vw * 100 / var(--max_w2)), 351px);
+    --sz-352: clamp(calc(352px * var(--min_w2) / var(--max_w2)), calc(352vw * 100 / var(--max_w2)), 352px);
+    --sz-353: clamp(calc(353px * var(--min_w2) / var(--max_w2)), calc(353vw * 100 / var(--max_w2)), 353px);
+    --sz-354: clamp(calc(354px * var(--min_w2) / var(--max_w2)), calc(354vw * 100 / var(--max_w2)), 354px);
+    --sz-355: clamp(calc(355px * var(--min_w2) / var(--max_w2)), calc(355vw * 100 / var(--max_w2)), 355px);
+    --sz-356: clamp(calc(356px * var(--min_w2) / var(--max_w2)), calc(356vw * 100 / var(--max_w2)), 356px);
+    --sz-357: clamp(calc(357px * var(--min_w2) / var(--max_w2)), calc(357vw * 100 / var(--max_w2)), 357px);
+    --sz-358: clamp(calc(358px * var(--min_w2) / var(--max_w2)), calc(358vw * 100 / var(--max_w2)), 358px);
+    --sz-359: clamp(calc(359px * var(--min_w2) / var(--max_w2)), calc(359vw * 100 / var(--max_w2)), 359px);
+    --sz-360: clamp(calc(360px * var(--min_w2) / var(--max_w2)), calc(360vw * 100 / var(--max_w2)), 360px);
+    --sz-361: clamp(calc(361px * var(--min_w2) / var(--max_w2)), calc(361vw * 100 / var(--max_w2)), 361px);
+    --sz-362: clamp(calc(362px * var(--min_w2) / var(--max_w2)), calc(362vw * 100 / var(--max_w2)), 362px);
+    --sz-363: clamp(calc(363px * var(--min_w2) / var(--max_w2)), calc(363vw * 100 / var(--max_w2)), 363px);
+    --sz-364: clamp(calc(364px * var(--min_w2) / var(--max_w2)), calc(364vw * 100 / var(--max_w2)), 364px);
+    --sz-365: clamp(calc(365px * var(--min_w2) / var(--max_w2)), calc(365vw * 100 / var(--max_w2)), 365px);
+    --sz-366: clamp(calc(366px * var(--min_w2) / var(--max_w2)), calc(366vw * 100 / var(--max_w2)), 366px);
+    --sz-367: clamp(calc(367px * var(--min_w2) / var(--max_w2)), calc(367vw * 100 / var(--max_w2)), 367px);
+    --sz-368: clamp(calc(368px * var(--min_w2) / var(--max_w2)), calc(368vw * 100 / var(--max_w2)), 368px);
+    --sz-369: clamp(calc(369px * var(--min_w2) / var(--max_w2)), calc(369vw * 100 / var(--max_w2)), 369px);
+    --sz-370: clamp(calc(370px * var(--min_w2) / var(--max_w2)), calc(370vw * 100 / var(--max_w2)), 370px);
+    --sz-371: clamp(calc(371px * var(--min_w2) / var(--max_w2)), calc(371vw * 100 / var(--max_w2)), 371px);
+    --sz-372: clamp(calc(372px * var(--min_w2) / var(--max_w2)), calc(372vw * 100 / var(--max_w2)), 372px);
+    --sz-373: clamp(calc(373px * var(--min_w2) / var(--max_w2)), calc(373vw * 100 / var(--max_w2)), 373px);
+    --sz-374: clamp(calc(374px * var(--min_w2) / var(--max_w2)), calc(374vw * 100 / var(--max_w2)), 374px);
+    --sz-375: clamp(calc(375px * var(--min_w2) / var(--max_w2)), calc(375vw * 100 / var(--max_w2)), 375px);
+    --sz-376: clamp(calc(376px * var(--min_w2) / var(--max_w2)), calc(376vw * 100 / var(--max_w2)), 376px);
+    --sz-377: clamp(calc(377px * var(--min_w2) / var(--max_w2)), calc(377vw * 100 / var(--max_w2)), 377px);
+    --sz-378: clamp(calc(378px * var(--min_w2) / var(--max_w2)), calc(378vw * 100 / var(--max_w2)), 378px);
+    --sz-379: clamp(calc(379px * var(--min_w2) / var(--max_w2)), calc(379vw * 100 / var(--max_w2)), 379px);
+    --sz-380: clamp(calc(380px * var(--min_w2) / var(--max_w2)), calc(380vw * 100 / var(--max_w2)), 380px);
+    --sz-381: clamp(calc(381px * var(--min_w2) / var(--max_w2)), calc(381vw * 100 / var(--max_w2)), 381px);
+    --sz-382: clamp(calc(382px * var(--min_w2) / var(--max_w2)), calc(382vw * 100 / var(--max_w2)), 382px);
+    --sz-383: clamp(calc(383px * var(--min_w2) / var(--max_w2)), calc(383vw * 100 / var(--max_w2)), 383px);
+    --sz-384: clamp(calc(384px * var(--min_w2) / var(--max_w2)), calc(384vw * 100 / var(--max_w2)), 384px);
+    --sz-385: clamp(calc(385px * var(--min_w2) / var(--max_w2)), calc(385vw * 100 / var(--max_w2)), 385px);
+    --sz-386: clamp(calc(386px * var(--min_w2) / var(--max_w2)), calc(386vw * 100 / var(--max_w2)), 386px);
+    --sz-387: clamp(calc(387px * var(--min_w2) / var(--max_w2)), calc(387vw * 100 / var(--max_w2)), 387px);
+    --sz-388: clamp(calc(388px * var(--min_w2) / var(--max_w2)), calc(388vw * 100 / var(--max_w2)), 388px);
+    --sz-389: clamp(calc(389px * var(--min_w2) / var(--max_w2)), calc(389vw * 100 / var(--max_w2)), 389px);
+    --sz-390: clamp(calc(390px * var(--min_w2) / var(--max_w2)), calc(390vw * 100 / var(--max_w2)), 390px);
+    --sz-391: clamp(calc(391px * var(--min_w2) / var(--max_w2)), calc(391vw * 100 / var(--max_w2)), 391px);
+    --sz-392: clamp(calc(392px * var(--min_w2) / var(--max_w2)), calc(392vw * 100 / var(--max_w2)), 392px);
+    --sz-393: clamp(calc(393px * var(--min_w2) / var(--max_w2)), calc(393vw * 100 / var(--max_w2)), 393px);
+    --sz-394: clamp(calc(394px * var(--min_w2) / var(--max_w2)), calc(394vw * 100 / var(--max_w2)), 394px);
+    --sz-395: clamp(calc(395px * var(--min_w2) / var(--max_w2)), calc(395vw * 100 / var(--max_w2)), 395px);
+    --sz-396: clamp(calc(396px * var(--min_w2) / var(--max_w2)), calc(396vw * 100 / var(--max_w2)), 396px);
+    --sz-397: clamp(calc(397px * var(--min_w2) / var(--max_w2)), calc(397vw * 100 / var(--max_w2)), 397px);
+    --sz-398: clamp(calc(398px * var(--min_w2) / var(--max_w2)), calc(398vw * 100 / var(--max_w2)), 398px);
+    --sz-399: clamp(calc(399px * var(--min_w2) / var(--max_w2)), calc(399vw * 100 / var(--max_w2)), 399px);
+    --sz-400: clamp(calc(400px * var(--min_w2) / var(--max_w2)), calc(400vw * 100 / var(--max_w2)), 400px);
+    --sz-401: clamp(calc(401px * var(--min_w2) / var(--max_w2)), calc(401vw * 100 / var(--max_w2)), 401px);
+    --sz-402: clamp(calc(402px * var(--min_w2) / var(--max_w2)), calc(402vw * 100 / var(--max_w2)), 402px);
+    --sz-403: clamp(calc(403px * var(--min_w2) / var(--max_w2)), calc(403vw * 100 / var(--max_w2)), 403px);
+    --sz-404: clamp(calc(404px * var(--min_w2) / var(--max_w2)), calc(404vw * 100 / var(--max_w2)), 404px);
+    --sz-405: clamp(calc(405px * var(--min_w2) / var(--max_w2)), calc(405vw * 100 / var(--max_w2)), 405px);
+    --sz-406: clamp(calc(406px * var(--min_w2) / var(--max_w2)), calc(406vw * 100 / var(--max_w2)), 406px);
+    --sz-407: clamp(calc(407px * var(--min_w2) / var(--max_w2)), calc(407vw * 100 / var(--max_w2)), 407px);
+    --sz-408: clamp(calc(408px * var(--min_w2) / var(--max_w2)), calc(408vw * 100 / var(--max_w2)), 408px);
+    --sz-409: clamp(calc(409px * var(--min_w2) / var(--max_w2)), calc(409vw * 100 / var(--max_w2)), 409px);
+    --sz-410: clamp(calc(410px * var(--min_w2) / var(--max_w2)), calc(410vw * 100 / var(--max_w2)), 410px);
+    --sz-411: clamp(calc(411px * var(--min_w2) / var(--max_w2)), calc(411vw * 100 / var(--max_w2)), 411px);
+    --sz-412: clamp(calc(412px * var(--min_w2) / var(--max_w2)), calc(412vw * 100 / var(--max_w2)), 412px);
+    --sz-413: clamp(calc(413px * var(--min_w2) / var(--max_w2)), calc(413vw * 100 / var(--max_w2)), 413px);
+    --sz-414: clamp(calc(414px * var(--min_w2) / var(--max_w2)), calc(414vw * 100 / var(--max_w2)), 414px);
+    --sz-415: clamp(calc(415px * var(--min_w2) / var(--max_w2)), calc(415vw * 100 / var(--max_w2)), 415px);
+    --sz-416: clamp(calc(416px * var(--min_w2) / var(--max_w2)), calc(416vw * 100 / var(--max_w2)), 416px);
+    --sz-417: clamp(calc(417px * var(--min_w2) / var(--max_w2)), calc(417vw * 100 / var(--max_w2)), 417px);
+    --sz-418: clamp(calc(418px * var(--min_w2) / var(--max_w2)), calc(418vw * 100 / var(--max_w2)), 418px);
+    --sz-419: clamp(calc(419px * var(--min_w2) / var(--max_w2)), calc(419vw * 100 / var(--max_w2)), 419px);
+    --sz-420: clamp(calc(420px * var(--min_w2) / var(--max_w2)), calc(420vw * 100 / var(--max_w2)), 420px);
+    --sz-421: clamp(calc(421px * var(--min_w2) / var(--max_w2)), calc(421vw * 100 / var(--max_w2)), 421px);
+    --sz-422: clamp(calc(422px * var(--min_w2) / var(--max_w2)), calc(422vw * 100 / var(--max_w2)), 422px);
+    --sz-423: clamp(calc(423px * var(--min_w2) / var(--max_w2)), calc(423vw * 100 / var(--max_w2)), 423px);
+    --sz-424: clamp(calc(424px * var(--min_w2) / var(--max_w2)), calc(424vw * 100 / var(--max_w2)), 424px);
+    --sz-425: clamp(calc(425px * var(--min_w2) / var(--max_w2)), calc(425vw * 100 / var(--max_w2)), 425px);
+    --sz-426: clamp(calc(426px * var(--min_w2) / var(--max_w2)), calc(426vw * 100 / var(--max_w2)), 426px);
+    --sz-427: clamp(calc(427px * var(--min_w2) / var(--max_w2)), calc(427vw * 100 / var(--max_w2)), 427px);
+    --sz-428: clamp(calc(428px * var(--min_w2) / var(--max_w2)), calc(428vw * 100 / var(--max_w2)), 428px);
+    --sz-429: clamp(calc(429px * var(--min_w2) / var(--max_w2)), calc(429vw * 100 / var(--max_w2)), 429px);
+    --sz-430: clamp(calc(430px * var(--min_w2) / var(--max_w2)), calc(430vw * 100 / var(--max_w2)), 430px);
+    --sz-431: clamp(calc(431px * var(--min_w2) / var(--max_w2)), calc(431vw * 100 / var(--max_w2)), 431px);
+    --sz-432: clamp(calc(432px * var(--min_w2) / var(--max_w2)), calc(432vw * 100 / var(--max_w2)), 432px);
+    --sz-433: clamp(calc(433px * var(--min_w2) / var(--max_w2)), calc(433vw * 100 / var(--max_w2)), 433px);
+    --sz-434: clamp(calc(434px * var(--min_w2) / var(--max_w2)), calc(434vw * 100 / var(--max_w2)), 434px);
+    --sz-435: clamp(calc(435px * var(--min_w2) / var(--max_w2)), calc(435vw * 100 / var(--max_w2)), 435px);
+    --sz-436: clamp(calc(436px * var(--min_w2) / var(--max_w2)), calc(436vw * 100 / var(--max_w2)), 436px);
+    --sz-437: clamp(calc(437px * var(--min_w2) / var(--max_w2)), calc(437vw * 100 / var(--max_w2)), 437px);
+    --sz-438: clamp(calc(438px * var(--min_w2) / var(--max_w2)), calc(438vw * 100 / var(--max_w2)), 438px);
+    --sz-439: clamp(calc(439px * var(--min_w2) / var(--max_w2)), calc(439vw * 100 / var(--max_w2)), 439px);
+    --sz-440: clamp(calc(440px * var(--min_w2) / var(--max_w2)), calc(440vw * 100 / var(--max_w2)), 440px);
+    --sz-441: clamp(calc(441px * var(--min_w2) / var(--max_w2)), calc(441vw * 100 / var(--max_w2)), 441px);
+    --sz-442: clamp(calc(442px * var(--min_w2) / var(--max_w2)), calc(442vw * 100 / var(--max_w2)), 442px);
+    --sz-443: clamp(calc(443px * var(--min_w2) / var(--max_w2)), calc(443vw * 100 / var(--max_w2)), 443px);
+    --sz-444: clamp(calc(444px * var(--min_w2) / var(--max_w2)), calc(444vw * 100 / var(--max_w2)), 444px);
+    --sz-445: clamp(calc(445px * var(--min_w2) / var(--max_w2)), calc(445vw * 100 / var(--max_w2)), 445px);
+    --sz-446: clamp(calc(446px * var(--min_w2) / var(--max_w2)), calc(446vw * 100 / var(--max_w2)), 446px);
+    --sz-447: clamp(calc(447px * var(--min_w2) / var(--max_w2)), calc(447vw * 100 / var(--max_w2)), 447px);
+    --sz-448: clamp(calc(448px * var(--min_w2) / var(--max_w2)), calc(448vw * 100 / var(--max_w2)), 448px);
+    --sz-449: clamp(calc(449px * var(--min_w2) / var(--max_w2)), calc(449vw * 100 / var(--max_w2)), 449px);
+    --sz-450: clamp(calc(450px * var(--min_w2) / var(--max_w2)), calc(450vw * 100 / var(--max_w2)), 450px);
+    --sz-451: clamp(calc(451px * var(--min_w2) / var(--max_w2)), calc(451vw * 100 / var(--max_w2)), 451px);
+    --sz-452: clamp(calc(452px * var(--min_w2) / var(--max_w2)), calc(452vw * 100 / var(--max_w2)), 452px);
+    --sz-453: clamp(calc(453px * var(--min_w2) / var(--max_w2)), calc(453vw * 100 / var(--max_w2)), 453px);
+    --sz-454: clamp(calc(454px * var(--min_w2) / var(--max_w2)), calc(454vw * 100 / var(--max_w2)), 454px);
+    --sz-455: clamp(calc(455px * var(--min_w2) / var(--max_w2)), calc(455vw * 100 / var(--max_w2)), 455px);
+    --sz-456: clamp(calc(456px * var(--min_w2) / var(--max_w2)), calc(456vw * 100 / var(--max_w2)), 456px);
+    --sz-457: clamp(calc(457px * var(--min_w2) / var(--max_w2)), calc(457vw * 100 / var(--max_w2)), 457px);
+    --sz-458: clamp(calc(458px * var(--min_w2) / var(--max_w2)), calc(458vw * 100 / var(--max_w2)), 458px);
+    --sz-459: clamp(calc(459px * var(--min_w2) / var(--max_w2)), calc(459vw * 100 / var(--max_w2)), 459px);
+    --sz-460: clamp(calc(460px * var(--min_w2) / var(--max_w2)), calc(460vw * 100 / var(--max_w2)), 460px);
+    --sz-461: clamp(calc(461px * var(--min_w2) / var(--max_w2)), calc(461vw * 100 / var(--max_w2)), 461px);
+    --sz-462: clamp(calc(462px * var(--min_w2) / var(--max_w2)), calc(462vw * 100 / var(--max_w2)), 462px);
+    --sz-463: clamp(calc(463px * var(--min_w2) / var(--max_w2)), calc(463vw * 100 / var(--max_w2)), 463px);
+    --sz-464: clamp(calc(464px * var(--min_w2) / var(--max_w2)), calc(464vw * 100 / var(--max_w2)), 464px);
+    --sz-465: clamp(calc(465px * var(--min_w2) / var(--max_w2)), calc(465vw * 100 / var(--max_w2)), 465px);
+    --sz-466: clamp(calc(466px * var(--min_w2) / var(--max_w2)), calc(466vw * 100 / var(--max_w2)), 466px);
+    --sz-467: clamp(calc(467px * var(--min_w2) / var(--max_w2)), calc(467vw * 100 / var(--max_w2)), 467px);
+    --sz-468: clamp(calc(468px * var(--min_w2) / var(--max_w2)), calc(468vw * 100 / var(--max_w2)), 468px);
+    --sz-469: clamp(calc(469px * var(--min_w2) / var(--max_w2)), calc(469vw * 100 / var(--max_w2)), 469px);
+    --sz-470: clamp(calc(470px * var(--min_w2) / var(--max_w2)), calc(470vw * 100 / var(--max_w2)), 470px);
+    --sz-471: clamp(calc(471px * var(--min_w2) / var(--max_w2)), calc(471vw * 100 / var(--max_w2)), 471px);
+    --sz-472: clamp(calc(472px * var(--min_w2) / var(--max_w2)), calc(472vw * 100 / var(--max_w2)), 472px);
+    --sz-473: clamp(calc(473px * var(--min_w2) / var(--max_w2)), calc(473vw * 100 / var(--max_w2)), 473px);
+    --sz-474: clamp(calc(474px * var(--min_w2) / var(--max_w2)), calc(474vw * 100 / var(--max_w2)), 474px);
+    --sz-475: clamp(calc(475px * var(--min_w2) / var(--max_w2)), calc(475vw * 100 / var(--max_w2)), 475px);
+    --sz-476: clamp(calc(476px * var(--min_w2) / var(--max_w2)), calc(476vw * 100 / var(--max_w2)), 476px);
+    --sz-477: clamp(calc(477px * var(--min_w2) / var(--max_w2)), calc(477vw * 100 / var(--max_w2)), 477px);
+    --sz-478: clamp(calc(478px * var(--min_w2) / var(--max_w2)), calc(478vw * 100 / var(--max_w2)), 478px);
+    --sz-479: clamp(calc(479px * var(--min_w2) / var(--max_w2)), calc(479vw * 100 / var(--max_w2)), 479px);
+    --sz-480: clamp(calc(480px * var(--min_w2) / var(--max_w2)), calc(480vw * 100 / var(--max_w2)), 480px);
+    --sz-481: clamp(calc(481px * var(--min_w2) / var(--max_w2)), calc(481vw * 100 / var(--max_w2)), 481px);
+    --sz-482: clamp(calc(482px * var(--min_w2) / var(--max_w2)), calc(482vw * 100 / var(--max_w2)), 482px);
+    --sz-483: clamp(calc(483px * var(--min_w2) / var(--max_w2)), calc(483vw * 100 / var(--max_w2)), 483px);
+    --sz-484: clamp(calc(484px * var(--min_w2) / var(--max_w2)), calc(484vw * 100 / var(--max_w2)), 484px);
+    --sz-485: clamp(calc(485px * var(--min_w2) / var(--max_w2)), calc(485vw * 100 / var(--max_w2)), 485px);
+    --sz-486: clamp(calc(486px * var(--min_w2) / var(--max_w2)), calc(486vw * 100 / var(--max_w2)), 486px);
+    --sz-487: clamp(calc(487px * var(--min_w2) / var(--max_w2)), calc(487vw * 100 / var(--max_w2)), 487px);
+    --sz-488: clamp(calc(488px * var(--min_w2) / var(--max_w2)), calc(488vw * 100 / var(--max_w2)), 488px);
+    --sz-489: clamp(calc(489px * var(--min_w2) / var(--max_w2)), calc(489vw * 100 / var(--max_w2)), 489px);
+    --sz-490: clamp(calc(490px * var(--min_w2) / var(--max_w2)), calc(490vw * 100 / var(--max_w2)), 490px);
+    --sz-491: clamp(calc(491px * var(--min_w2) / var(--max_w2)), calc(491vw * 100 / var(--max_w2)), 491px);
+    --sz-492: clamp(calc(492px * var(--min_w2) / var(--max_w2)), calc(492vw * 100 / var(--max_w2)), 492px);
+    --sz-493: clamp(calc(493px * var(--min_w2) / var(--max_w2)), calc(493vw * 100 / var(--max_w2)), 493px);
+    --sz-494: clamp(calc(494px * var(--min_w2) / var(--max_w2)), calc(494vw * 100 / var(--max_w2)), 494px);
+    --sz-495: clamp(calc(495px * var(--min_w2) / var(--max_w2)), calc(495vw * 100 / var(--max_w2)), 495px);
+    --sz-496: clamp(calc(496px * var(--min_w2) / var(--max_w2)), calc(496vw * 100 / var(--max_w2)), 496px);
+    --sz-497: clamp(calc(497px * var(--min_w2) / var(--max_w2)), calc(497vw * 100 / var(--max_w2)), 497px);
+    --sz-498: clamp(calc(498px * var(--min_w2) / var(--max_w2)), calc(498vw * 100 / var(--max_w2)), 498px);
+    --sz-499: clamp(calc(499px * var(--min_w2) / var(--max_w2)), calc(499vw * 100 / var(--max_w2)), 499px);
+    --sz-500: clamp(calc(500px * var(--min_w2) / var(--max_w2)), calc(500vw * 100 / var(--max_w2)), 500px);
+  }
+}
+
+.sz-1 {
+  font-size: var(--sz-1);
+}
+.sz-2 {
+  font-size: var(--sz-2);
+}
+.sz-3 {
+  font-size: var(--sz-3);
+}
+.sz-4 {
+  font-size: var(--sz-4);
+}
+.sz-5 {
+  font-size: var(--sz-5);
+}
+.sz-6 {
+  font-size: var(--sz-6);
+}
+.sz-7 {
+  font-size: var(--sz-7);
+}
+.sz-8 {
+  font-size: var(--sz-8);
+}
+.sz-9 {
+  font-size: var(--sz-9);
+}
+.sz-10 {
+  font-size: var(--sz-10);
+}
+.sz-11 {
+  font-size: var(--sz-11);
+}
+.sz-12 {
+  font-size: var(--sz-12);
+}
+.sz-13 {
+  font-size: var(--sz-13);
+}
+.sz-14 {
+  font-size: var(--sz-14);
+}
+.sz-15 {
+  font-size: var(--sz-15);
+}
+.sz-16 {
+  font-size: var(--sz-16);
+}
+.sz-17 {
+  font-size: var(--sz-17);
+}
+.sz-18 {
+  font-size: var(--sz-18);
+}
+.sz-19 {
+  font-size: var(--sz-19);
+}
+.sz-20 {
+  font-size: var(--sz-20);
+}
+.sz-21 {
+  font-size: var(--sz-21);
+}
+.sz-22 {
+  font-size: var(--sz-22);
+}
+.sz-23 {
+  font-size: var(--sz-23);
+}
+.sz-24 {
+  font-size: var(--sz-24);
+}
+.sz-25 {
+  font-size: var(--sz-25);
+}
+.sz-26 {
+  font-size: var(--sz-26);
+}
+.sz-27 {
+  font-size: var(--sz-27);
+}
+.sz-28 {
+  font-size: var(--sz-28);
+}
+.sz-29 {
+  font-size: var(--sz-29);
+}
+.sz-30 {
+  font-size: var(--sz-30);
+}
+.sz-31 {
+  font-size: var(--sz-31);
+}
+.sz-32 {
+  font-size: var(--sz-32);
+}
+.sz-33 {
+  font-size: var(--sz-33);
+}
+.sz-34 {
+  font-size: var(--sz-34);
+}
+.sz-35 {
+  font-size: var(--sz-35);
+}
+.sz-36 {
+  font-size: var(--sz-36);
+}
+.sz-37 {
+  font-size: var(--sz-37);
+}
+.sz-38 {
+  font-size: var(--sz-38);
+}
+.sz-39 {
+  font-size: var(--sz-39);
+}
+.sz-40 {
+  font-size: var(--sz-40);
+}
+.sz-41 {
+  font-size: var(--sz-41);
+}
+.sz-42 {
+  font-size: var(--sz-42);
+}
+.sz-43 {
+  font-size: var(--sz-43);
+}
+.sz-44 {
+  font-size: var(--sz-44);
+}
+.sz-45 {
+  font-size: var(--sz-45);
+}
+.sz-46 {
+  font-size: var(--sz-46);
+}
+.sz-47 {
+  font-size: var(--sz-47);
+}
+.sz-48 {
+  font-size: var(--sz-48);
+}
+.sz-49 {
+  font-size: var(--sz-49);
+}
+.sz-50 {
+  font-size: var(--sz-50);
+}
+.sz-51 {
+  font-size: var(--sz-51);
+}
+.sz-52 {
+  font-size: var(--sz-52);
+}
+.sz-53 {
+  font-size: var(--sz-53);
+}
+.sz-54 {
+  font-size: var(--sz-54);
+}
+.sz-55 {
+  font-size: var(--sz-55);
+}
+.sz-56 {
+  font-size: var(--sz-56);
+}
+.sz-57 {
+  font-size: var(--sz-57);
+}
+.sz-58 {
+  font-size: var(--sz-58);
+}
+.sz-59 {
+  font-size: var(--sz-59);
+}
+.sz-60 {
+  font-size: var(--sz-60);
+}
+.sz-61 {
+  font-size: var(--sz-61);
+}
+.sz-62 {
+  font-size: var(--sz-62);
+}
+.sz-63 {
+  font-size: var(--sz-63);
+}
+.sz-64 {
+  font-size: var(--sz-64);
+}
+.sz-65 {
+  font-size: var(--sz-65);
+}
+.sz-66 {
+  font-size: var(--sz-66);
+}
+.sz-67 {
+  font-size: var(--sz-67);
+}
+.sz-68 {
+  font-size: var(--sz-68);
+}
+.sz-69 {
+  font-size: var(--sz-69);
+}
+.sz-70 {
+  font-size: var(--sz-70);
+}
+.sz-71 {
+  font-size: var(--sz-71);
+}
+.sz-72 {
+  font-size: var(--sz-72);
+}
+.sz-73 {
+  font-size: var(--sz-73);
+}
+.sz-74 {
+  font-size: var(--sz-74);
+}
+.sz-75 {
+  font-size: var(--sz-75);
+}
+.sz-76 {
+  font-size: var(--sz-76);
+}
+.sz-77 {
+  font-size: var(--sz-77);
+}
+.sz-78 {
+  font-size: var(--sz-78);
+}
+.sz-79 {
+  font-size: var(--sz-79);
+}
+.sz-80 {
+  font-size: var(--sz-80);
+}
+.sz-81 {
+  font-size: var(--sz-81);
+}
+.sz-82 {
+  font-size: var(--sz-82);
+}
+.sz-83 {
+  font-size: var(--sz-83);
+}
+.sz-84 {
+  font-size: var(--sz-84);
+}
+.sz-85 {
+  font-size: var(--sz-85);
+}
+.sz-86 {
+  font-size: var(--sz-86);
+}
+.sz-87 {
+  font-size: var(--sz-87);
+}
+.sz-88 {
+  font-size: var(--sz-88);
+}
+.sz-89 {
+  font-size: var(--sz-89);
+}
+.sz-90 {
+  font-size: var(--sz-90);
+}
+.sz-91 {
+  font-size: var(--sz-91);
+}
+.sz-92 {
+  font-size: var(--sz-92);
+}
+.sz-93 {
+  font-size: var(--sz-93);
+}
+.sz-94 {
+  font-size: var(--sz-94);
+}
+.sz-95 {
+  font-size: var(--sz-95);
+}
+.sz-96 {
+  font-size: var(--sz-96);
+}
+.sz-97 {
+  font-size: var(--sz-97);
+}
+.sz-98 {
+  font-size: var(--sz-98);
+}
+.sz-99 {
+  font-size: var(--sz-99);
+}
+.sz-100 {
+  font-size: var(--sz-100);
+}
+.sz-101 {
+  font-size: var(--sz-101);
+}
+.sz-102 {
+  font-size: var(--sz-102);
+}
+.sz-103 {
+  font-size: var(--sz-103);
+}
+.sz-104 {
+  font-size: var(--sz-104);
+}
+.sz-105 {
+  font-size: var(--sz-105);
+}
+.sz-106 {
+  font-size: var(--sz-106);
+}
+.sz-107 {
+  font-size: var(--sz-107);
+}
+.sz-108 {
+  font-size: var(--sz-108);
+}
+.sz-109 {
+  font-size: var(--sz-109);
+}
+.sz-110 {
+  font-size: var(--sz-110);
+}
+.sz-111 {
+  font-size: var(--sz-111);
+}
+.sz-112 {
+  font-size: var(--sz-112);
+}
+.sz-113 {
+  font-size: var(--sz-113);
+}
+.sz-114 {
+  font-size: var(--sz-114);
+}
+.sz-115 {
+  font-size: var(--sz-115);
+}
+.sz-116 {
+  font-size: var(--sz-116);
+}
+.sz-117 {
+  font-size: var(--sz-117);
+}
+.sz-118 {
+  font-size: var(--sz-118);
+}
+.sz-119 {
+  font-size: var(--sz-119);
+}
+.sz-120 {
+  font-size: var(--sz-120);
+}
+.sz-121 {
+  font-size: var(--sz-121);
+}
+.sz-122 {
+  font-size: var(--sz-122);
+}
+.sz-123 {
+  font-size: var(--sz-123);
+}
+.sz-124 {
+  font-size: var(--sz-124);
+}
+.sz-125 {
+  font-size: var(--sz-125);
+}
+.sz-126 {
+  font-size: var(--sz-126);
+}
+.sz-127 {
+  font-size: var(--sz-127);
+}
+.sz-128 {
+  font-size: var(--sz-128);
+}
+.sz-129 {
+  font-size: var(--sz-129);
+}
+.sz-130 {
+  font-size: var(--sz-130);
+}
+.sz-131 {
+  font-size: var(--sz-131);
+}
+.sz-132 {
+  font-size: var(--sz-132);
+}
+.sz-133 {
+  font-size: var(--sz-133);
+}
+.sz-134 {
+  font-size: var(--sz-134);
+}
+.sz-135 {
+  font-size: var(--sz-135);
+}
+.sz-136 {
+  font-size: var(--sz-136);
+}
+.sz-137 {
+  font-size: var(--sz-137);
+}
+.sz-138 {
+  font-size: var(--sz-138);
+}
+.sz-139 {
+  font-size: var(--sz-139);
+}
+.sz-140 {
+  font-size: var(--sz-140);
+}
+.sz-141 {
+  font-size: var(--sz-141);
+}
+.sz-142 {
+  font-size: var(--sz-142);
+}
+.sz-143 {
+  font-size: var(--sz-143);
+}
+.sz-144 {
+  font-size: var(--sz-144);
+}
+.sz-145 {
+  font-size: var(--sz-145);
+}
+.sz-146 {
+  font-size: var(--sz-146);
+}
+.sz-147 {
+  font-size: var(--sz-147);
+}
+.sz-148 {
+  font-size: var(--sz-148);
+}
+.sz-149 {
+  font-size: var(--sz-149);
+}
+.sz-150 {
+  font-size: var(--sz-150);
+}
+.sz-151 {
+  font-size: var(--sz-151);
+}
+.sz-152 {
+  font-size: var(--sz-152);
+}
+.sz-153 {
+  font-size: var(--sz-153);
+}
+.sz-154 {
+  font-size: var(--sz-154);
+}
+.sz-155 {
+  font-size: var(--sz-155);
+}
+.sz-156 {
+  font-size: var(--sz-156);
+}
+.sz-157 {
+  font-size: var(--sz-157);
+}
+.sz-158 {
+  font-size: var(--sz-158);
+}
+.sz-159 {
+  font-size: var(--sz-159);
+}
+.sz-160 {
+  font-size: var(--sz-160);
+}
+.sz-161 {
+  font-size: var(--sz-161);
+}
+.sz-162 {
+  font-size: var(--sz-162);
+}
+.sz-163 {
+  font-size: var(--sz-163);
+}
+.sz-164 {
+  font-size: var(--sz-164);
+}
+.sz-165 {
+  font-size: var(--sz-165);
+}
+.sz-166 {
+  font-size: var(--sz-166);
+}
+.sz-167 {
+  font-size: var(--sz-167);
+}
+.sz-168 {
+  font-size: var(--sz-168);
+}
+.sz-169 {
+  font-size: var(--sz-169);
+}
+.sz-170 {
+  font-size: var(--sz-170);
+}
+.sz-171 {
+  font-size: var(--sz-171);
+}
+.sz-172 {
+  font-size: var(--sz-172);
+}
+.sz-173 {
+  font-size: var(--sz-173);
+}
+.sz-174 {
+  font-size: var(--sz-174);
+}
+.sz-175 {
+  font-size: var(--sz-175);
+}
+.sz-176 {
+  font-size: var(--sz-176);
+}
+.sz-177 {
+  font-size: var(--sz-177);
+}
+.sz-178 {
+  font-size: var(--sz-178);
+}
+.sz-179 {
+  font-size: var(--sz-179);
+}
+.sz-180 {
+  font-size: var(--sz-180);
+}
+.sz-181 {
+  font-size: var(--sz-181);
+}
+.sz-182 {
+  font-size: var(--sz-182);
+}
+.sz-183 {
+  font-size: var(--sz-183);
+}
+.sz-184 {
+  font-size: var(--sz-184);
+}
+.sz-185 {
+  font-size: var(--sz-185);
+}
+.sz-186 {
+  font-size: var(--sz-186);
+}
+.sz-187 {
+  font-size: var(--sz-187);
+}
+.sz-188 {
+  font-size: var(--sz-188);
+}
+.sz-189 {
+  font-size: var(--sz-189);
+}
+.sz-190 {
+  font-size: var(--sz-190);
+}
+.sz-191 {
+  font-size: var(--sz-191);
+}
+.sz-192 {
+  font-size: var(--sz-192);
+}
+.sz-193 {
+  font-size: var(--sz-193);
+}
+.sz-194 {
+  font-size: var(--sz-194);
+}
+.sz-195 {
+  font-size: var(--sz-195);
+}
+.sz-196 {
+  font-size: var(--sz-196);
+}
+.sz-197 {
+  font-size: var(--sz-197);
+}
+.sz-198 {
+  font-size: var(--sz-198);
+}
+.sz-199 {
+  font-size: var(--sz-199);
+}
+.sz-200 {
+  font-size: var(--sz-200);
+}
+.sz-201 {
+  font-size: var(--sz-201);
+}
+.sz-202 {
+  font-size: var(--sz-202);
+}
+.sz-203 {
+  font-size: var(--sz-203);
+}
+.sz-204 {
+  font-size: var(--sz-204);
+}
+.sz-205 {
+  font-size: var(--sz-205);
+}
+.sz-206 {
+  font-size: var(--sz-206);
+}
+.sz-207 {
+  font-size: var(--sz-207);
+}
+.sz-208 {
+  font-size: var(--sz-208);
+}
+.sz-209 {
+  font-size: var(--sz-209);
+}
+.sz-210 {
+  font-size: var(--sz-210);
+}
+.sz-211 {
+  font-size: var(--sz-211);
+}
+.sz-212 {
+  font-size: var(--sz-212);
+}
+.sz-213 {
+  font-size: var(--sz-213);
+}
+.sz-214 {
+  font-size: var(--sz-214);
+}
+.sz-215 {
+  font-size: var(--sz-215);
+}
+.sz-216 {
+  font-size: var(--sz-216);
+}
+.sz-217 {
+  font-size: var(--sz-217);
+}
+.sz-218 {
+  font-size: var(--sz-218);
+}
+.sz-219 {
+  font-size: var(--sz-219);
+}
+.sz-220 {
+  font-size: var(--sz-220);
+}
+.sz-221 {
+  font-size: var(--sz-221);
+}
+.sz-222 {
+  font-size: var(--sz-222);
+}
+.sz-223 {
+  font-size: var(--sz-223);
+}
+.sz-224 {
+  font-size: var(--sz-224);
+}
+.sz-225 {
+  font-size: var(--sz-225);
+}
+.sz-226 {
+  font-size: var(--sz-226);
+}
+.sz-227 {
+  font-size: var(--sz-227);
+}
+.sz-228 {
+  font-size: var(--sz-228);
+}
+.sz-229 {
+  font-size: var(--sz-229);
+}
+.sz-230 {
+  font-size: var(--sz-230);
+}
+.sz-231 {
+  font-size: var(--sz-231);
+}
+.sz-232 {
+  font-size: var(--sz-232);
+}
+.sz-233 {
+  font-size: var(--sz-233);
+}
+.sz-234 {
+  font-size: var(--sz-234);
+}
+.sz-235 {
+  font-size: var(--sz-235);
+}
+.sz-236 {
+  font-size: var(--sz-236);
+}
+.sz-237 {
+  font-size: var(--sz-237);
+}
+.sz-238 {
+  font-size: var(--sz-238);
+}
+.sz-239 {
+  font-size: var(--sz-239);
+}
+.sz-240 {
+  font-size: var(--sz-240);
+}
+.sz-241 {
+  font-size: var(--sz-241);
+}
+.sz-242 {
+  font-size: var(--sz-242);
+}
+.sz-243 {
+  font-size: var(--sz-243);
+}
+.sz-244 {
+  font-size: var(--sz-244);
+}
+.sz-245 {
+  font-size: var(--sz-245);
+}
+.sz-246 {
+  font-size: var(--sz-246);
+}
+.sz-247 {
+  font-size: var(--sz-247);
+}
+.sz-248 {
+  font-size: var(--sz-248);
+}
+.sz-249 {
+  font-size: var(--sz-249);
+}
+.sz-250 {
+  font-size: var(--sz-250);
+}
+.sz-251 {
+  font-size: var(--sz-251);
+}
+.sz-252 {
+  font-size: var(--sz-252);
+}
+.sz-253 {
+  font-size: var(--sz-253);
+}
+.sz-254 {
+  font-size: var(--sz-254);
+}
+.sz-255 {
+  font-size: var(--sz-255);
+}
+.sz-256 {
+  font-size: var(--sz-256);
+}
+.sz-257 {
+  font-size: var(--sz-257);
+}
+.sz-258 {
+  font-size: var(--sz-258);
+}
+.sz-259 {
+  font-size: var(--sz-259);
+}
+.sz-260 {
+  font-size: var(--sz-260);
+}
+.sz-261 {
+  font-size: var(--sz-261);
+}
+.sz-262 {
+  font-size: var(--sz-262);
+}
+.sz-263 {
+  font-size: var(--sz-263);
+}
+.sz-264 {
+  font-size: var(--sz-264);
+}
+.sz-265 {
+  font-size: var(--sz-265);
+}
+.sz-266 {
+  font-size: var(--sz-266);
+}
+.sz-267 {
+  font-size: var(--sz-267);
+}
+.sz-268 {
+  font-size: var(--sz-268);
+}
+.sz-269 {
+  font-size: var(--sz-269);
+}
+.sz-270 {
+  font-size: var(--sz-270);
+}
+.sz-271 {
+  font-size: var(--sz-271);
+}
+.sz-272 {
+  font-size: var(--sz-272);
+}
+.sz-273 {
+  font-size: var(--sz-273);
+}
+.sz-274 {
+  font-size: var(--sz-274);
+}
+.sz-275 {
+  font-size: var(--sz-275);
+}
+.sz-276 {
+  font-size: var(--sz-276);
+}
+.sz-277 {
+  font-size: var(--sz-277);
+}
+.sz-278 {
+  font-size: var(--sz-278);
+}
+.sz-279 {
+  font-size: var(--sz-279);
+}
+.sz-280 {
+  font-size: var(--sz-280);
+}
+.sz-281 {
+  font-size: var(--sz-281);
+}
+.sz-282 {
+  font-size: var(--sz-282);
+}
+.sz-283 {
+  font-size: var(--sz-283);
+}
+.sz-284 {
+  font-size: var(--sz-284);
+}
+.sz-285 {
+  font-size: var(--sz-285);
+}
+.sz-286 {
+  font-size: var(--sz-286);
+}
+.sz-287 {
+  font-size: var(--sz-287);
+}
+.sz-288 {
+  font-size: var(--sz-288);
+}
+.sz-289 {
+  font-size: var(--sz-289);
+}
+.sz-290 {
+  font-size: var(--sz-290);
+}
+.sz-291 {
+  font-size: var(--sz-291);
+}
+.sz-292 {
+  font-size: var(--sz-292);
+}
+.sz-293 {
+  font-size: var(--sz-293);
+}
+.sz-294 {
+  font-size: var(--sz-294);
+}
+.sz-295 {
+  font-size: var(--sz-295);
+}
+.sz-296 {
+  font-size: var(--sz-296);
+}
+.sz-297 {
+  font-size: var(--sz-297);
+}
+.sz-298 {
+  font-size: var(--sz-298);
+}
+.sz-299 {
+  font-size: var(--sz-299);
+}
+.sz-300 {
+  font-size: var(--sz-300);
+}
+.sz-301 {
+  font-size: var(--sz-301);
+}
+.sz-302 {
+  font-size: var(--sz-302);
+}
+.sz-303 {
+  font-size: var(--sz-303);
+}
+.sz-304 {
+  font-size: var(--sz-304);
+}
+.sz-305 {
+  font-size: var(--sz-305);
+}
+.sz-306 {
+  font-size: var(--sz-306);
+}
+.sz-307 {
+  font-size: var(--sz-307);
+}
+.sz-308 {
+  font-size: var(--sz-308);
+}
+.sz-309 {
+  font-size: var(--sz-309);
+}
+.sz-310 {
+  font-size: var(--sz-310);
+}
+.sz-311 {
+  font-size: var(--sz-311);
+}
+.sz-312 {
+  font-size: var(--sz-312);
+}
+.sz-313 {
+  font-size: var(--sz-313);
+}
+.sz-314 {
+  font-size: var(--sz-314);
+}
+.sz-315 {
+  font-size: var(--sz-315);
+}
+.sz-316 {
+  font-size: var(--sz-316);
+}
+.sz-317 {
+  font-size: var(--sz-317);
+}
+.sz-318 {
+  font-size: var(--sz-318);
+}
+.sz-319 {
+  font-size: var(--sz-319);
+}
+.sz-320 {
+  font-size: var(--sz-320);
+}
+.sz-321 {
+  font-size: var(--sz-321);
+}
+.sz-322 {
+  font-size: var(--sz-322);
+}
+.sz-323 {
+  font-size: var(--sz-323);
+}
+.sz-324 {
+  font-size: var(--sz-324);
+}
+.sz-325 {
+  font-size: var(--sz-325);
+}
+.sz-326 {
+  font-size: var(--sz-326);
+}
+.sz-327 {
+  font-size: var(--sz-327);
+}
+.sz-328 {
+  font-size: var(--sz-328);
+}
+.sz-329 {
+  font-size: var(--sz-329);
+}
+.sz-330 {
+  font-size: var(--sz-330);
+}
+.sz-331 {
+  font-size: var(--sz-331);
+}
+.sz-332 {
+  font-size: var(--sz-332);
+}
+.sz-333 {
+  font-size: var(--sz-333);
+}
+.sz-334 {
+  font-size: var(--sz-334);
+}
+.sz-335 {
+  font-size: var(--sz-335);
+}
+.sz-336 {
+  font-size: var(--sz-336);
+}
+.sz-337 {
+  font-size: var(--sz-337);
+}
+.sz-338 {
+  font-size: var(--sz-338);
+}
+.sz-339 {
+  font-size: var(--sz-339);
+}
+.sz-340 {
+  font-size: var(--sz-340);
+}
+.sz-341 {
+  font-size: var(--sz-341);
+}
+.sz-342 {
+  font-size: var(--sz-342);
+}
+.sz-343 {
+  font-size: var(--sz-343);
+}
+.sz-344 {
+  font-size: var(--sz-344);
+}
+.sz-345 {
+  font-size: var(--sz-345);
+}
+.sz-346 {
+  font-size: var(--sz-346);
+}
+.sz-347 {
+  font-size: var(--sz-347);
+}
+.sz-348 {
+  font-size: var(--sz-348);
+}
+.sz-349 {
+  font-size: var(--sz-349);
+}
+.sz-350 {
+  font-size: var(--sz-350);
+}
+.sz-351 {
+  font-size: var(--sz-351);
+}
+.sz-352 {
+  font-size: var(--sz-352);
+}
+.sz-353 {
+  font-size: var(--sz-353);
+}
+.sz-354 {
+  font-size: var(--sz-354);
+}
+.sz-355 {
+  font-size: var(--sz-355);
+}
+.sz-356 {
+  font-size: var(--sz-356);
+}
+.sz-357 {
+  font-size: var(--sz-357);
+}
+.sz-358 {
+  font-size: var(--sz-358);
+}
+.sz-359 {
+  font-size: var(--sz-359);
+}
+.sz-360 {
+  font-size: var(--sz-360);
+}
+.sz-361 {
+  font-size: var(--sz-361);
+}
+.sz-362 {
+  font-size: var(--sz-362);
+}
+.sz-363 {
+  font-size: var(--sz-363);
+}
+.sz-364 {
+  font-size: var(--sz-364);
+}
+.sz-365 {
+  font-size: var(--sz-365);
+}
+.sz-366 {
+  font-size: var(--sz-366);
+}
+.sz-367 {
+  font-size: var(--sz-367);
+}
+.sz-368 {
+  font-size: var(--sz-368);
+}
+.sz-369 {
+  font-size: var(--sz-369);
+}
+.sz-370 {
+  font-size: var(--sz-370);
+}
+.sz-371 {
+  font-size: var(--sz-371);
+}
+.sz-372 {
+  font-size: var(--sz-372);
+}
+.sz-373 {
+  font-size: var(--sz-373);
+}
+.sz-374 {
+  font-size: var(--sz-374);
+}
+.sz-375 {
+  font-size: var(--sz-375);
+}
+.sz-376 {
+  font-size: var(--sz-376);
+}
+.sz-377 {
+  font-size: var(--sz-377);
+}
+.sz-378 {
+  font-size: var(--sz-378);
+}
+.sz-379 {
+  font-size: var(--sz-379);
+}
+.sz-380 {
+  font-size: var(--sz-380);
+}
+.sz-381 {
+  font-size: var(--sz-381);
+}
+.sz-382 {
+  font-size: var(--sz-382);
+}
+.sz-383 {
+  font-size: var(--sz-383);
+}
+.sz-384 {
+  font-size: var(--sz-384);
+}
+.sz-385 {
+  font-size: var(--sz-385);
+}
+.sz-386 {
+  font-size: var(--sz-386);
+}
+.sz-387 {
+  font-size: var(--sz-387);
+}
+.sz-388 {
+  font-size: var(--sz-388);
+}
+.sz-389 {
+  font-size: var(--sz-389);
+}
+.sz-390 {
+  font-size: var(--sz-390);
+}
+.sz-391 {
+  font-size: var(--sz-391);
+}
+.sz-392 {
+  font-size: var(--sz-392);
+}
+.sz-393 {
+  font-size: var(--sz-393);
+}
+.sz-394 {
+  font-size: var(--sz-394);
+}
+.sz-395 {
+  font-size: var(--sz-395);
+}
+.sz-396 {
+  font-size: var(--sz-396);
+}
+.sz-397 {
+  font-size: var(--sz-397);
+}
+.sz-398 {
+  font-size: var(--sz-398);
+}
+.sz-399 {
+  font-size: var(--sz-399);
+}
+.sz-400 {
+  font-size: var(--sz-400);
+}
+.sz-401 {
+  font-size: var(--sz-401);
+}
+.sz-402 {
+  font-size: var(--sz-402);
+}
+.sz-403 {
+  font-size: var(--sz-403);
+}
+.sz-404 {
+  font-size: var(--sz-404);
+}
+.sz-405 {
+  font-size: var(--sz-405);
+}
+.sz-406 {
+  font-size: var(--sz-406);
+}
+.sz-407 {
+  font-size: var(--sz-407);
+}
+.sz-408 {
+  font-size: var(--sz-408);
+}
+.sz-409 {
+  font-size: var(--sz-409);
+}
+.sz-410 {
+  font-size: var(--sz-410);
+}
+.sz-411 {
+  font-size: var(--sz-411);
+}
+.sz-412 {
+  font-size: var(--sz-412);
+}
+.sz-413 {
+  font-size: var(--sz-413);
+}
+.sz-414 {
+  font-size: var(--sz-414);
+}
+.sz-415 {
+  font-size: var(--sz-415);
+}
+.sz-416 {
+  font-size: var(--sz-416);
+}
+.sz-417 {
+  font-size: var(--sz-417);
+}
+.sz-418 {
+  font-size: var(--sz-418);
+}
+.sz-419 {
+  font-size: var(--sz-419);
+}
+.sz-420 {
+  font-size: var(--sz-420);
+}
+.sz-421 {
+  font-size: var(--sz-421);
+}
+.sz-422 {
+  font-size: var(--sz-422);
+}
+.sz-423 {
+  font-size: var(--sz-423);
+}
+.sz-424 {
+  font-size: var(--sz-424);
+}
+.sz-425 {
+  font-size: var(--sz-425);
+}
+.sz-426 {
+  font-size: var(--sz-426);
+}
+.sz-427 {
+  font-size: var(--sz-427);
+}
+.sz-428 {
+  font-size: var(--sz-428);
+}
+.sz-429 {
+  font-size: var(--sz-429);
+}
+.sz-430 {
+  font-size: var(--sz-430);
+}
+.sz-431 {
+  font-size: var(--sz-431);
+}
+.sz-432 {
+  font-size: var(--sz-432);
+}
+.sz-433 {
+  font-size: var(--sz-433);
+}
+.sz-434 {
+  font-size: var(--sz-434);
+}
+.sz-435 {
+  font-size: var(--sz-435);
+}
+.sz-436 {
+  font-size: var(--sz-436);
+}
+.sz-437 {
+  font-size: var(--sz-437);
+}
+.sz-438 {
+  font-size: var(--sz-438);
+}
+.sz-439 {
+  font-size: var(--sz-439);
+}
+.sz-440 {
+  font-size: var(--sz-440);
+}
+.sz-441 {
+  font-size: var(--sz-441);
+}
+.sz-442 {
+  font-size: var(--sz-442);
+}
+.sz-443 {
+  font-size: var(--sz-443);
+}
+.sz-444 {
+  font-size: var(--sz-444);
+}
+.sz-445 {
+  font-size: var(--sz-445);
+}
+.sz-446 {
+  font-size: var(--sz-446);
+}
+.sz-447 {
+  font-size: var(--sz-447);
+}
+.sz-448 {
+  font-size: var(--sz-448);
+}
+.sz-449 {
+  font-size: var(--sz-449);
+}
+.sz-450 {
+  font-size: var(--sz-450);
+}
+.sz-451 {
+  font-size: var(--sz-451);
+}
+.sz-452 {
+  font-size: var(--sz-452);
+}
+.sz-453 {
+  font-size: var(--sz-453);
+}
+.sz-454 {
+  font-size: var(--sz-454);
+}
+.sz-455 {
+  font-size: var(--sz-455);
+}
+.sz-456 {
+  font-size: var(--sz-456);
+}
+.sz-457 {
+  font-size: var(--sz-457);
+}
+.sz-458 {
+  font-size: var(--sz-458);
+}
+.sz-459 {
+  font-size: var(--sz-459);
+}
+.sz-460 {
+  font-size: var(--sz-460);
+}
+.sz-461 {
+  font-size: var(--sz-461);
+}
+.sz-462 {
+  font-size: var(--sz-462);
+}
+.sz-463 {
+  font-size: var(--sz-463);
+}
+.sz-464 {
+  font-size: var(--sz-464);
+}
+.sz-465 {
+  font-size: var(--sz-465);
+}
+.sz-466 {
+  font-size: var(--sz-466);
+}
+.sz-467 {
+  font-size: var(--sz-467);
+}
+.sz-468 {
+  font-size: var(--sz-468);
+}
+.sz-469 {
+  font-size: var(--sz-469);
+}
+.sz-470 {
+  font-size: var(--sz-470);
+}
+.sz-471 {
+  font-size: var(--sz-471);
+}
+.sz-472 {
+  font-size: var(--sz-472);
+}
+.sz-473 {
+  font-size: var(--sz-473);
+}
+.sz-474 {
+  font-size: var(--sz-474);
+}
+.sz-475 {
+  font-size: var(--sz-475);
+}
+.sz-476 {
+  font-size: var(--sz-476);
+}
+.sz-477 {
+  font-size: var(--sz-477);
+}
+.sz-478 {
+  font-size: var(--sz-478);
+}
+.sz-479 {
+  font-size: var(--sz-479);
+}
+.sz-480 {
+  font-size: var(--sz-480);
+}
+.sz-481 {
+  font-size: var(--sz-481);
+}
+.sz-482 {
+  font-size: var(--sz-482);
+}
+.sz-483 {
+  font-size: var(--sz-483);
+}
+.sz-484 {
+  font-size: var(--sz-484);
+}
+.sz-485 {
+  font-size: var(--sz-485);
+}
+.sz-486 {
+  font-size: var(--sz-486);
+}
+.sz-487 {
+  font-size: var(--sz-487);
+}
+.sz-488 {
+  font-size: var(--sz-488);
+}
+.sz-489 {
+  font-size: var(--sz-489);
+}
+.sz-490 {
+  font-size: var(--sz-490);
+}
+.sz-491 {
+  font-size: var(--sz-491);
+}
+.sz-492 {
+  font-size: var(--sz-492);
+}
+.sz-493 {
+  font-size: var(--sz-493);
+}
+.sz-494 {
+  font-size: var(--sz-494);
+}
+.sz-495 {
+  font-size: var(--sz-495);
+}
+.sz-496 {
+  font-size: var(--sz-496);
+}
+.sz-497 {
+  font-size: var(--sz-497);
+}
+.sz-498 {
+  font-size: var(--sz-498);
+}
+.sz-499 {
+  font-size: var(--sz-499);
+}
+.sz-500 {
+  font-size: var(--sz-500);
+}
+
+/* font weight */
+strong {
+  font-weight: 700 !important;
+}
+
+strong.font-serif,
+.fw-bold.font-serif {
+  font-weight: 900 !important;
+}
+
+/* font feature settings */
+.palt {
+  font-feature-settings: "palt";
+}
+
+/* font size */
+.text-larger {
+  font-size: 120%;
+}
+
+.text-large {
+  font-size: 150%;
+}
+
+.fs-50 {
+  font-size: 50%;
+}
+
+.fs-60 {
+  font-size: 60%;
+}
+
+.fs-70 {
+  font-size: 70%;
+}
+
+.fs-80 {
+  font-size: 80%;
+}
+
+.fs-90 {
+  font-size: 90%;
+}
+
+.fs-100 {
+  font-size: 100%;
+}
+
+.fs-110 {
+  font-size: 110%;
+}
+
+.fs-120 {
+  font-size: 120%;
+}
+
+.fs-130 {
+  font-size: 130%;
+}
+
+.fs-140 {
+  font-size: 140%;
+}
+
+.fs-150 {
+  font-size: 150%;
+}
+
+.fs-160 {
+  font-size: 160%;
+}
+
+.fs-170 {
+  font-size: 170%;
+}
+
+.fs-180 {
+  font-size: 180%;
+}
+
+.fs-190 {
+  font-size: 190%;
+}
+
+.fs-200 {
+  font-size: 200%;
+}
+
+.fs-210 {
+  font-size: 210%;
+}
+
+.fs-220 {
+  font-size: 220%;
+}
+
+.fs-230 {
+  font-size: 230%;
+}
+
+.fs-240 {
+  font-size: 240%;
+}
+
+.fs-250 {
+  font-size: 250%;
+}
+
+.fs-260 {
+  font-size: 260%;
+}
+
+.fs-270 {
+  font-size: 270%;
+}
+
+.fs-280 {
+  font-size: 280%;
+}
+
+.fs-290 {
+  font-size: 290%;
+}
+
+.fs-300 {
+  font-size: 300%;
+}
+
+@media (min-width: 992px) {
+  .text-lg-larger {
+    font-size: 120%;
+  }
+
+  .text-lg-large {
+    font-size: 150%;
+  }
+
+  .fs-lg-50 {
+    font-size: 50%;
+  }
+
+  .fs-lg-60 {
+    font-size: 60%;
+  }
+
+  .fs-lg-70 {
+    font-size: 70%;
+  }
+
+  .fs-lg-80 {
+    font-size: 80%;
+  }
+
+  .fs-lg-90 {
+    font-size: 90%;
+  }
+
+  .fs-lg-100 {
+    font-size: 100%;
+  }
+
+  .fs-lg-110 {
+    font-size: 110%;
+  }
+
+  .fs-lg-120 {
+    font-size: 120%;
+  }
+
+  .fs-lg-130 {
+    font-size: 130%;
+  }
+
+  .fs-lg-140 {
+    font-size: 140%;
+  }
+
+  .fs-lg-150 {
+    font-size: 150%;
+  }
+
+  .fs-lg-160 {
+    font-size: 160%;
+  }
+
+  .fs-lg-170 {
+    font-size: 170%;
+  }
+
+  .fs-lg-180 {
+    font-size: 180%;
+  }
+
+  .fs-lg-190 {
+    font-size: 190%;
+  }
+
+  .fs-lg-200 {
+    font-size: 200%;
+  }
+
+  .fs-lg-210 {
+    font-size: 210%;
+  }
+
+  .fs-lg-220 {
+    font-size: 220%;
+  }
+
+  .fs-lg-230 {
+    font-size: 230%;
+  }
+
+  .fs-lg-240 {
+    font-size: 240%;
+  }
+
+  .fs-lg-250 {
+    font-size: 250%;
+  }
+
+  .fs-lg-260 {
+    font-size: 260%;
+  }
+
+  .fs-lg-270 {
+    font-size: 270%;
+  }
+
+  .fs-lg-280 {
+    font-size: 280%;
+  }
+
+  .fs-lg-290 {
+    font-size: 290%;
+  }
+
+  .fs-lg-300 {
+    font-size: 300%;
+  }
+
+  .fs-lg-310 {
+    font-size: 310%;
+  }
+
+  .fs-lg-320 {
+    font-size: 320%;
+  }
+
+  .fs-lg-330 {
+    font-size: 330%;
+  }
+
+  .fs-lg-340 {
+    font-size: 340%;
+  }
+
+  .fs-lg-350 {
+    font-size: 350%;
+  }
+
+  .fs-lg-360 {
+    font-size: 360%;
+  }
+
+  .fs-lg-370 {
+    font-size: 370%;
+  }
+
+  .fs-lg-380 {
+    font-size: 380%;
+  }
+
+  .fs-lg-390 {
+    font-size: 390%;
+  }
+
+  .fs-lg-400 {
+    font-size: 400%;
+  }
+}
+
+/* spacer */
+.spacer {
+  margin-bottom: 3em;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.spacer--sm {
+  margin-bottom: 2em;
+}
+
+.spacer--lg {
+  margin-bottom: 5em;
+}
+
+/* margin */
+.-m1 {
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.mb-1em {
+  margin-bottom: 1em !important;
+}
+
+.mb-2em {
+  margin-bottom: 2em !important;
+}
+
+.mb-3em {
+  margin-bottom: 3em !important;
+}
+
+.mb-4em {
+  margin-bottom: 4em !important;
+}
+
+.mb-5em {
+  margin-bottom: 5em !important;
+}
+
+/* padding */
+.pt-1em {
+  padding-top: 1em !important;
+}
+
+.pt-2em {
+  padding-top: 2em !important;
+}
+
+.pt-3em {
+  padding-top: 3em !important;
+}
+
+.pt-4em {
+  padding-top: 4em !important;
+}
+
+.pt-5em {
+  padding-top: 5em !important;
+}
+
+.pb-1em {
+  padding-bottom: 1em !important;
+}
+
+.pb-2em {
+  padding-bottom: 2em !important;
+}
+
+.pb-3em {
+  padding-bottom: 3em !important;
+}
+
+.pb-4em {
+  padding-bottom: 4em !important;
+}
+
+.pb-5em {
+  padding-bottom: 5em !important;
+}
