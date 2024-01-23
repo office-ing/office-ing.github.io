@@ -1,4 +1,4 @@
-import * as Vue from 'https://unpkg.com/vue@3.4.15/dist/vue.global.js';
+import * as Vue from 'https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.41/vue.esm-browser.prod.js';
 
 import { createApp, ref } from 'vue'
 
