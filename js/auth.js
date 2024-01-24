@@ -22,7 +22,7 @@
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(hostinfo),
+    body: JSON.stringify(json),
   });
 
   // // auth
