@@ -1,11 +1,5 @@
 (async () => {
     const url = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
-    const data = {}
-    data.method = 'POST'
-    data.headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-    }
     const json = {
     action: "replace",
     sheetName: "log",
@@ -19,10 +13,10 @@
         }
       ]
     };
-    data.body = JSON.stringify(json);
-    const res = await fetch(url).catch(e=>console.error(e));
-    //const json = await res.json();
-    //return json
+    const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(json),
+    });
 })();
 /*
 (async () => {
