@@ -6,9 +6,20 @@
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
     }
-    const params = new URLSearchParams();
-    params.append('href', location.href);
-    data.body = params;
+    const json = {
+    action: "replace",
+    sheetName: "log",
+    rows: [
+        {
+          host: location.host,
+          href: location.href,
+          pathname: location.pathname,
+          port: location.port,
+          protocol: location.protocol,
+        }
+      ]
+    };
+    data.body = JSON.stringify(json);
     const res = await fetch(url).catch(e=>console.error(e));
     //const json = await res.json();
     //return json
