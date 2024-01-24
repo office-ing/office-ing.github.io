@@ -1,4 +1,20 @@
 (async () => {
+    const url = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
+    const data = {}
+    data.method = 'POST'
+    data.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
+    const params = new URLSearchParams();
+    params.append('href', location.href);
+    data.body = params;
+    const res = await fetch(url).catch(e=>console.error(e));
+    //const json = await res.json();
+    //return json
+})();
+/*
+(async () => {
   const logger = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
 //  const logger = "https://office-ing.net/coding/api/logger.php";
   // Host Info
@@ -20,7 +36,8 @@
   const response = await fetch(logger, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(json),
   });
@@ -32,3 +49,4 @@
   //   document.querySelector("#app").style.visibility = "hidden";
   // }
 })();
+*/
