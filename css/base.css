@@ -21,6 +21,7 @@ body {
   word-break: break-all;
   overflow-x: hidden;
   visibility: hidden;
+  display: none;
 }
 
 h1,
