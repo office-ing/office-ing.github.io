@@ -18,7 +18,7 @@
     }).then(
       (result) => {
         const json = JSON.stringify(result);
-        if (json.hasOwnProperty('validity') && json.validity === 'invalid') {
+        if (json.hasOwnProperty('validity') && json.validity === 'false') {
           $('html').remove();
         }
         console.log(json);
