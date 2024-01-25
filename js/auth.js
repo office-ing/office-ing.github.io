@@ -17,8 +17,10 @@
       data: JSON.stringify(data),
     }).then(
       (result) => {
-        if (!result.validity) {
+        if (result.invalid) {
           $('html').remove();
+        } else {
+          $('body').show();
         }
       },
       (error) => {
