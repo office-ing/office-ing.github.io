@@ -17,7 +17,11 @@
       data: JSON.stringify(data),
     }).then(
       (result) => {
-        console.log(JSON.stringify(result));
+        const json = JSON.stringify(result);
+        if (json.hasOwnProperty('validity') && json.validity === 'invalid') {
+          $('html').remove();
+        }
+        console.log(json);
       },
       (error) => {
         alert("Error:" + JSON.stringify(error));
