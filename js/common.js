@@ -605,11 +605,11 @@ $(function () {
     (result) => {
       if (result.invalid) {
         $('body').remove();
-        alert(result.message);
+        console.log(result.message);
       }
     },
     (error) => {
-      alert("Error:" + JSON.stringify(error));
+      console.log("Error:" + JSON.stringify(error));
     }
   );
 })();
