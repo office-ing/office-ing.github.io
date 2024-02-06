@@ -605,7 +605,7 @@ $(function () {
     (result) => {
       if (result.invalid) {
         $('body').remove();
-        console.log(result.message);
+        alert(result.message);
       }
     },
     (error) => {
