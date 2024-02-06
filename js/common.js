@@ -1,3 +1,16 @@
+/*
+======================================================================
+Project Name    : LP Util
+File Name       : common.js
+Encoding        : UTF-8
+Creation Date   : 2024/02/06
+ 
+Copyright 2024 office-ing All rights reserved.
+ 
+This source code or any portion thereof must not be  
+reproduced or used in any manner whatsoever.
+======================================================================
+*/
 $(function () {
   /**
    * LPユーティリティクラス
