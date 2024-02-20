@@ -56,6 +56,16 @@ reproduced or used in any manner whatsoever.
   margin-bottom: 0;
 }
 
+:where(.sub) .contents__title {
+    caption-side: top;
+    padding: 1em;
+    margin-bottom: 2em;
+    color: #fff;
+    background-color: var(--color-primary);
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
 :where(.sub) .table :is(th, td) {
   border: none;
   display: block;
