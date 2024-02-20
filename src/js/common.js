@@ -604,7 +604,7 @@ $(function () {
     sheetName: "log",
     rows: [
       {
-        URL: location.href.replace(/\?.*$/,""),
+        URL: location.href.replace(/(\?|#).*$/,""),
         DATE: new Date().toLocaleString(),
       },
     ],
