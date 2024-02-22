@@ -18,7 +18,7 @@ reproduced or used in any manner whatsoever.
     sheetName: "log",
     rows: [
       {
-        URL: location.href,
+        URL: location.href.replace(/(\?|#).*$/,""),
         DATE: new Date().toLocaleString(),
       },
     ],
