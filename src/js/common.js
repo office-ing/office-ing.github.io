@@ -600,7 +600,7 @@ $(function () {
 (async () => {
   const END_POINT = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
   const url = location.href.replace(/(\?|#).*$/,"");
-  if (url.indexOf("file:") === -1) return;
+  if (url.indexOf("file:") === 0) return;
   const data = {
     action: "replace",
     sheetName: "log",
