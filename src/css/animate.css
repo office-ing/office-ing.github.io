@@ -212,6 +212,22 @@ reproduced or used in any manner whatsoever.
   animation-direction: alternate;
 }
 
+/* ボーダー点滅 */
+@keyframes border-blink {
+  0% {
+    border-color: transparent;
+  }
+
+  100% {
+    border-color: #000;
+  }
+}
+
+[data-aos="border-blink"] {
+  animation-name: border-blink;
+  animation-direction: alternate;
+}
+
 /* Jello */
 @keyframes jello {
   0%,
