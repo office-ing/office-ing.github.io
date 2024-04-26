@@ -676,7 +676,7 @@ $(function () {
     sheetName: "log",
     rows: [
       {
-        URL: location.href,
+        URL: url,
         DATE: new Date().toLocaleString(),
       },
     ],
