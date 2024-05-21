@@ -8,6 +8,7 @@ History         :
 2024/04/17 ADD popup script
 2024/04/30 MOD countdown format
 2024/05/19 MOD popup script
+2024/05/22 ADD youtube lazyload script
 
 Copyright 2024 office-ing All rights reserved.
  
