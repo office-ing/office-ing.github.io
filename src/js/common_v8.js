@@ -798,6 +798,8 @@ $(function () {
     static init_youtube(params) {
       // YouTube
       const ytData = Array.from($("[data-video-id]")).map((e) => $(e).data("video-id"));
+      if (ytData.length === 0) return;
+
       const ytPlayer = [];
       let player;
       const ytEvent = {
