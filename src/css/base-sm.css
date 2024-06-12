@@ -57,6 +57,13 @@ h6 {
   --max_w1: 750;
 }
 
+.container {
+  max-width: calc(1px * var(--container-width));
+  box-shadow: 0 3px 5px 3px var(--color-container-shadow, #d9e5ed);
+  --bs-gutter-x: 0;
+  position: relative;
+}
+
 /* font family */
 :root {
   --font-default: "Hiragino Kaku Gothic Pro", "meiryo", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", sans-serif;
