@@ -34,7 +34,7 @@ body {
   font-weight: var(--font-weight, 500);
   line-height: 1.8;
   color: var(--color-text, var(--bs-body-color));
-  background-color: var(--color-bg-, var(--bs-body-bg));
+  background-color: var(--color-bg, var(--bs-body-bg));
   width: 100%;
   height: 100%;
   word-break: break-all;
