@@ -643,6 +643,8 @@ $(function () {
       const selector = settings.selector;
       const params = settings.params;
 
+      let stopFlg = false;
+
       // trigger only once
       let isShow = false;
       $("input[type='email']").on("focus", function () {
@@ -717,8 +719,6 @@ $(function () {
         }
       }
 
-      // v5仕様変更
-      let stopFlg = false;
       // ポップアップ起動
       const popup = () => {
         // 起動
