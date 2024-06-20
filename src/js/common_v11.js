@@ -383,9 +383,6 @@ $(function () {
           }
           // クラス付与
           $target.addClass("over");
-        }
-        // カウント継続
-        else {
           // コールバック実行
           if (params.hasOwnProperty("callback") && params.callback) {
             params.callback($target);
