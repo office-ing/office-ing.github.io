@@ -411,23 +411,25 @@ ol {
 
 /* type1 */
 :where(.progress--type1) {
-  position: absolute;
-  top: var(--sz-30);
-  left: 0;
-  width: 100%;
-  height: var(--sz-61);
-  border-radius: 0;
-  --bs-progress-bg: #fff;
-  z-index: 10;
-  &::before {
-    content: "";
+  &.progress {
     position: absolute;
-    top: 0;
+    top: var(--sz-30);
     left: 0;
     width: 100%;
-    height: 100%;
-    border-block: 2px dashed #01a001;
-    display: block;
+    height: var(--sz-61);
+    border-radius: 0;
+    --bs-progress-bg: #fff;
+    z-index: 10;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-block: 2px dashed #01a001;
+      display: block;
+    }
   }
 
   & .progress-bar {
@@ -449,8 +451,9 @@ ol {
     }
   }
   @media (min-width: 750px) {
-    height: 45px;
-
+    &.progress {
+      height: 45px;
+    }
     & .progress-text {
       font-size: 26px;
     }
