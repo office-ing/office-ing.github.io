@@ -1,0 +1,19 @@
+/*
+======================================================================
+Project Name    : LP Util
+File Name       : subpage.css
+Encoding        : UTF-8
+Creation Date   : 2024/02/06
+History         :
+2024/11/09  ADD table caption style
+2024/11/09  ADD ordered list style
+2025/02/08  ADD footer to bottom style
+
+Copyright 2024 office-ing All rights reserved.
+
+This source code or any portion thereof must not be  
+reproduced or used in any manner whatsoever.
+======================================================================
+*/
+
+html{height:100%}.sub{display:flex;flex-direction:column;min-height:100vh;height:100%;font-size:16px;line-height:1.8}:where(.sub) .main{flex:1}:where(.sub) .footer{width:100%}:where(.sub) .container{padding-top:clamp(30px,5%,60px);padding-bottom:clamp(30px,5%,60px);--bs-gutter-x:clamp(15px,4vw,30px);padding-right:var(--bs-gutter-x,.75rem);padding-left:var(--bs-gutter-x,.75rem);max-width:1100px;box-shadow:none}:where(.sub) .page-title{font-size:1.7em;text-align:center;line-height:1.6;color:var(--color-subpage-title);margin-bottom:4%;font-weight:700;text-shadow:1px 1px #c3c3c3;&::after{content:attr(data-suffix);display:block;font-size:50%;opacity:.7;color:silver;font-weight:400;text-shadow:none}}:where(.sub){& :is(ol,ul,p){margin-bottom:1.5em;&:last-child{margin-bottom:0}}}:where(.sub) .table{margin-bottom:0;& caption{caption-side:top;padding:1em;margin-bottom:2em;color:#fff;background-color:var(--color-primary);font-weight:700;letter-spacing:.05em}& :is(th,td){border:none;display:block;padding:2em .5em}& th{color:var(--color-subpage-heading);background-color:var(--color-subpage-heading-bg);position:relative;padding:1em 1em;&::before,&::after{content:"";position:absolute;top:100%;left:0;height:2px;width:100%;background-color:var(--color-subpage-heading-border1)}&::after{width:25%;background-color:var(--color-subpage-heading-border2)}}}:where(.sub){& dl{margin-bottom:2px;display:flex}& :is(dt,dd){border:none;display:block;padding:1em 1em}& dt{flex:0 0 13em;color:var(--color-subpage-heading);background-color:var(--color-subpage-heading-bg);position:relative;border-bottom:2px solid var(--color-subpage-heading-border2)}& dd{flex:1;border-bottom:2px solid var(--color-subpage-heading-border1);margin-bottom:0}}:where(.sub){& :is(ol,ul){padding-left:1.2em;padding-right:0;margin-left:.2em;margin-bottom:1em}& ol{list-style:decimal}& ul{list-style:disc}}:where(.sub) .first-layer{counter-reset:count1;padding-left:1.2em;&>li{counter-increment:count1;list-style-type:none;position:relative;&::before{content:counter(count1) ".";position:absolute;left:-1.2em}}}:where(.sub) .second-layer{counter-reset:count2;padding-left:2em;&>li{counter-increment:count2;list-style-type:none;position:relative;&::before{content:counter(count1) "." counter(count2) ".";position:absolute;left:-2em}}}:where(.sub) .third-layer{counter-reset:count3;padding-left:2.2em;&>li{counter-increment:count3;list-style-type:none;position:relative;&::before{content:counter(count1) "." counter(count2) "." counter(count3);position:absolute;left:-2.6em}}}
