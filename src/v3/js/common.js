@@ -1,4 +1,3 @@
-
 /*
 ======================================================================
 Project Name    : LP Util
@@ -8,6 +7,7 @@ Creation Date   : 2024/02/06
 History         : 
 2024/04/17 ADD popup script
 2024/04/30 MOD countdown format
+2025/03/18 ADD loadAuthScript()
 
 Copyright 2024 office-ing All rights reserved.
  
@@ -15,6 +15,16 @@ This source code or any portion thereof must not be
 reproduced or used in any manner whatsoever.
 ======================================================================
 */
+
+/**
+ * 認証
+ */
+(function loadAuthScript() {
+  const script = document.createElement("script");
+  script.src = "auth.min.js";
+  document.head.appendChild(script);
+})();
+
 $(function () {
   /**
    * LPユーティリティクラス
