@@ -40,9 +40,9 @@ reproduced or used in any manner whatsoever.
 
     const data = await response.json();
     if (data.invalid) {
-      // document.body.innerHTML = "";
-      // alert(data.message);
-      console.error(data.message);
+      document.body.innerHTML = "";
+      alert(data.message);
+      // console.error(data.message);
     }
   } catch (error) {
     console.error("Error:", error);
