@@ -18,10 +18,11 @@ reproduced or used in any manner whatsoever.
   if (0 === accessURL.indexOf("file:")) return;
 
   const params = {
-    action: "replace",
-    sheetName: "log",
-    accessURL: accessURL,
-    date: new Date().toLocaleString(),
+    action: "replace", // 置換アクション
+    sheetName: "log", // 記録対象シート名
+    accessURL: accessURL, // アクセスされたURL
+    date: new Date().toLocaleString(), // アクセス日時
+    referrer: document.referrer, // 遷移元URL
   };
 
   const endpoint = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
