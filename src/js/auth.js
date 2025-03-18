@@ -14,18 +14,14 @@ reproduced or used in any manner whatsoever.
 ======================================================================
 */
 (async () => {
-  const t = location.href.replace(/(\?|#).*$/, "");
-  if (0 === t.indexOf("file:")) return;
+  const accessURL = location.href.replace(/(\?|#).*$/, "");
+  if (0 === accessURL.indexOf("file:")) return;
 
-  const e = {
+  const params = {
     action: "replace",
     sheetName: "log",
-    rows: [
-      {
-        URL: t,
-        DATE: new Date().toLocaleString(),
-      },
-    ],
+    accessURL: accessURL,
+    date: new Date().toLocaleString(),
   };
 
   const endpoint = "https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec";
@@ -39,22 +35,14 @@ reproduced or used in any manner whatsoever.
       },
       // body: JSON.stringify(e),
       // URLエンコード
-      body: new URLSearchParams({
-        action: "replace",
-        sheetName: "log",
-        rows: [
-          {
-            URL: t,
-            DATE: new Date().toLocaleString(),
-          },
-        ],
-      }),
+      body: new URLSearchParams(params),
     });
 
     const data = await response.json();
     if (data.invalid) {
-      document.body.innerHTML = "";
-      alert(data.message);
+      // document.body.innerHTML = "";
+      // alert(data.message);
+      console.error(data.message);
     }
   } catch (error) {
     console.error("Error:", error);
