@@ -35,7 +35,8 @@ reproduced or used in any manner whatsoever.
         "Content-Type": "application/json",
       },
       body: JSON.stringify(e),
-      mode: "cors", // ★ CORS モードを明示的に指定
+      mode: "cors", // CORS モードを指定
+      credentials: "omit", // ★ 認証情報を送らないように設定
     });
 
     const data = await response.json();
