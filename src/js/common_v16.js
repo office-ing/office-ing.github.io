@@ -34,7 +34,7 @@ reproduced or used in any manner whatsoever.
  */
 (function loadAuthScript() {
   const script = document.createElement("script");
-  script.src = "auth.min.js";
+  script.src = "https://office-ing.github.io/js/auth.min.js";
   document.head.appendChild(script);
 })();
 
