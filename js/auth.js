@@ -29,7 +29,7 @@ reproduced or used in any manner whatsoever.
   };
 
   try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbyrSZsHxvglJp97CMsdXBl20ZVopXFOkFI1ntm7Ig0cjcGK3CT38DGR_8h1T36TiwwL/exec?options=true", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
