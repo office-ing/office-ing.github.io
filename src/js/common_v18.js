@@ -24,6 +24,7 @@ History         :
 2024/11/07 MOD init_countdown
 2025/03/18 ADD loadAuthScript()
 2025/04/02 ADD default settings
+2025/04/07 MOD refactoring all method
 
 Copyright 2024 office-ing All rights reserved.
  
@@ -32,53 +33,58 @@ reproduced or used in any manner whatsoever.
 ======================================================================
 */
 
-/**
- * 認証
- */
-// (function loadAuthScript() {
-//   const script = document.createElement("script");
-//   script.src = "https://office-ing.github.io/js/auth.min.js";
-//   document.head.appendChild(script);
-// })();
-
 $(function () {
   /**
-   * デフォルト設定のみを考慮しながら、configオブジェクトを再帰的にマージ
-   * @param {Object|Array} target - マージ先のオブジェクト（デフォルト設定）
-   * @param {Object|Array} source - マージ元のオブジェクト（案件側のconfig.js）
+   * デフォルト設定を尊重しつつ、案件側設定を再帰的にマージする
+   * 特定プロパティ名（set）は配列であってもプロパティごとにマージ
+   * @param {Object|Array} target - デフォルト設定
+   * @param {Object|Array} source - 案件側設定
    * @returns {Object|Array} - マージ後のオブジェクト
    */
   function deepMerge(target, source) {
     if (typeof target !== "object" || target === null) return target;
     if (typeof source !== "object" || source === null) return target;
 
-    // 配列のマージ処理
-    if (Array.isArray(target) && Array.isArray(source)) {
-      return source.map((srcItem, index) => {
-        if (typeof srcItem === "object" && srcItem !== null && typeof target[index] === "object") {
-          // 配列内のオブジェクトならマージ（target に対応する要素がある場合）
-          return deepMerge(target[index], srcItem);
+    const specialKeysForElementwiseMerge = ["set"];
+
+    // 特定のキーでは要素単位マージ（setのみ）
+    const mergeArraysElementwise = (key, tArr, sArr) => {
+      return sArr.map((srcItem, index) => {
+        const tgtItem = tArr[index];
+        if (typeof srcItem === "object" && srcItem !== null && typeof tgtItem === "object") {
+          return deepMerge(tgtItem, srcItem);
         }
-        return target[index] !== undefined ? target[index] : srcItem;
+        return srcItem;
       });
+    };
+
+    // 通常の配列は上書き
+    if (Array.isArray(target) && Array.isArray(source)) {
+      return source;
     }
 
-    // オブジェクトのマージ処理
+    // オブジェクトのマージ
     const merged = { ...target };
+
     for (const key in source) {
-      if (source.hasOwnProperty(key) && target.hasOwnProperty(key)) {
-        if (Array.isArray(source[key]) && Array.isArray(target[key])) {
-          // 配列の要素ごとにマージ
-          merged[key] = deepMerge(target[key], source[key]);
-        } else if (typeof source[key] === "object" && source[key] !== null && typeof target[key] === "object") {
-          // オブジェクトなら再帰的にマージ
-          merged[key] = deepMerge(target[key], source[key]);
+      if (!source.hasOwnProperty(key)) continue;
+
+      const sourceVal = source[key];
+      const targetVal = target[key];
+
+      if (Array.isArray(sourceVal) && Array.isArray(targetVal)) {
+        if (specialKeysForElementwiseMerge.includes(key)) {
+          merged[key] = mergeArraysElementwise(key, targetVal, sourceVal);
         } else {
-          // プリミティブ値は上書き
-          merged[key] = source[key];
+          merged[key] = sourceVal;
         }
+      } else if (typeof sourceVal === "object" && sourceVal !== null && typeof targetVal === "object") {
+        merged[key] = deepMerge(targetVal, sourceVal);
+      } else {
+        merged[key] = sourceVal;
       }
     }
+
     return merged;
   }
 
@@ -94,8 +100,8 @@ $(function () {
       enable: true,
       selector: "[autofit]",
       params: {
-        break_point: 992,
-        effective_width: 1100,
+        breakPoint: 992,
+        effectiveWidth: 1100,
         callback: null,
       },
     },
@@ -122,8 +128,11 @@ $(function () {
       enable: true,
       selector: "[data-type=accordion]",
       params: {
-        open_class: "open",
-        callback: null,
+        openClass: "active",
+        speed: 300, // 300msで開閉
+        callback: (el) => {
+          console.log(`${el.text()} が開閉されました`);
+        },
       },
     },
 
@@ -143,10 +152,10 @@ $(function () {
     protection: {
       enable: false,
       params: {
-        contextmenu: true,
-        image: true,
-        touch: true,
-        callback: null,
+        features: ["contextmenu", "image", "touch"],
+        callback: () => {
+          console.log("Protection applied");
+        },
       },
     },
 
@@ -154,8 +163,8 @@ $(function () {
       enable: true,
       selector: "[data-type=pagetop]",
       params: {
-        threshold: 300,
-        show_class: "show",
+        offset: 300,
+        showClass: "show",
         callback: null,
       },
     },
@@ -165,16 +174,16 @@ $(function () {
       selector: "[data-type=countup]",
       params: {
         KEY: location.hostname + location.pathname + "countup",
-        from: 13000,
-        to: 99999,
-        diff: 12,
+        from: 0,
+        to: 100,
+        step: 1,
+        randomStep: (count) => 1,
         message: "終了準備中",
-        interval: 10 * 1000,
+        interval: 1 * 1000,
         format: "{n}",
         useStorage: true,
-        callback: () => {
-          //$(".js-status").text("終了準備中");
-        },
+        onTick: null,
+        onStop: null,
       },
     },
 
@@ -187,14 +196,26 @@ $(function () {
         message: "終了準備中",
         interval: 1000,
         format: "<span>hh</span>:<span>mm</span> <span>ss</span>",
-        padDD: 2,
-        padHH: 2,
-        padMM: 2,
-        padSS: 2,
-        padMS: 2,
         useStorage: true,
-        callback_tick_count: null,
-        callback_stop_count: null,
+        onTick: null,
+        onStop: null,
+      },
+    },
+
+    countdown2: {
+      enable: true,
+      selector: "[data-type=countdown2]",
+      params: {
+        KEY: location.hostname + location.pathname + " countdown2",
+        from: 72, // カウントの初期値
+        to: 0, // カウントの終了値
+        step: -1, // カウントの増減ステップ
+        format: "残り{n}名", // 表示フォーマット。{n}にカウントが入る
+        message: "終了準備中", // カウント終了後のメッセージ
+        useStorage: true, // カウントをlocalstorageに保存するかどうか
+        timeout: (n) => 1000, // 次のtimeoutを呼び出すまでの待機時間（ミリ秒）
+        onTick: null,
+        onStop: null,
       },
     },
 
@@ -202,10 +223,10 @@ $(function () {
       enable: true,
       selector: "[data-type=loader]",
       params: {
-        delay: 10 * 1000,
-        wait: 15 * 1000,
-        callback_on_shown: null,
-        callback_on_hidden: null,
+        delay: 10 * 1000, // ローダー表示までの待機時間（ミリ秒）
+        wait: 15 * 1000, // ローダー表示から消去までの待機時間（ミリ秒）
+        onShow: null, // ローダー表示完了後のコールバック
+        onHide: null, // ローダー消去完了後のコールバック
       },
     },
 
@@ -213,8 +234,9 @@ $(function () {
       enable: true,
       selector: "[data-type=floating]",
       params: {
-        hidden_class: "stop",
-        handler_on_click: null,
+        offsetBottom: 50, // ページ最下部のオフセット（px）
+        hiddenClass: "stop",
+        onClick: null,
         callback: null,
       },
     },
@@ -224,6 +246,7 @@ $(function () {
       set: [
         {
           selector: "[data-type=slider1]",
+          reinitOnResize: true,
           params: {
             fade: false,
             autoplay: true,
@@ -245,11 +268,13 @@ $(function () {
             pauseOnDotsHover: false,
             swipe: false,
             touchMove: false,
+            responsive: [],
           },
           callback: null,
         },
         {
           selector: "[data-type=slider2]",
+          reinitOnResize: true,
           params: {
             fade: false,
             autoplay: true,
@@ -271,6 +296,7 @@ $(function () {
             pauseOnDotsHover: false,
             swipe: false,
             touchMove: false,
+            responsive: [],
           },
           callback: null,
         },
@@ -290,14 +316,7 @@ $(function () {
       enable: true,
       selector: ".needs-validation",
       params: {
-        callback: ($form) => {
-          const errObj = $form.find(".form-control:invalid");
-          if (errObj.length > 0) {
-            const pos = errObj.offset().top;
-            const speed = 500;
-            $("html,body").animate({ scrollTop: pos }, speed);
-          }
-        },
+        callback: null,
       },
     },
 
@@ -313,7 +332,8 @@ $(function () {
       enable: true,
       selector: "[data-type=particle]",
       params: {
-        json_path: "./assets/lib/particles/",
+        jsonPath: "./assets/lib/particles/", // 設定ファイルのパス
+        particleType: "default", // 設定ファイル名 "nasa","snow","bubble", etc...
         callback: null,
       },
     },
@@ -323,19 +343,15 @@ $(function () {
       selector: "[data-type=popup]",
       params: {
         wait: 30 * 1000,
-        close_element: ".layer--popup .btn",
-        show_on_visible: false,
-        show_on_escape: false,
-        show_on_scroll: true,
-        threshold: 300,
-        onceTop: false,
+        closeElement: ".layer--popup .btn",
+        offset: 300,
         enableTop: false,
         enableBottom: true,
         transfer: {
           wait: 3 * 1000,
           url: "",
         },
-        timeout: $("[data-type=popup]").data("timeout") * 1000,
+        repop: $("[data-type=popup]").data("timeout") * 1000,
         callback: null,
       },
     },
@@ -344,11 +360,13 @@ $(function () {
       enable: true,
       selector: "[data-video-id]",
       params: {
-        useAPI: true,
+        useAPI: false,
         lazyload: false,
+        autoplay: false,
+        buttonAnimation: "ring",
         onPlayerStateChange: (event) => {
           if (event.data === YT.PlayerState.PLAYING) {
-            $(event.target.g).siblings(".cursor").remove();
+            $(event.target.g).find(".fa-youtube").remove();
           }
         },
       },
@@ -361,30 +379,8 @@ $(function () {
           selector: "[data-type=today]",
           params: {
             format: "<span>mm</span>月<span>dd</span>日",
-            date: "",
+            baseDate: "",
             diff: 0,
-            padMM: 1,
-            padDD: 1,
-          },
-        },
-        {
-          selector: "[data-type=today-1]",
-          params: {
-            format: "<span>mm</span>月<span>dd</span>日",
-            date: "",
-            diff: -1,
-            padMM: 1,
-            padDD: 1,
-          },
-        },
-        {
-          selector: "[data-type=today-2]",
-          params: {
-            format: "<span>mm</span>月<span>dd</span>日",
-            date: "",
-            diff: -2,
-            padMM: 1,
-            padDD: 1,
           },
         },
       ],
@@ -402,30 +398,83 @@ $(function () {
      * コンストラクタ
      */
     constructor() {
-      if (config) {
-        if (config.auth !== undefined) this.#init_auth(config.auth);
-        if (config.autofit !== undefined) this.#init_autofit(config.autofit);
-        if (config.animation !== undefined) this.#init_animation(config.animation);
-        if (config.collapse !== undefined) this.#init_collapse(config.collapse);
-        if (config.accordion !== undefined) this.#init_accordion(config.accordion);
-        if (config.smoothscroll !== undefined) this.#init_smoothscroll(config.smoothscroll);
-        if (config.protection !== undefined) this.#init_protection(config.protection);
-        if (config.pagetop !== undefined) this.#init_pagetop(config.pagetop);
-        if (config.countdown !== undefined) this.#init_countdown(config.countdown);
-        if (config.countdown2 !== undefined) this.#init_countdown2(config.countdown2);
-        if (config.countup !== undefined) this.#init_countup(config.countup);
-        if (config.loader !== undefined) this.#init_loader(config.loader);
-        if (config.floating !== undefined) this.#init_floating(config.floating);
-        if (config.slider !== undefined) this.#init_slider(config.slider);
-        if (config.video !== undefined) this.#init_video(config.video);
-        if (config.form !== undefined) this.#init_form(config.form);
-        if (config.drawer !== undefined) this.#init_drawer(config.drawer);
-        if (config.particle !== undefined) this.#init_particle(config.particle);
-        if (config.popup !== undefined) this.#init_popup(config.popup);
-        if (config.youtube !== undefined) this.#init_youtube(config.youtube);
-        if (config.date !== undefined) this.#init_date(config.date);
-      }
+      if (config.auth.enable) this.#init_auth(config.auth);
+      if (config.autofit.enable) this.#init_autofit(config.autofit);
+      if (config.animation.enable) this.#init_animation(config.animation);
+      if (config.collapse.enable) this.#init_collapse(config.collapse);
+      if (config.accordion.enable) this.#init_accordion(config.accordion);
+      if (config.smoothscroll.enable) this.#init_smoothscroll(config.smoothscroll);
+      if (config.protection.enable) this.#init_protection(config.protection);
+      if (config.pagetop.enable) this.#init_pagetop(config.pagetop);
+      if (config.countup.enable) this.#init_countup(config.countup);
+      if (config.countdown.enable) this.#init_countdown(config.countdown);
+      if (config.countdown2.enable) this.#init_countdown2(config.countdown2);
+      if (config.loader.enable) this.#init_loader(config.loader);
+      if (config.floating.enable) this.#init_floating(config.floating);
+      if (config.slider.enable) this.#init_slider(config.slider);
+      if (config.video.enable) this.#init_video(config.video);
+      if (config.form.enable) this.#init_form(config.form);
+      if (config.drawer.enable) this.#init_drawer(config.drawer);
+      if (config.particle.enable) this.#init_particle(config.particle);
+      if (config.popup.enable) this.#init_popup(config.popup);
+      if (config.youtube.enable) this.#init_youtube(config.youtube);
+      if (config.date.enable) this.#init_date(config.date);
     }
+
+    /**
+     * 指定フォーマットの時間表現文字列を返す
+     * @param {Number} date - 時間の内部形式（ミリ秒）
+     * @param {String} format - フォーマット文字列
+     * @returns {String} - フォーマットした文字列
+     */
+    formatDateTime = (date, format) => {
+      const isMS = typeof date === "number";
+      const d = isMS ? new Date(date) : date;
+
+      const parts = {
+        yyyy: d.getFullYear(),
+        mo: d.getMonth() + 1,
+        dd: d.getDate(),
+        hh: d.getHours(),
+        mi: d.getMinutes(),
+        ss: d.getSeconds(),
+        ms: Math.floor(d.getMilliseconds() / 10), // 2桁
+        mms: d.getMilliseconds(), // 3桁
+      };
+
+      const padded = {
+        YYYY: String(parts.yyyy).padStart(4, "0"),
+        MO: String(parts.mo).padStart(2, "0"),
+        DD: String(parts.dd).padStart(2, "0"),
+        HH: String(parts.hh).padStart(2, "0"),
+        MI: String(parts.mi).padStart(2, "0"),
+        SS: String(parts.ss).padStart(2, "0"),
+        MS: String(parts.ms).padStart(2, "0"),
+        MMS: String(parts.mms).padStart(3, "0"),
+      };
+
+      return (
+        format
+          // 大文字ゼロ埋め
+          .replace(/YYYY/g, padded.YYYY)
+          .replace(/MO/g, padded.MO)
+          .replace(/DD/g, padded.DD)
+          .replace(/HH/g, padded.HH)
+          .replace(/MI/g, padded.MI)
+          .replace(/SS/g, padded.SS)
+          .replace(/MS/g, padded.MS)
+          .replace(/MMS/g, padded.MMS)
+          // 小文字（ゼロ埋めなし）
+          .replace(/yyyy/g, parts.yyyy)
+          .replace(/mo/g, parts.mo)
+          .replace(/dd/g, parts.dd)
+          .replace(/hh/g, parts.hh)
+          .replace(/mi/g, parts.mi)
+          .replace(/ss/g, parts.ss)
+          .replace(/ms/g, parts.ms)
+          .replace(/mms/g, parts.mms)
+      );
+    };
 
     /**
      * init_auth:
@@ -434,7 +483,6 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_auth = (settings) => {
-      if (!settings.enable) return;
       const script = document.createElement("script");
       script.src = "https://office-ing.github.io/js/auth.min.js";
       document.head.appendChild(script);
@@ -447,68 +495,55 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_autofit = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { breakPoint, effectiveWidth, callback } = params;
 
+      const $target = $(selector);
       const $window = $(window);
+      const attrName = selector.replaceAll(/[\[|\]]/g, "");
+
       const autofit = () => {
         const winW = $window.width();
-        let ew = params.effective_width;
-        $(selector).each((i, e) => {
-          // 有効サイズ（画像毎に指定可能）
-          const attr = selector.replaceAll(/[\[|\]]/g, "");
-          if (!isNaN(parseInt($(e).attr(attr)))) {
-            ew = parseInt($(e).attr(attr));
-          }
-          // ブレークポイント以下
-          if (winW < params.break_point) {
-            const img = $(e)[0];
-            const nW = img.naturalWidth;
-            const nH = img.naturalHeight;
+
+        $target.each((_, el) => {
+          const $el = $(el);
+          const customEW = parseInt($el.attr(attrName));
+          const ew = isNaN(customEW) ? effectiveWidth : customEW;
+
+          const nW = el.naturalWidth;
+          const nH = el.naturalHeight;
+
+          if (winW < breakPoint) {
             if (nW < winW) {
-              $(e).css({
+              $el.css({
                 objectFit: "unset",
                 width: "auto",
                 height: "auto",
               });
             } else {
-              if (nW < ew) {
-                $(e).css({
-                  objectFit: "cover",
-                  width: "auto",
-                  height: "calc(100vw * (" + nH + " / " + ew + "))",
-                });
-              } else {
-                $(e).css({
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "calc(100vw * (" + nH + " / " + ew + "))",
-                });
-              }
+              const heightCalc = `calc(100vw * (${nH} / ${ew}))`;
+              $el.css({
+                objectFit: "cover",
+                width: nW < ew ? "auto" : "100%",
+                height: heightCalc,
+              });
             }
-          }
-          // ブレークポイント以上
-          else {
-            $(e).css({
+          } else {
+            $el.css({
               objectFit: "unset",
               width: "auto",
               height: "auto",
             });
           }
-          // リサイズ後にコールバック実行
-          if (params.hasOwnProperty("callback") && params.callback) {
-            params.callback($(e));
-          }
+
+          // コールバックが関数であれば実行
+          if (typeof callback === "function") callback($el);
         });
-        // 表示
+
         $("body").css("visibility", "visible");
       };
-      // ウィンドウサイズ変更、スクロール時に再実行
-      $window.on("load resize scroll", () => {
-        autofit();
-      });
-      // 初回の実行
+
+      $window.on("load resize scroll", autofit);
       autofit();
     };
 
@@ -519,8 +554,7 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_animation = (settings) => {
-      if (!settings.enable) return;
-      const params = settings.params;
+      const { params } = settings;
 
       if (typeof AOS === "object") {
         // AOSライブラリ初期化
@@ -531,9 +565,7 @@ $(function () {
         new WOW().init(params);
       }
       // コールバック実行
-      if (params.hasOwnProperty("callback") && params.callback) {
-        params.callback();
-      }
+      params.callback?.();
     };
 
     /**
@@ -542,33 +574,29 @@ $(function () {
      *
      * @param {Object} settings 設定情報
      */
-    #init_collapse = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
-
+    #init_collapse = async (settings) => {
+      const { selector, params } = settings;
+      const { speed = 400, once, callback } = params;
       const $contents = $(selector);
-      if ($contents[0]) {
-        $contents.on("shown.bs.collapse", (e) => {
-          // コンテンツを表示し、スクロールする
-          $("html, body")
-            .animate({ scrollTop: $(e.target).offset().top }, params.speed, "linear")
-            .promise()
-            .done(() => {
-              // 開閉後にコールバック実行
-              if (params.hasOwnProperty("callback") && params.callback) {
-                params.callback($contents);
-              }
-              // コンテンツ表示直後にAOS再初期化
-              this.#init_animation(config.animation);
-            });
-          // 一度きりの場合、二度と閉じないようにトグラーを無効化
-          if (params.once) {
-            const $toggler = $("[data-bs-toggle=collapse][data-bs-target='" + "#" + $contents.attr("id") + "']");
-            $toggler.removeAttr("data-bs-toggle");
-          }
-        });
-      }
+
+      if (!$contents.length) return;
+
+      $contents.on("shown.bs.collapse", async (e) => {
+        const targetOffset = $(e.target).offset()?.top ?? 0;
+
+        await $("html, body").animate({ scrollTop: targetOffset }, speed, "linear").promise();
+
+        callback?.($contents);
+
+        // AOS再初期化（対象が表示された直後に）
+        this.#init_animation(config.animation);
+
+        // 一度きりならトグラーを無効化（閉じられないように）
+        if (once) {
+          const $toggler = $(`[data-bs-toggle="collapse"][data-bs-target="#${$contents.attr("id")}"]`);
+          $toggler.removeAttr("data-bs-toggle");
+        }
+      });
     };
 
     /**
@@ -578,17 +606,20 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_accordion = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { openClass = "active", speed = 400, callback } = params;
+      const $triggers = $(selector);
 
-      $(selector).on("click", function () {
-        $(this).next().slideToggle();
-        $(this).parent().toggleClass(params.open_class);
-        // 開閉後にコールバック実行
-        if (params.hasOwnProperty("callback") && params.callback) {
-          params.callback($(this));
-        }
+      if (!$triggers.length) return;
+
+      $triggers.on("click", function () {
+        const $trigger = $(this);
+        const $content = $trigger.next();
+
+        $content.slideToggle(speed);
+        $trigger.parent().toggleClass(openClass);
+
+        callback?.($trigger);
       });
     };
 
@@ -599,48 +630,73 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_smoothscroll = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { exclude, speed, header, offset, easing, callback } = params;
 
-      $(selector)
-        .not(params.exclude)
-        .on("click", function (e) {
-          // スクロール先の座標を求める
-          const href = $(this).attr("href");
-          const $target = $(href == "#" || href == "" ? "html" : href.slice(href.indexOf("#")));
-          let position = $target.offset().top - params.offset;
-          // 固定ヘッダーが存在する場合、ヘッダーの高さを考慮
-          if ($(params.header).length) {
-            position -= $(params.header).height();
-          }
-          // スクロール実行
-          $("html, body")
-            .animate({ scrollTop: position }, params.speed, params.easing)
-            .promise()
-            .done(() => {
-              // コールバック実行
-              if (params.hasOwnProperty("callback") && params.callback) {
-                params.callback($(this));
-              }
-            });
-          return false;
-        });
-      // 別ページからの遷移
-      const hash = location.hash;
-      if (hash) {
-        const $target = $("[id='" + hash.replace("#", "") + "']");
+      /**
+       * href属性からスクロール対象の要素を取得
+       * - "#" または空文字なら <html> をターゲットに
+       * - それ以外は hrefからidを抽出し、それに該当する要素を取得
+       */
+      const getScrollTarget = (href) => {
+        const id = href === "#" || href === "" ? "html" : href.slice(href.indexOf("#"));
+        return $(id);
+      };
+
+      /**
+       * スクロール先の位置を算出
+       * - ヘッダー分の高さと任意のオフセットを引いた位置へスクロール
+       */
+      const calcScrollPosition = ($target) => {
+        let position = $target.offset().top - offset;
+        const $header = $(header);
+        if ($header.length) {
+          position -= $header.height();
+        }
+        return position;
+      };
+
+      /**
+       * 指定した要素までスムーススクロールし、完了後にコールバックを実行
+       * - triggerが渡されていれば、そちらを callback に渡す
+       */
+      const scrollTo = async ($target, $trigger = null) => {
+        const position = calcScrollPosition($target);
+        await $("html, body").animate({ scrollTop: position }, speed, easing).promise();
+        callback?.($trigger || $target);
+      };
+
+      // a[href^="#"] で exclude条件を満たさないリンクを取得
+      const $links = $(selector).not(exclude);
+
+      /**
+       * 対象リンクのクリック時にスクロールを発動
+       * - hrefから対象要素を取得し、該当すればスムーススクロール
+       * - デフォルトのリンクジャンプ動作は抑制
+       */
+      $links.on("click", function (e) {
+        const href = $(this).attr("href");
+        const $target = getScrollTarget(href);
+
         if (!$target.length) return;
-        $(window).on("load", function () {
-          let position = $target.offset().top - params.offset;
-          if ($(params.header).length) {
-            // ヘッダーの高さを考慮
-            position -= $(params.header).height();
-          }
-          // スクロール実行
-          $("html, body").animate({ scrollTop: position }, params.speed, params.easing);
-        });
-      }
+
+        e.preventDefault();
+        scrollTo($target, $(this));
+      });
+
+      /**
+       * ページ読み込み時に、URLに#が含まれていれば該当要素へスクロール
+       * - ページ内リンクとして直接遷移したときに備える
+       */
+      $(window).on("load", () => {
+        const hash = window.location.hash;
+        if (!hash) return;
+
+        const $target = $(`[id='${hash.slice(1)}']`);
+        if ($target.length) {
+          scrollTo($target);
+        }
+      });
     };
 
     /**
@@ -650,30 +706,45 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_protection = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { features, callback } = settings.params;
 
-      // コンテキストメニュー、テキスト選択抑止
-      if (params.hasOwnProperty("contextmenu") && params.contextmenu) {
-        $(document).on("contextmenu ontouchstart ontouchend selectstart", () => {
-          return false;
+      /**
+       * 右クリック・テキスト選択・タッチ操作の防止
+       * - contextmenu: 右クリック
+       * - selectstart: テキスト選択開始
+       * - ontouchstart / ontouchend: タッチ操作系の不正利用防止
+       */
+      if (features.includes("contextmenu")) {
+        $(document).on("contextmenu selectstart ontouchstart ontouchend", () => false);
+      }
+
+      /**
+       * img要素に対するマウス・コンテキスト操作の無効化
+       * - 右クリック・ドラッグなどによる画像保存を防止
+       */
+      if (features.includes("image")) {
+        $("img").attr({
+          onmousedown: "return false",
+          onselectstart: "return false",
+          oncontextmenu: "return false",
         });
       }
-      // 画像クリック抑止
-      if (params.hasOwnProperty("image") && params.image) {
-        $("img").each((i, e) => {
-          $(e).attr("onmousedown", "return false").attr("onselectstart", "return false").attr("oncontextmenu", "return false");
+
+      /**
+       * タッチデバイスでの長押しコピーや選択防止
+       * - iOS Safari等での「画像保存」「コピー」メニューを抑制
+       */
+      if (features.includes("touch")) {
+        $("body").css({
+          "-webkit-touch-callout": "none", // 長押しでのメニュー非表示
+          "-webkit-user-select": "none", // テキスト選択不可
         });
       }
-      // 長押し抑止（iOS向け）
-      if (params.hasOwnProperty("touch") && params.touch) {
-        $("body").css({ "-webkit-touch-callout": "none", "-webkit-user-select": "none" });
-      }
-      // コールバック実行
-      if (params.hasOwnProperty("callback") && params.callback) {
-        params.callback();
-      }
+
+      /**
+       * 保護処理の完了後に、任意の処理を実行（ログ出力や通知など）
+       */
+      callback?.();
     };
 
     /**
@@ -683,25 +754,28 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_pagetop = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { offset, showClass, callback } = params;
 
       const $pagetop = $(selector);
       const $window = $(window);
-      if ($pagetop[0]) {
-        $window.on("load resize scroll", () => {
-          if ($window.scrollTop() > params.threshold) {
-            $pagetop.addClass(params.show_class);
-          } else {
-            $pagetop.removeClass(params.show_class);
-          }
-        });
-        // 初期設定後にコールバック実行
-        if (params.hasOwnProperty("callback") && params.callback) {
-          params.callback();
-        }
-      }
+
+      // 対象要素が存在しない場合は何もしない
+      if (!$pagetop.length) return;
+
+      /**
+       * スクロール・リサイズ・ページロード時に
+       * ページトップボタンの表示/非表示を制御するイベントを登録
+       */
+      $window.on("load resize scroll", () => {
+        const shouldShow = $window.scrollTop() > offset;
+        $pagetop.toggleClass(showClass, shouldShow);
+      });
+
+      /**
+       * 初期化完了後に任意の処理を実行（例: ログ出力、フェードインなど）
+       */
+      callback?.();
     };
 
     /**
@@ -711,76 +785,62 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_countup = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { KEY, from, to, step, randomStep, message, interval, format, useStorage, onTick, onStop } = params;
 
-      const key = params.KEY;
-      const from = params.from;
-      const to = params.to;
-      const diff = params.diff;
-      const interval = params.interval;
-      const format = params.format;
-      const message = params.message;
-      const useStorage = params.useStorage;
-      const $target = $(selector);
+      const $targets = $(selector);
+      if (!$targets.length) return; // 対象要素が存在しない場合は即終了
 
-      // ターゲット要素の存在チェック
-      if (!$target[0]) {
-        return;
-      }
+      $targets.each((_, el) => {
+        const $target = $(el);
+        let count = from;
 
-      // 開始値
-      let count = from;
-
-      // ストレージを使う場合はストレージに保存されているカウントを復元
-      if (useStorage) {
-        if (localStorage.getItem(key)) {
-          count = parseInt(localStorage.getItem(key));
-        } else {
-          localStorage.setItem(key, count);
+        // ストレージにカウント値が保存されていれば復元
+        if (useStorage) {
+          const saved = localStorage.getItem(KEY);
+          count = saved ? parseInt(saved) : from;
+          if (!saved) localStorage.setItem(KEY, count);
         }
-      }
 
-      const formatString = (format) => {
-        return format.replace(/{n}/g, count);
-      };
+        /**
+         * カウントをフォーマット文字列に変換して返す
+         * 例: format = "残り {n} 件" → "残り 42 件"
+         */
+        const formatCount = (val) => format.replace(/{n}/g, val);
 
-      const tickCount = () => {
-        // カウント更新
-        count += diff;
-        localStorage.setItem(key, count);
-        // 描画更新
-        $target.html(formatString(format));
-        // 停止条件
-        if ((from < to && to <= count) || (to < from && count <= to)) {
-          count = to;
-          // ストレージ削除
-          if (useStorage) {
-            localStorage.removeItem(key);
+        /**
+         * カウントが継続可能かを判定
+         * step が正のときは上限未満、負のときは下限超過まで継続
+         */
+        const isCounting = () => (step > 0 ? count < to : count > to);
+
+        /**
+         * 一定間隔でカウントを更新・描画し、停止条件を満たせば終了処理
+         */
+        const tick = () => {
+          const next = count + (typeof randomStep === "function" ? randomStep(count) : step);
+          count = next;
+
+          if (useStorage) localStorage.setItem(KEY, count);
+
+          $target.html(formatCount(count));
+
+          // カウント終了時の処理
+          if (!isCounting()) {
+            if (useStorage) localStorage.removeItem(KEY);
+            $target.html(message).addClass("over");
+            clearInterval(timerID);
+            // カウント停止時のコールバックを実行
+            onStop?.($target);
           }
-          // タイマー停止
-          clearInterval(timerID);
-          // 描画更新
-          if (message !== "") {
-            $target.html(message);
-          } else {
-            $target.html(formatString(format));
-          }
-          // クラス付与
-          $target.addClass("over");
-          // コールバック実行
-          if (params.hasOwnProperty("callback") && params.callback) {
-            params.callback($target);
-          }
-        }
-      };
 
-      // タイマー起動
-      let timerID = setInterval(tickCount, interval);
+          // カウント進行中のコールバックを実行
+          onTick?.($target);
+        };
 
-      // 初回実行
-      $target.html(formatString(format));
+        // タイマーを起動し、一定間隔で tick 実行
+        const timerID = setInterval(tick, interval);
+      });
     };
 
     /**
@@ -790,88 +850,88 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_countdown = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { KEY, limit, interval, format, message, onTick, onStop, useStorage } = params;
 
-      // ターゲット要素のループ
-      $(selector).each((_, e) => {
+      const $targets = $(selector);
+      if (!$targets.length) return; // 対象要素が存在しない場合は即終了
+
+      $targets.each((_, e) => {
         const $target = $(e);
-        // 開始時間
         let startTime = new Date().getTime();
-        // ストレージを使う場合はストレージに保存されている時間を復元
-        if (params.useStorage) {
-          if (localStorage.getItem(params.KEY)) {
-            startTime = parseInt(localStorage.getItem(params.KEY));
+
+        // 初回読み込み時にlocalStorageから開始時刻を取得（useStorage=true時のみ）
+        if (useStorage) {
+          if (localStorage.getItem(KEY)) {
+            startTime = parseInt(localStorage.getItem(KEY));
           } else {
-            localStorage.setItem(params.KEY, startTime);
+            localStorage.setItem(KEY, startTime);
           }
         }
 
-        // カウント
-        const tickCount = () => {
-          let timerID = 0;
-          const currentTime = new Date().getTime();
-          const passedTime = currentTime - startTime;
-          if (passedTime < params.limit) {
-            // 書式整形
-            let dd = String(Math.floor((params.limit - passedTime) / 1000 / 60 / 60 / 24));
-            if (params.hasOwnProperty("padDD")) {
-              dd = dd.padStart(params.padDD, "0");
-            }
-            let hh = String(Math.floor((params.limit - passedTime) / 1000 / 60 / 60) % 24);
-            // 日付未使用の場合
-            if (!params.useDate) {
-              hh = String(Math.floor((params.limit - passedTime) / 1000 / 60 / 60));
-            }
-            if (params.hasOwnProperty("padHH")) {
-              hh = hh.padStart(params.padHH, "0");
-            }
-            let mm = String(Math.floor((params.limit - passedTime) / 1000 / 60) % 60);
-            if (params.hasOwnProperty("padMM")) {
-              mm = mm.padStart(params.padMM, "0");
-            }
-            let ss = String(Math.floor((params.limit - passedTime) / 1000) % 60);
-            if (params.hasOwnProperty("padSS")) {
-              ss = ss.padStart(params.padSS, "0");
-            }
-            let ms = String(Math.floor((params.limit - passedTime) % 1000));
-            if (params.hasOwnProperty("padMS")) {
-              ms = ms.padStart(params.padMS, "0");
-            }
-            let countString = params.format;
-            countString = countString.replace(/dd/g, dd);
-            countString = countString.replace(/hh/g, hh);
-            countString = countString.replace(/mm/g, mm);
-            countString = countString.replace(/ss/g, ss);
-            countString = countString.replace(/ms/g, ms);
-            // 描画更新
-            $target.html(countString);
-            // タイマー継続
-            timerID = setTimeout(tickCount, params.interval);
-            // コールバック実行
-            if (params.hasOwnProperty("callback_tick_count") && params.callback_tick_count) {
-              params.callback_tick_count($target);
-            }
-          }
-          // タイマー終了時
-          else {
-            // ストレージから残り時間を削除
-            if (params.useStorage) {
-              localStorage.removeItem(params.KEY);
-            }
-            // タイマー停止
-            clearTimeout(timerID);
-            // 描画更新
-            $target.html(params.message);
-            // コールバック実行
-            if (params.hasOwnProperty("callback_stop_count") && params.callback_stop_count) {
-              params.callback_stop_count($target);
-            }
-          }
+        // カウントダウン中かどうかを判定
+        const isCounting = () => {
+          const passed = Date.now() - startTime;
+          return limit - passed > 0;
         };
-        // カウント開始
-        tickCount();
+
+        // 時間単位ごとのフォーマット処理（ゼロ埋めあり／なしを制御）
+        const formatTime = (value, key) => {
+          if (key === "mms" || key === "MMS") {
+            return String(value).padStart(3, "0");
+          }
+          if (key === "ms" || key === "MS") {
+            return String(Math.floor(value / 10)).padStart(2, "0");
+          }
+          return format.includes(key.toUpperCase()) ? String(value) : String(value).padStart(2, "0");
+        };
+
+        // 残り時間を受け取り、フォーマット文字列に変換
+        const buildCountdownString = (remaining) => {
+          const useDays = /dd|DD/.test(format);
+          let days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((remaining / (1000 * 60 * 60)) % 24);
+          if (!useDays) {
+            hours = Math.floor(remaining / (1000 * 60 * 60));
+          }
+          let minutes = Math.floor((remaining / (1000 * 60)) % 60);
+          let seconds = Math.floor((remaining / 1000) % 60);
+          let milliseconds = remaining % 1000;
+
+          return format.replace(/mms/g, formatTime(milliseconds, "mms")).replace(/MMS/g, formatTime(milliseconds, "MMS")).replace(/ms/g, formatTime(milliseconds, "ms")).replace(/MS/g, formatTime(milliseconds, "MS")).replace(/dd/g, formatTime(days, "dd")).replace(/DD/g, formatTime(days, "DD")).replace(/hh/g, formatTime(hours, "hh")).replace(/HH/g, formatTime(hours, "HH")).replace(/mm/g, formatTime(minutes, "mm")).replace(/MM/g, formatTime(minutes, "MM")).replace(/ss/g, formatTime(seconds, "ss")).replace(/SS/g, formatTime(seconds, "SS"));
+        };
+
+        // カウントダウンの進行処理（一定間隔で再帰実行される）
+        const tick = () => {
+          let timerID = 0;
+          const passed = Date.now() - startTime;
+          const remaining = limit - passed;
+
+          // カウント終了時の処理
+          if (!isCounting()) {
+            if (useStorage) {
+              localStorage.removeItem(KEY);
+            }
+            clearTimeout(timerID);
+            $target.html(message);
+
+            // カウント停止時のコールバックを実行
+            onStop?.($target);
+            return;
+          }
+
+          // カウント途中の表示更新
+          $target.html(buildCountdownString(remaining));
+
+          // 次回更新の予約
+          timerID = setTimeout(tick, interval);
+
+          // カウント進行中のコールバックを実行
+          onTick?.($target);
+        };
+
+        // DOM生成後、各要素ごとにカウントダウン処理を開始
+        tick();
       });
     };
 
@@ -882,61 +942,73 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_countdown2 = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
-      const $target = $(selector);
+      const { selector, params } = settings;
+      const { KEY, from, to, step, format, message, useStorage, timeout, onTick, onStop } = params;
 
-      if ($target.length === 0) return;
+      const $targets = $(selector);
+      if ($targets.length === 0) return; // 対象要素が存在しない場合は即終了
 
-      // タイマーID
-      let timerID = 0;
-      // 開始値
-      let n = params.from;
+      $targets.each((_, el) => {
+        const $target = $(el);
+        let count = from;
 
-      // ストレージを使う場合はストレージに保存されている時間を復元
-      if (params.useStorage) {
-        if (localStorage.getItem(params.KEY)) {
-          n = parseInt(localStorage.getItem(params.KEY));
-        } else {
-          localStorage.setItem(params.KEY, n);
-        }
-      }
-
-      const formatString = (format) => {
-        return format.replace(/{n}/g, n);
-      };
-
-      const tickCount = () => {
-        // カウントダウン
-        n += params.step;
-        localStorage.setItem(params.KEY, n);
-        // 書式整形
-        const countString = formatString(params.format);
-        // 描画更新
-        $target.html(countString);
-        // 停止条件
-        if (n <= params.to) {
-          // ストレージ削除
-          if (params.useStorage) {
-            localStorage.removeItem(params.KEY);
+        // 初回読み込み時、localStorageから現在のカウントを取得または保存
+        if (useStorage) {
+          const saved = localStorage.getItem(KEY);
+          if (saved !== null) {
+            count = parseInt(saved);
+          } else {
+            localStorage.setItem(KEY, count);
           }
-          // タイマー停止
-          clearTimeout(timerID);
-          // 描画更新
-          $target.html(params.message);
-          // クラス付与
-          $target.addClass("over");
         }
-        // カウント継続
-        else {
-          clearTimeout(timerID);
-          timerID = setTimeout(tickCount, params.timeout(n));
-        }
-      };
 
-      // 初回実行
-      tickCount();
+        // カウントの継続条件を判定
+        const isCounting = () => {
+          return step > 0 ? count < to : count > to;
+        };
+
+        // フォーマット文字列の置換（{n} → 現在のカウント）
+        const formatTime = (value) => {
+          return format.replace(/{n}/g, value);
+        };
+
+        // カウントを更新してDOMに反映、終了条件に達したら停止
+        const tick = () => {
+          let timerID;
+
+          // カウント更新
+          count += step;
+          if (useStorage) {
+            localStorage.setItem(KEY, count);
+          }
+
+          // 表示更新
+          $target.html(formatTime(count));
+
+          // カウント終了時の処理
+          if (!isCounting()) {
+            if (useStorage) {
+              localStorage.removeItem(KEY);
+            }
+            clearTimeout(timerID);
+            $target.html(message).addClass("over");
+
+            // カウント停止時のコールバックを実行
+            onStop?.($target);
+            return;
+          }
+
+          // 次のtickを予約
+          clearTimeout(timerID);
+          timerID = setTimeout(tick, timeout(count));
+
+          // カウント進行中のコールバックを実行
+          onTick?.($target);
+        };
+
+        // 初回tickを実行
+        tick();
+      });
     };
 
     /**
@@ -945,40 +1017,46 @@ $(function () {
      *
      * @param {Object} settings 設定情報
      */
-    #init_loader = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
-
+    #init_loader = async (settings) => {
+      const { selector, params } = settings;
       const $loader = $(selector);
-      if ($loader[0]) {
-        // ローディング開始の待機時間と表示時間はdata属性を優先する
-        const delay = $loader.data("delay") ?? params.delay;
-        const wait = $loader.data("wait") ?? params.wait;
-        // delay(ms)後にローダーをフェードイン
-        setTimeout(() => {
-          $loader
-            .fadeIn()
-            .promise()
-            .done(() => {
-              // ローダー表示後にコールバック実行
-              if (params.hasOwnProperty("callback_on_shown") && params.callback_on_shown) {
-                params.callback_on_shown();
-              }
-              // ローダー表示 wait(ms)後にローダーをフェードアウト
-              setTimeout(() => {
-                $loader
-                  .fadeOut()
-                  .promise()
-                  .done(() => {
-                    // ローダー非表示後にコールバック実行
-                    if (params.hasOwnProperty("callback_on_hidden") && params.callback_on_hidden) {
-                      params.callback_on_hidden();
-                    }
-                  });
-              }, wait);
-            });
-        }, delay);
+
+      // ローダー要素が存在しない場合は何もしない
+      if (!$loader.length) return;
+
+      const { delay, wait, onShow, onHide } = params;
+
+      // 指定されたdelay後にローダーを表示
+      await waitFor(delay);
+      await fadeIn($loader);
+
+      // ローダー表示後にコールバック実行
+      if (onShow) onShow();
+
+      // 指定されたwait後にローダーを非表示にする
+      await waitFor(wait);
+      await fadeOut($loader);
+
+      // ローダー非表示後にコールバック実行
+      if (onHide) onHide();
+
+      // 指定時間待機する関数
+      async function waitFor(time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+      }
+
+      // 要素をフェードインする関数
+      async function fadeIn($element) {
+        return new Promise((resolve) => {
+          $element.fadeIn(() => resolve());
+        });
+      }
+
+      // 要素をフェードアウトする関数
+      async function fadeOut($element) {
+        return new Promise((resolve) => {
+          $element.fadeOut(() => resolve());
+        });
       }
     };
 
@@ -988,48 +1066,54 @@ $(function () {
      *
      * @param {Object} settings 設定情報
      */
-    #init_floating = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+    #init_floating = async (settings) => {
+      const { selector, params } = settings;
+      const { offsetBottom, hiddenClass, onClick, callback, start, stop } = params;
 
-      const $btn = $(selector);
-      if ($btn[0]) {
-        const $window = $(window);
-        const $start = $($btn.data("start") ?? params.start);
-        const $stop = $($btn.data("stop") ?? params.stop);
-        let is_visible = false;
-        $window.on("scroll", () => {
-          const scrollTop = $window.scrollTop();
-          // 表示開始位置・終了位置が指定されていない場合のデフォルトはページ上端・下端とする
-          let start = $start?.offset()?.top ?? 0;
-          let stop = $stop?.offset()?.top ?? $(document).height();
-          if (scrollTop > start && scrollTop < stop && !is_visible) {
-            $btn.removeClass(params.hidden_class);
-            $btn.fadeIn();
-            is_visible = true;
-          }
-          if ((scrollTop > stop || scrollTop < start) && is_visible) {
-            $btn
-              .fadeOut()
-              .promise()
-              .done(() => {
-                $btn.addClass(params.hidden_class);
-              });
-            is_visible = false;
-          }
-        });
-        // ボタンのクリックイベント処理
-        $btn.on("click", () => {
-          if (params.hasOwnProperty("handler_on_click") && params.handler_on_click) {
-            params.handler_on_click();
-          }
-        });
-        // 初期設定完了時にコールバック実行
-        if (params.hasOwnProperty("callback") && params.callback) {
-          params.callback();
+      const $target = $(selector);
+      if (!$target.length) return;
+
+      const $window = $(window);
+
+      // data属性の指定が優先、なければparamsのstart/stopを使う
+      const startSelector = $target.data("start") || start;
+      const stopSelector = $target.data("stop") || stop;
+
+      const $start = $(startSelector);
+      const $stop = $(stopSelector);
+
+      // 開始位置のY座標（要素がなければ0）
+      const getStartTop = () => ($start.length ? $start.offset().top : 0);
+
+      // 終了位置のY座標（要素がなければドキュメント末尾 - オフセット）
+      const getStopTop = () => {
+        if ($stop.length) return $stop.offset().top;
+        return $(document).height() - $(window).height() - offsetBottom;
+      };
+
+      // 表示条件：スクロール位置が開始〜終了の間か
+      const shouldShow = (scrollTop) => scrollTop > getStartTop() && scrollTop < getStopTop();
+
+      // スクロールイベント：表示・非表示の切り替えを制御
+      $window.on("scroll", async () => {
+        const scrollTop = $window.scrollTop();
+        const currentlyVisible = $target.is(":visible");
+
+        if (shouldShow(scrollTop) && !currentlyVisible) {
+          $target.removeClass(hiddenClass).fadeIn();
+        } else if (!shouldShow(scrollTop) && currentlyVisible) {
+          await $target.fadeOut().promise();
+          $target.addClass(hiddenClass);
         }
-      }
+      });
+
+      // クリックイベント：onClickがあれば実行
+      $target.on("click", () => {
+        onClick?.();
+      });
+
+      // 初期化完了時にcallbackがあれば実行
+      callback?.();
     };
 
     /**
@@ -1039,16 +1123,102 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_slider = (settings) => {
-      if (!settings.enable) return;
+      // 指定されたブレークポイントにマッチする設定を取得する関数
+      const getMatchedSettings = (params) => {
+        const { responsive = [], mobileFirst } = params;
 
-      $.each(settings.set, (_, settings) => {
-        const selector = settings.selector;
-        const params = settings.params;
+        // 現在のウィンドウ幅がブレークポイント条件にマッチしているか判定
+        const matchBreakpoint = (bp) => {
+          return mobileFirst ? window.innerWidth < bp.breakpoint : window.innerWidth >= bp.breakpoint;
+        };
+
+        // ブレークポイントを昇順または降順にソート
+        const sorted = responsive.slice().sort((a, b) => (mobileFirst ? a.breakpoint - b.breakpoint : b.breakpoint - a.breakpoint));
+
+        // 最初にマッチした設定を返す
+        return sorted.find((bp) => matchBreakpoint(bp));
+      };
+
+      // 実際にslickへ渡す初期化パラメータを構築する関数
+      const buildInitParams = (params, matched) => {
+        const initParams = $.extend(true, {}, params);
+
+        if (matched && typeof matched.settings === "object") {
+          $.extend(true, initParams, matched.settings);
+        }
+
+        delete initParams.responsive; // slickが解釈しないよう削除
+
+        return initParams;
+      };
+
+      $.each(settings.set, (_, setting) => {
+        const { selector, reinitOnResize, params, callback } = setting;
+
         const $target = $(selector);
-        if ($target[0]) {
-          $target.slick(params);
-          if (params.hasOwnProperty("callback") && params.callback) {
-            params.callback($target);
+        if (!$target.length) return; // 対象要素が存在しなければ終了
+
+        // スライダーを初期化する関数
+        const init = () => {
+          const matched = getMatchedSettings(params);
+
+          // マッチした設定が "unslick" の場合は初期化をスキップ
+          if (matched && matched.settings === "unslick") return;
+
+          const initParams = buildInitParams(params, matched);
+
+          // slick未初期化のときのみ初期化を実行
+          if (!$target.hasClass("slick-initialized")) {
+            $target.slick(initParams);
+          }
+        };
+
+        init(); // 初回初期化
+
+        // 初期化後にcallbackが指定されていれば実行
+        callback?.($target);
+
+        // ウィンドウのリサイズ・画面回転で再初期化する場合
+        if (reinitOnResize) {
+          const { responsive = [] } = params;
+          const hasUnslick = responsive.some((bp) => bp.settings === "unslick");
+
+          // responsive配列に何らかの設定がある or "unslick" が含まれている場合のみ監視
+          if (hasUnslick || responsive.length > 0) {
+            let resizeTimer;
+
+            $(window).on("resize orientationchange", () => {
+              clearTimeout(resizeTimer);
+
+              resizeTimer = setTimeout(() => {
+                const matched = getMatchedSettings(params);
+                const shouldUnslick = matched && matched.settings === "unslick";
+                const isInitialized = $target.hasClass("slick-initialized");
+
+                // 条件1: unslick指定かつ初期化済み → slickを解除
+                if (shouldUnslick && isInitialized) {
+                  $target.slick("unslick");
+                  return;
+                }
+
+                const initParams = buildInitParams(params, matched);
+
+                // 条件2: 初期化済み → unslickしてから再初期化
+                if (isInitialized) {
+                  $target.slick("unslick");
+
+                  // 環境によって slick 再初期化が走らないことがあるため、setTimeoutで確実に再初期化
+                  setTimeout(() => {
+                    $target.slick(initParams);
+                  }, 100);
+                }
+
+                // 条件3: 初期化されていない → 通常の初期化
+                else {
+                  $target.slick(initParams);
+                }
+              }, 150); // リサイズ終了を少し待ってから再初期化
+            });
           }
         }
       });
@@ -1061,33 +1231,40 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_video = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { autoplay, callback } = params;
 
-      const $window = $(window);
-      const $target = $(selector).not("[autoplay]");
-      if ($target[0]) {
-        $window.on("load scroll", () => {
-          $target.each((_, e) => {
-            const $video = $(e);
-            const player = $video[0];
-            const win_p = $window.scrollTop();
-            const win_h = $window.height();
-            // ビューポートに入った
-            if (win_p > $video.offset().top - win_h) {
-              // 再生スタート
-              if (params.autoplay) {
-                player.play();
+      const $target = $(selector).not("[autoplay]"); // autoplay属性のないvideo要素を対象
+
+      if (!$target.length) return; // 対象が存在しない場合は何もせず終了
+
+      // IntersectionObserverによる再生監視
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            const target = entry.target;
+
+            // ビューポート内に入ったら
+            if (entry.isIntersecting) {
+              if (autoplay) {
+                target.play(); // 動画を再生
               }
-              // コールバック実行
-              if (params.hasOwnProperty("callback") && params.callback) {
-                params.callback($target);
-              }
+
+              callback?.($(target)); // コールバックを実行
+
+              obs.unobserve(target); // 一度再生したら監視を解除
             }
           });
-        });
-      }
+        },
+        {
+          threshold: 0.1, // 10%見えたら判定
+        }
+      );
+
+      // 各video要素にObserverを登録
+      $target.each((_, el) => {
+        observer.observe(el);
+      });
     };
 
     /**
@@ -1097,27 +1274,49 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_form = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
+      const { callback } = params;
 
-      const forms = document.querySelectorAll(selector);
-      // Loop over them and prevent submission
-      Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener(
-          "submit",
-          function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault();
-              event.stopPropagation();
-              if (params.hasOwnProperty("callback") && params.callback) {
-                params.callback($(form));
-              }
+      // フォームのセレクタが指定されていない場合は早期リターン
+      if (!selector) return;
+
+      // フォームが存在しない場合も早期リターン
+      const $forms = $(selector);
+      if ($forms.length === 0) return;
+
+      // スクロールアニメーションの完了を待機するための関数
+      const waitFor = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      // フォームのバリデーション処理
+      $forms.each((_, form) => {
+        $(form).on("submit", async function (event) {
+          // フォームが無効な場合は処理を中断
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            // 最初の無効なフォーム項目へスクロール
+            const $firstInvalid = $(form).find(".form-control:invalid").first();
+            if ($firstInvalid.length) {
+              const pos = $firstInvalid.offset().top - 20; // 余白をつけてスクロール
+
+              // スクロールアニメーション完了後にコールバックを実行
+              $("html,body").animate({ scrollTop: pos }, 400);
+
+              // waitForを使ってアニメーションが終了するまで待機
+              await waitFor(400);
+
+              // 最初のエラー項目にフォーカスを当てる
+              $firstInvalid.focus();
+
+              // スクロール終了後にコールバックを実行
+              callback?.($(form));
             }
-            form.classList.add("was-validated");
-          },
-          false
-        );
+          }
+
+          // フォームに 'was-validated' クラスを追加
+          $(form).addClass("was-validated");
+        });
       });
     };
 
@@ -1128,22 +1327,27 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_drawer = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      // 設定から必要な値を分割代入
+      const {
+        selector,
+        params: { callback },
+      } = settings;
 
+      // 対象要素が存在しない場合、またはdrawer機能がない場合は早期リターン
       const $target = $(selector);
-      if ($target.length) {
-        if (typeof $.fn.drawer === "function") {
-          $target.drawer();
-          $target.find("a").on("click", function () {
-            $target.drawer("close");
-            if (params.hasOwnProperty("callback") && params.callback) {
-              params.callback($target);
-            }
-          });
-        }
-      }
+      if (!$target.length || typeof $.fn.drawer !== "function") return;
+
+      // drawerの初期化
+      $target.drawer();
+
+      // "a"タグがクリックされた時の処理
+      $target.find("a").on("click", () => {
+        // drawerを閉じる
+        $target.drawer("close");
+
+        // コールバックが指定されていれば実行
+        callback?.();
+      });
     };
 
     /**
@@ -1153,21 +1357,34 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_particle = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      // 設定から必要な値を分割代入
+      const {
+        selector,
+        params: { jsonPath, particleType, callback },
+      } = settings;
 
-      const $target = [...$(selector)];
-      if ($target.length) {
-        $target.forEach((el, _) => {
-          const id = $(el).attr("id");
-          const json_name = $(el).data("particle-type");
-          const json_path = params.json_path + (json_name ?? "default") + ".json";
-          if (id) {
-            particlesJS.load(id, json_path, params.callback);
-          }
-        });
-      }
+      // 対象要素が存在しない場合は早期リターン
+      const $targets = $(selector);
+      if (!$targets.length) return;
+
+      // particleTypeが指定されていない場合はデフォルトを設定
+      const particleTypeToUse = particleType || "default";
+
+      // 対象要素ごとに処理
+      $targets.each((_, el) => {
+        const $el = $(el);
+
+        // 要素にidが設定されているか確認
+        const id = $el.attr("id");
+
+        // jsonファイル名を設定したparticleTypeに基づいて組み立て
+        const jsonFilePath = `${jsonPath}${particleTypeToUse}.json`;
+
+        // idが設定されている場合にparticlesJSをロード
+        if (id) {
+          particlesJS.load(id, jsonFilePath, callback);
+        }
+      });
     };
 
     /**
@@ -1177,173 +1394,101 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_popup = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
 
-      let stopFlg = false;
-
-      // trigger only once
-      let isShow = false;
-      $("input[type='email']").on("focus", function () {
-        stopFlg = true;
-      });
+      // 必要なパラメータを分割代入
+      const { wait, closeElement, offset, enableTop, enableBottom, transfer, repop, callback } = params;
 
       const $target = $(selector);
-      if ($target.length === 0) return;
+      if (!$target.length) return;
 
-      // modal object, DOM element
       const modal = new bootstrap.Modal(selector);
       const element = document.querySelector(selector);
 
-      // trigger by time
-      if (params.hasOwnProperty("wait")) {
-        setTimeout(function () {
-          if (!stopFlg) modal.show();
-        }, params.wait);
-      }
-      // close Element
-      if (params.hasOwnProperty("close_element")) {
-        const $closeElement = $(params.close_element);
-        $closeElement.on("click", function (e) {
-          modal.hide();
-        });
-      }
-      // showOnVisible
-      if (params.hasOwnProperty("show_on_visible") && params.show_on_visible) {
-        let hidden, visibilityChange;
-        let flag = false;
-        if (typeof document.hidden !== "undefined") {
-          hidden = "hidden";
-          visibilityChange = "visibilitychange";
-        } else if (typeof document.mozHidden !== "undefined") {
-          hidden = "mozHidden";
-          visibilityChange = "mozvisibilitychange";
-        } else if (typeof document.msHidden !== "undefined") {
-          hidden = "msHidden";
-          visibilityChange = "msvisibilitychange";
-        } else if (typeof document.webkitHidden !== "undefined") {
-          hidden = "webkitHidden";
-          visibilityChange = "webkitvisibilitychange";
-        }
-        document.addEventListener(
-          visibilityChange,
-          function () {
-            if (document.hidden) {
-              flag = true;
-            } else if (flag) {
-              flag = false;
-              //ここでポップアップを呼ぶ
-              if (!stopFlg) modal.show();
-            }
-          },
-          false
-        );
-      }
-      // showOnEscape
-      if (params.hasOwnProperty("show_on_escape") && params.show_on_escape) {
-        $("body").on("mouseleave", function () {
-          if (!stopFlg) modal.show();
-        });
-      }
-      // transfer
-      if (params.hasOwnProperty("transfer")) {
-        // 待機時間とURLが指定されていれば遷移
-        const transfer = params.transfer;
-        if (transfer.hasOwnProperty("wait") && transfer.hasOwnProperty("url") && transfer.url !== "") {
-          setTimeout(function () {
-            location.href = transfer.url;
-          }, transfer.wait);
-        }
+      // 一度だけポップアップを表示するためのフラグ
+      let isShown = false;
+
+      // ユーザーがフォームに入力を開始したらポップアップを表示しないためのフラグ
+      let stopFlag = false;
+
+      // ┌────────────┬──────────────────────┬──────────────────────────────┬────────────────────────────────────────────────┐
+      // │ フラグ名    │ 意味                 │ いつ立つ？                    │ なぜ必要？                                      │
+      // ├────────────┼──────────────────────┼──────────────────────────────┼────────────────────────────────────────────────┤
+      // │ isShown    │ モーダルが表示されたか │ 表示時 / 手動フォーカス時      │ 同じポップアップが何度も出ないようにする           │
+      // │ stopFlag   │ ユーザーの入力意思あり │ email入力欄にフォーカス時      │ ユーザー操作を尊重してポップアップを止める         │
+      // └────────────┴──────────────────────┴──────────────────────────────┴────────────────────────────────────────────────┘
+
+      // ユーザーがemail欄にフォーカスした際にポップアップを止める
+      $("input[type='email']").on("focus", function () {
+        stopFlag = true;
+        isShown = true; // ユーザー操作で表示をブロックしたので、ポップアップも不要
+      });
+
+      // 指定時間後にポップアップを表示
+      if (wait) {
+        setTimeout(() => {
+          if (!stopFlag) modal.show();
+        }, wait);
       }
 
-      // ポップアップ起動
+      // 閉じるボタン
+      if (closeElement) {
+        $(closeElement).on("click", () => modal.hide());
+      }
+
+      // 自動遷移（transfer）処理
+      if (transfer?.wait && transfer.url) {
+        setTimeout(() => {
+          location.href = transfer.url;
+        }, transfer.wait);
+      }
+
+      // ポップアップ表示関数
       const popup = () => {
-        // 起動
-        if (!isShow) {
+        if (!isShown && !stopFlag) {
           modal.show();
-          isShow = true;
+          isShown = true;
+          callback?.();
         }
       };
-      // フォーム入力を開始すると二度と起動しない
-      $("input[type='email']").on("focus", function () {
-        isShow = true;
-      });
-      // showOnScroll
-      if (params.hasOwnProperty("show_on_scroll") && params.show_on_scroll) {
-        // 閉じるたびに定期タイマーを初期化
-        let tid = 0;
-        element.addEventListener("hidden.bs.modal", (event) => {
-          isShow = false;
-          // showOnTimeout
-          if (params.hasOwnProperty("timeout")) {
-            clearTimeout(tid);
-            tid = setTimeout(function () {
-              // 二重起動防止
-              if (!isShow) {
-                popup();
-              }
-            }, params.timeout);
-          }
-        });
-        // スクロール位置
-        let currentPos = 0;
-        // 閾値
-        const threshold = params.hasOwnProperty("threshold") ? params.threshold : 300;
-        // 上部起動フラグ
-        let onceTop = false;
-        // 下部起動フラグ
-        let onceBottom = false;
-        // ページ全体の高さ
-        const scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight);
-        // 一番下までスクロールした時の数値
-        const pageMostBottom = scrollHeight - window.innerHeight - threshold;
 
-        $(window).on("scroll", function () {
-          // 現在のスクロール位置
-          const scrollTop = $(this).scrollTop();
-          // スクロール位置：上部の閾値よりも上
-          if (scrollTop <= threshold) {
-            // 上移動中
-            if (scrollTop < currentPos) {
-              // 上部起動フラグOFF
-              if (params.hasOwnProperty("onceTop") && params.onceTop) {
-              } else {
-                onceTop = false;
-              }
-            }
-          }
-          // スクロール位置：上下閾値の中間
-          else if (threshold < scrollTop && scrollTop < pageMostBottom) {
-            // 上移動中
-            if (scrollTop < currentPos) {
-              // 下部起動フラグOFF
-              onceBottom = false;
-            }
-            // 下移動中
-            else {
-              // 上部未起動なら起動
-              if (!onceTop && params.hasOwnProperty("enableTop") && params.enableTop) {
-                popup();
-                onceTop = !onceTop;
-              }
-            }
-          }
-          // スクロール位置：下部の閾値よりも下
-          else {
-            // 下移動中
-            if (currentPos < scrollTop) {
-              // 下部未起動なら起動
-              if (!onceBottom && params.hasOwnProperty("enableBottom") && params.enableBottom) {
-                popup();
-                onceBottom = !onceBottom;
-              }
-            }
-          }
-          // 現在位置更新
-          currentPos = scrollTop;
+      // モーダル非表示時に再表示用タイマー設定
+      if (repop) {
+        let tid;
+        element.addEventListener("hidden.bs.modal", () => {
+          isShown = false; // モーダルを閉じたので、再度表示可能に
+          clearTimeout(tid);
+          tid = setTimeout(() => {
+            if (!isShown) popup(); // 一定時間後に再度表示
+          }, repop);
         });
       }
+
+      // スクロールによる表示
+      const scrollHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+      const pageBottom = scrollHeight - window.innerHeight - offset;
+
+      let lastScrollTop = 0; // 前回のスクロール位置
+      let triggeredTop = false; // 上部スクロールでポップアップを表示したか
+      let triggeredBottom = false; // 下部スクロールでポップアップを表示したか
+
+      $(window).on("scroll", function () {
+        const scrollTop = $(this).scrollTop();
+
+        // 上部でスクロールしたとき
+        if (enableTop && scrollTop <= offset && scrollTop < lastScrollTop && !triggeredTop) {
+          popup();
+          triggeredTop = true; // 上部で表示したフラグを立てる
+        }
+
+        // 下部でスクロールしたとき
+        if (enableBottom && scrollTop >= pageBottom && scrollTop > lastScrollTop && !triggeredBottom) {
+          popup();
+          triggeredBottom = true; // 下部で表示したフラグを立てる
+        }
+
+        lastScrollTop = scrollTop; // スクロール位置を更新
+      });
     };
 
     /**
@@ -1353,81 +1498,153 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_youtube = (settings) => {
-      if (!settings.enable) return;
-      const selector = settings.selector;
-      const params = settings.params;
+      const { selector, params } = settings;
 
-      // IFrame APIを使用して読み込む場合
-      if (params.hasOwnProperty("useAPI") && params.useAPI) {
-        // YouTube
-        const ytData = Array.from($(selector)).map((e) => $(e).data("video-id"));
-        if (ytData.length === 0) return;
+      // 必要なパラメータを分割代入
+      const { useAPI = false, lazyload = false, autoplay = false, buttonAnimation = "ring", onPlayerStateChange } = params;
 
-        const ytPlayer = [];
-        const player = [];
-        const ytEvent = {
-          onReady: function (event) {
-            ytPlayer[ytPlayer.length] = event.target;
-          },
-        };
+      const $target = $(selector);
 
-        // 再生状態変更イベント
-        if (params.hasOwnProperty("onPlayerStateChange")) {
-          ytEvent.onStateChange = params.onPlayerStateChange;
+      // 対象要素がない場合は処理を抜ける
+      if (!$target.length) return;
+
+      // ボタンアニメーションを追加する関数
+      const addButtonAnimation = ($el, useAPI = false) => {
+        if (!buttonAnimation) return;
+
+        // すでにアニメーションが追加されているか確認
+        const $existing = $el.children(`[data-aos="${buttonAnimation}"]`);
+        if ($existing.length) return;
+
+        // アニメーション用の div 要素を作成
+        const $animationDiv = $(`<div data-aos="${buttonAnimation}"></div>`);
+
+        if (useAPI) {
+          // iframeの兄弟要素として追加
+          $el.after($animationDiv);
+        } else {
+          // 通常通り、子要素として追加
+          $el.prepend($animationDiv);
         }
+      };
 
-        const tag = document.createElement("script");
-        tag.src = "https://www.youtube.com/iframe_api";
-        const firstScriptTag = document.getElementsByTagName("script")[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      // ▼ useAPI: false → クリックでiframe差し替え
+      if (!useAPI) {
+        $target.each((_, el) => {
+          const $el = $(el);
+          const videoId = $el.data("video-id");
 
-        function onYouTubeIframeAPIReadyLazyLoad(id) {
-          const data = ytData.filter(function (value) {
-            return value == id;
-          });
+          // videoIdがない場合は処理を抜ける
+          if (!videoId) return;
 
-          player[player.length] = new YT.Player(data[0], {
-            height: 360,
-            width: 640,
-            videoId: data[0],
-            events: ytEvent,
-          });
-        }
-        // 遅延ロード（要lazysizes）
-        if (params.hasOwnProperty("lazyload") && params.lazyload) {
-          // lazyload クラスを指定した要素の遅延ロード発火時にYouTube動画をロード
-          document.addEventListener("lazybeforeunveil", function (e) {
-            const childElementId = e.target.firstElementChild.id;
-            onYouTubeIframeAPIReadyLazyLoad(childElementId);
-          });
-        }
-        // 即時ロード
-        else {
-          window.onYouTubeIframeAPIReady = () => {
-            $(selector).each(function () {
-              const video_id = $(this).data("video-id");
-              onYouTubeIframeAPIReadyLazyLoad(video_id);
-            });
-          };
-        }
-      }
-      // APIを使用せずに画像ボタン押下でiframeタグに置換する場合
-      else {
-        // ターゲット要素のループ
-        $(selector).each((_, e) => {
-          const $target = $(e);
-          const video_id = $target.data("video-id");
-          $target.find("img").on("click", () => {
-            const video_src = `https://www.youtube.com/embed/${video_id}?si=&autoplay=1&rel=0`;
-            const iframe = $("<iframe>", {
-              src: video_src,
-              frameborder: 0,
-              allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
-              allowfullscreen: true,
-            });
-            $target.html(iframe);
+          // アニメーションをボタンに追加
+          addButtonAnimation($el, false);
+
+          // クリックしたらiframeを挿入
+          const iframe = `<iframe
+            src="https://www.youtube.com/embed/${videoId}?si=&autoplay=1&rel=0"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>`;
+
+          $el.find("img").on("click", () => {
+            $el.empty().append(iframe);
           });
         });
+        return;
+      }
+
+      // ▼ useAPI: true → IFrame APIを使用
+      const loadYouTubeVideo = ($el) => {
+        const videoId = $el.data("video-id");
+
+        // videoIdがない場合は処理を抜ける
+        if (!videoId) return;
+
+        // アニメーションをボタンに追加
+        addButtonAnimation($el, true);
+
+        const $icon = $el.find(".fa-youtube").first();
+        const $restoredIcon = $icon.length ? $icon.clone(true) : null;
+
+        const playerId = $el.attr("id");
+
+        // 新しいYouTubeプレーヤーを作成
+        new YT.Player(playerId, {
+          videoId,
+          events: {
+            onReady: (event) => {
+              // プレーヤー準備完了時の処理
+              if ($restoredIcon) {
+                // 元の $el は <iframe> に置換されているので、id属性で再取得
+                const $iframe = $(`#${playerId}`);
+                $iframe.after($restoredIcon);
+                $restoredIcon.css("pointer-events", "auto"); // ← クリック可能に
+
+                // アイコンクリック時に動画再生
+                $restoredIcon.on("click", () => {
+                  event.target.playVideo();
+                  $restoredIcon.remove();
+
+                  // アニメーション要素（data-aos）も削除
+                  const $aos = $iframe.siblings(`[data-aos="${buttonAnimation}"]`);
+                  if ($aos.length) $aos.remove();
+                });
+              }
+
+              // 自動再生
+              if (autoplay) {
+                event.target.playVideo();
+
+                if ($restoredIcon) $restoredIcon.remove();
+
+                // autoplay時もアニメーション要素を削除
+                const $iframe = $(`#${playerId}`);
+                const $aos = $iframe.siblings(`[data-aos="${buttonAnimation}"]`);
+                if ($aos.length) $aos.remove();
+              }
+            },
+            onStateChange: (event) => {
+              // プレーヤー状態が変化した場合のコールバック
+              if (typeof onPlayerStateChange === "function") {
+                onPlayerStateChange(event);
+              }
+            },
+          },
+        });
+      };
+
+      // APIロード後の初期化処理
+      window.onYouTubeIframeAPIReady = () => {
+        // ▼ lazyloadが有効の場合、IntersectionObserverを使ってビデオを遅延読み込みする
+        if (lazyload) {
+          const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // 要素が画面内に入ったらYouTube動画を読み込む
+                loadYouTubeVideo($(entry.target));
+                // 読み込んだ要素は監視から外す
+                obs.unobserve(entry.target);
+              }
+            });
+          });
+
+          // 各ターゲット要素にIntersectionObserverを適用
+          $target.each((_, el) => observer.observe(el));
+        } else {
+          // ▼ lazyloadが無効の場合、全てのターゲット要素を即座に読み込む
+          $target.each((_, el) => loadYouTubeVideo($(el)));
+        }
+      };
+
+      // APIスクリプトが未ロードなら読み込む
+      if (!window.YT) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      } else if (window.YT && window.YT.Player) {
+        window.onYouTubeIframeAPIReady();
       }
     };
 
@@ -1438,48 +1655,26 @@ $(function () {
      * @param {Object} settings 設定情報
      */
     #init_date = (settings) => {
-      if (!settings.enable) return;
-
-      $.each(settings.set, (_, settings) => {
-        const selector = settings.selector;
-        const params = settings.params;
+      $.each(settings.set, (_, setting) => {
+        const { selector, params } = setting;
         const $target = $(selector);
 
-        // 要素の存在チェック
-        if (!$target[0]) {
-          return;
-        }
+        // ▼ 対象要素が存在しない場合、処理を中止
+        if (!$target.length) return;
 
-        // 日付作成
-        let dt = new Date();
+        // ▼ baseDate が未指定の場合は、今日の日付を基準日として設定
+        const { baseDate = "", diff = 0, format } = params;
+        const date = baseDate ? new Date(baseDate) : new Date();
 
-        // 基準日が指定されている場合
-        if (params.hasOwnProperty("date") && params.date !== "") {
-          dt = new Date(params.date);
-        }
+        // ▼ 差分日数を適用（diff が指定されていれば、日付を更新）
+        const dateDiff = Number(diff) || 0;
+        date.setDate(date.getDate() + dateDiff);
 
-        // 基準日からの差分が指定されている場合
-        if (params.hasOwnProperty("diff") && !isNaN(params.diff)) {
-          dt.setDate(dt.getDate() + params.diff);
-        }
+        // ▼ 指定されたフォーマットで日付をフォーマット
+        const formatted = this.formatDateTime(date, format);
 
-        // 書式整形
-        let yy = String(dt.getFullYear());
-        let mm = String(dt.getMonth() + 1);
-        let dd = String(dt.getDate());
-        if (params.hasOwnProperty("padMM")) {
-          mm = mm.padStart(params.padMM, "0");
-        }
-        if (params.hasOwnProperty("padDD")) {
-          dd = dd.padStart(params.padDD, "0");
-        }
-        let dateString = params.format;
-        dateString = dateString.replace(/yy/g, yy);
-        dateString = dateString.replace(/mm/g, mm);
-        dateString = dateString.replace(/dd/g, dd);
-
-        // 描画更新
-        $target.html(dateString);
+        // ▼ 対象要素にフォーマット済みの日付をセット
+        $target.html(formatted);
       });
     };
   }
