@@ -26,6 +26,7 @@ History         :
 2025/04/02 ADD default settings
 2025/04/07 MOD refactoring all method
 2025/07/01 MOD floating
+2025/07/12 MOD init_smoothscroll
 
 Copyright 2024 office-ing All rights reserved.
  
@@ -690,9 +691,11 @@ $(function () {
        * - ページ内リンクとして直接遷移したときに備える
        */
       $(window).on("load", () => {
-        const hash = window.location.hash;
+        // URLからハッシュ部分を抽出
+        const fullHash = window.location.hash;
+        // クエリパラメータの有無に関わらず、ハッシュがあれば抽出
+        const hash = fullHash.includes("?") ? fullHash.split("?")[0] : fullHash;
         if (!hash) return;
-
         const $target = $(`[id='${hash.slice(1)}']`);
         if ($target.length) {
           scrollTo($target);
